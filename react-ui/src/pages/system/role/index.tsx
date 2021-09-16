@@ -318,7 +318,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
                 }
               }}
             >
-              <DeleteOutlined />{' '}
+              <DeleteOutlined />
               <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
             </Button>,
             <Button
@@ -329,7 +329,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
                 handleExport();
               }}
             >
-              <PlusOutlined />{' '}
+              <PlusOutlined />
               <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
             </Button>,
           ]}
@@ -355,8 +355,8 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
+              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />
+              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
             </div>
           }

@@ -31,7 +31,7 @@ export default (): React.ReactNode => {
           }}
         />
         <Typography.Text strong>
-          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />{' '}
+          <FormattedMessage id="pages.welcome.advancedComponent" defaultMessage="高级表格" />
           <a
             href="https://procomponents.ant.design/components/table"
             rel="noopener noreferrer"
@@ -47,7 +47,7 @@ export default (): React.ReactNode => {
             marginBottom: 12,
           }}
         >
-          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />{' '}
+          <FormattedMessage id="pages.welcome.advancedLayout" defaultMessage="高级布局" />
           <a
             href="https://procomponents.ant.design/components/layout"
             rel="noopener noreferrer"

@@ -396,8 +396,8 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
+              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />
+              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
             </div>
           }

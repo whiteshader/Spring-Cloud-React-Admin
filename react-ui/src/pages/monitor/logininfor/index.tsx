@@ -254,7 +254,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
                 }
               }}
             >
-              <DeleteOutlined />{' '}
+              <DeleteOutlined />
               <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
             </Button>,
             <Button
@@ -266,7 +266,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
                 actionRef.current?.reloadAndRest?.();
               }}
             >
-              <PlusOutlined />{' '}
+              <PlusOutlined />
               <FormattedMessage id="pages.searchTable.clear" defaultMessage="清空" />
             </Button>,
             <Button
@@ -277,7 +277,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
                 handleExport();
               }}
             >
-              <PlusOutlined />{' '}
+              <PlusOutlined />
               <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
             </Button>,
           ]}
@@ -303,8 +303,8 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
+              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />
+              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
             </div>
           }
