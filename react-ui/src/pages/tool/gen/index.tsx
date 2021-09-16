@@ -1,6 +1,7 @@
 import type { ConnectState } from '@/models/connect';
 import type { CurrentUser } from '@/models/user';
 import { PageContainer } from '@ant-design/pro-layout';
+import { Card } from 'antd';
 import React, { useEffect } from 'react';
 import type { ConnectProps } from 'umi';
 import { connect } from 'umi';
@@ -16,8 +17,6 @@ export type GlobalTableProps = {
 } & Partial<ConnectProps>;
 
 const TableList: React.FC<GlobalTableProps> = () => {
-
-
   /** 国际化配置 */
   // const intl = useIntl();
 
@@ -25,7 +24,7 @@ const TableList: React.FC<GlobalTableProps> = () => {
 
   return (
     <PageContainer>
-      <p>还没开发完成</p>
+      <Card title="Gen Code"></Card>
     </PageContainer>
   );
 };

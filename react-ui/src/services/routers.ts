@@ -6,27 +6,27 @@ export async function getRouters(): Promise<any> {
   return request('/api/getRouters');
 }
 
-export function getSubRouters(childrens: RoutersMenuItemType[], path: string): MenuDataItem[] {
+export function getSubRouters(childrens: RoutersMenuItemType[]): MenuDataItem[] {
   const menuslist = childrens.map((item) => {
     return {
-      path: path.length > 0 ? `${path}/${item.path}` : item.path,
+      path: item.path,
       icon: item.meta.icon,
       name: item.meta.title,
-      children: item.children ? getSubRouters(item.children, item.path) : undefined,
-      // routes: item.children ? getSubRouters(item.children, item.path) : undefined,
+      children: item.children ? getSubRouters(item.children) : undefined,
       hideChildrenInMenu: item.hidden,
       hideInMenu: item.hidden,
       component: item.component,
       authority: item.perms,
     };
-  });
+  });  
+  console.log(menuslist)
   return menuslist;
 }
 
 export async function getRoutersData(): Promise<MenuDataItem[]> {
   return request('/api/getRouters').then((res) => {
     const menus: RoutersMenuItemType[] = res.data;
-    return getSubRouters(menus, '');
+    return getSubRouters(menus);
   });
 }
 
