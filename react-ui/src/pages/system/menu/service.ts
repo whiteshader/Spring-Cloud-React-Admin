@@ -28,6 +28,13 @@ export function getMenu(menuId: number) {
   });
 }
 
+// 查询菜单权限详细
+export function getMenuTree() {
+  return request('/api/system/menu/treeselect', {
+    method: 'GET',
+  });
+}
+
 // 新增菜单权限
 export async function addMenu(params: MenuType) {
   return request('/api/system/menu', {

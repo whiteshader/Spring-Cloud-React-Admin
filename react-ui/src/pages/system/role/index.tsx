@@ -21,7 +21,7 @@ import {
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 import type { DataNode } from 'antd/lib/tree';
-import { getMenuList } from '../menu/service';
+import { getMenuTree } from '../menu/service';
 import { formatTreeSelectData } from '@/utils/utils';
 
 /* *
@@ -291,7 +291,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
               key="add"
               hidden={!hasPerms('system:role:add')}
               onClick={async () => {
-                getMenuList().then((res: any) => {
+                getMenuTree().then((res: any) => {
                   if (res.code === 200) {
                     const treeData = formatTreeSelectData(res.data);
                     setMenuTree(treeData);
