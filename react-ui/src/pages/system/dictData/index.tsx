@@ -1,4 +1,4 @@
-import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
+import { PlusOutlined, DeleteOutlined, RollbackOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
@@ -24,9 +24,8 @@ import { getDict, getDictType, getDictTypeList } from '../dict/service';
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
-
 
 /**
  * 添加节点
@@ -324,7 +323,7 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
                 }
               }}
             >
-              <DeleteOutlined />{' '}
+              <DeleteOutlined />
               <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
             </Button>,
             <Button
@@ -335,8 +334,18 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
                 handleExport();
               }}
             >
-              <PlusOutlined />{' '}
+              <PlusOutlined />
               <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+            </Button>,
+            <Button
+              type="primary"
+              key="goBack"
+              onClick={async () => {
+                history.goBack();
+              }}
+            >
+              <RollbackOutlined />
+              <FormattedMessage id="pages.goback" defaultMessage="返回" />
             </Button>,
           ]}
           request={async (params) => {
@@ -366,8 +375,8 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
         <FooterToolbar
           extra={
             <div>
-              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />{' '}
-              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>{' '}
+              <FormattedMessage id="pages.searchTable.chosen" defaultMessage="已选择" />
+              <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a>
               <FormattedMessage id="pages.searchTable.item" defaultMessage="项" />
             </div>
           }
