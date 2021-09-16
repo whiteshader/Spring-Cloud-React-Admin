@@ -39,7 +39,8 @@
  
 
 ## 演示视频
-<a herf="https://gitee.com/whiteshader/images/raw/master/demo.mp4">演示视频</a>
+https://gitee.com/whiteshader/images/raw/master/demo.mp4
+
 ## 演示图
 
 
