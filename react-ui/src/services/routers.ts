@@ -18,8 +18,7 @@ export function getSubRouters(childrens: RoutersMenuItemType[]): MenuDataItem[] 
       component: item.component,
       authority: item.perms,
     };
-  });  
-  console.log(menuslist)
+  });
   return menuslist;
 }
 
