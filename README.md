@@ -82,4 +82,4 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
 ## 若依(Ruoyi-React)前后端分离交流群
 
-QQ群： [![加入QQ群【Ruoyi-React】https://img.shields.io/badge/101456076-blue.svg)]：(https://jq.qq.com/?_wv=1027&k=u58VEEQK)点击按钮入群。
+QQ群： [![加入QQ群](https://img.shields.io/badge/201396349-blue.svg)](https://jq.qq.com/?_wv=1027&k=u58VEEQK) 点击按钮入群。
