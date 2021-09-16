@@ -14,7 +14,7 @@ const proSettings: DefaultSettings = {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: '若依管理系统',
   pwa: false,
   iconfontUrl: '//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js',
 };

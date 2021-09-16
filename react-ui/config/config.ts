@@ -100,29 +100,6 @@ export default defineConfig({
               ],
             },
             {
-              name: 'test',
-              icon: 'BugOutlined',
-              path: '/test',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/test/mqtt',
-                },
-                {
-                  name: 'mqtt',
-                  icon: 'PartitionOutlined',
-                  path: '/test/mqtt',
-                  component: './mqtt',
-                },
-                {
-                  name: 'userInfo',
-                  icon: 'PartitionOutlined',
-                  path: '/test/user',
-                  component: 'system/user/index',
-                },
-              ],
-            },
-            {
               name: 'system',
               icon: 'BugOutlined',
               path: '/system',
@@ -271,18 +248,6 @@ export default defineConfig({
                   icon: 'PartitionOutlined',
                   path: '/tool/gen',
                   component: 'tool/gen/index',
-                },
-                {
-                  name: 'genEdit',
-                  icon: 'PartitionOutlined',
-                  path: '/tool/gen/edit',
-                  component: 'tool/gen/edit',
-                },
-                {
-                  name: 'genImport',
-                  icon: 'PartitionOutlined',
-                  path: '/tool/gen/import',
-                  component: 'tool/gen/import',
                 },
                 {
                   name: 'buildForm',

@@ -81,9 +81,9 @@ const defaultFooterDom = (
         blankTarget: true,
       },
       {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        key: 'Ruoyi React',
+        title: 'Ruoyi React',
+        href: 'https://gitee.com/whiteshader/ruoyi-react',
         blankTarget: true,
       },
     ]}
