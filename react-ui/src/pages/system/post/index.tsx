@@ -13,6 +13,7 @@ import type { PostType, PostListParams } from './data.d';
 import { getPostList, removePost, addPost, updatePost, exportPost } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
+import { download } from '@/utils/utils';
 
 /* *
  *
@@ -104,9 +105,14 @@ const handleRemoveOne = async (selectedRow: PostType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportPost();
+    const res = await exportPost();    
     hide();
-    message.success('导出成功');
+    if (res.code === 200) {
+      download(res.msg);
+      message.success('导出成功');
+    } else {
+      message.error('导出失败，请重试');
+    }
     return true;
   } catch (error) {
     hide();

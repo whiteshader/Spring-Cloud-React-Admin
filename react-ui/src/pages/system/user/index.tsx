@@ -25,15 +25,14 @@ import ResetPwd from './components/ResetPwd';
 import { getTreeList as getDeptTreeList } from '../dept/service';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
-
+import { download } from '@/utils/utils';
 
 /* *
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
-
 
 /**
  * 添加节点
@@ -117,9 +116,14 @@ const handleRemoveOne = async (selectedRow: UserType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportUser();
+    const res = await exportUser();
     hide();
-    message.success('导出成功');
+    if (res.code === 200) {
+      download(res.msg);
+      message.success('导出成功');
+    } else {
+      message.error('导出失败，请重试');
+    }
     return true;
   } catch (error) {
     hide();

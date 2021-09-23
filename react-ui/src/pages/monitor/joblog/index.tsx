@@ -13,6 +13,7 @@ import type { JobLogType, JobLogListParams } from './data.d';
 import { getJobLogList, removeJobLog, exportJobLog, cleanJobLog } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
+import { download } from '@/utils/utils';
 
 
 /* *
@@ -81,9 +82,14 @@ const handleRemoveOne = async (selectedRow: JobLogType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportJobLog();
+    const res = await exportJobLog();
     hide();
-    message.success('导出成功');
+    if(res.code === 200) {
+      download(res.msg);      
+      message.success('导出成功');
+    } else {
+      message.error('导出失败，请重试');
+    }
     return true;
   } catch (error) {
     hide();

@@ -20,6 +20,7 @@ import {
 } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '@/pages/system/dict/service';
+import { download } from '@/utils/utils';
 
 /* *
  *
@@ -118,9 +119,14 @@ const handleRemoveAll = async () => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportLogininfor();
+    const res = await exportLogininfor();
+    if (res.code === 200) {
+      download(res.msg);
+      message.success('导出成功');
+    } else {
+      message.error('导出失败，请重试');
+    }
     hide();
-    message.success('导出成功');
     return true;
   } catch (error) {
     hide();

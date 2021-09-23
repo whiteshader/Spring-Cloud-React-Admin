@@ -20,15 +20,14 @@ import { getJobList, removeJob, addJob, updateJob, exportJob, runJob } from './s
 import UpdateForm from './components/edit';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-
+import { download } from '@/utils/utils';
 
 /* *
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
-
 
 /**
  * 添加节点
@@ -112,9 +111,14 @@ const handleRemoveOne = async (selectedRow: JobType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    await exportJob();
+    const res = await exportJob();
     hide();
-    message.success('导出成功');
+    if (res.code === 200) {
+      download(res.msg);
+      message.success('导出成功');
+    } else {
+      message.error('导出失败，请重试');
+    }
     return true;
   } catch (error) {
     hide();

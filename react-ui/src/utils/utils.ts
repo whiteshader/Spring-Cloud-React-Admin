@@ -112,3 +112,7 @@ export function formatTreeSelectData(arrayList: any): DataNode[] {
   });
   return treeSelectData;
 }
+
+export function download(fileName: string) {
+	window.location.href = `/api/common/download?fileName=${encodeURI(fileName)}&delete=${  true}`;
+}
