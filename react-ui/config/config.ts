@@ -250,10 +250,10 @@ export default defineConfig({
                   component: 'tool/gen/index',
                 },
                 {
-                  name: 'buildForm',
+                  name: 'design',
                   icon: 'PartitionOutlined',
-                  path: '/tool/build',
-                  component: 'tool/build',
+                  path: '/tool/design',
+                  component: 'tool/design',
                 },
                 {
                   name: 'swagger',
