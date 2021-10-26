@@ -7,8 +7,9 @@ import {
   UserOutlined,
   WeiboCircleOutlined,
 } from '@ant-design/icons';
+import type { FormInstance } from 'antd';
 import { Row, Col, Image, Alert, Space, message, Tabs } from 'antd';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ProForm, { ProFormCaptcha, ProFormCheckbox, ProFormText } from '@ant-design/pro-form';
 import { useIntl, connect, FormattedMessage } from 'umi';
 import { getFakeCaptcha } from '@/services/login';
@@ -46,6 +47,8 @@ const LoginMessage: React.FC<{
 const Login: React.FC<LoginProps> = (props) => {
   const { userLogin = {}, submitting } = props;
   const { status, type: loginType, codeImage, uuid } = userLogin;
+  const formRef = useRef<FormInstance>();
+
   const [type, setType] = useState<string>('account');
   const intl = useIntl();
 
@@ -70,6 +73,7 @@ const Login: React.FC<LoginProps> = (props) => {
   return (
     <div className={styles.main}>
       <ProForm
+        formRef={formRef}
         initialValues={{
           autoLogin: true,
         }}
@@ -183,6 +187,13 @@ const Login: React.FC<LoginProps> = (props) => {
                       ),
                     },
                   ]}
+                  fieldProps={{
+                    onPressEnter: ()=>{
+                      formRef.current?.validateFields().then((values) => {
+                        handleSubmit(values as LoginParamsType);
+                      });
+                    }
+                  }}
                 />
               </Col>
               <Col flex={2}>
