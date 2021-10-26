@@ -102,8 +102,6 @@ const JobForm: React.FC<JobFormProps> = (props) => {
               })}
               width="xl"
               placeholder="请输入任务名称"
-              disabled
-              hidden={!props.values.jobName}
               rules={[
                 {
                   required: true,
@@ -125,8 +123,6 @@ const JobForm: React.FC<JobFormProps> = (props) => {
               })}
               width="xl"
               placeholder="请输入任务组名"
-              disabled
-              hidden={!props.values.jobGroup}
               rules={[
                 {
                   required: true,
@@ -174,7 +170,7 @@ const JobForm: React.FC<JobFormProps> = (props) => {
               placeholder="请输入cron执行表达式"
               rules={[
                 {
-                  required: false,
+                  required: true,
                   message: (
                     <FormattedMessage
                       id="请输入cron执行表达式！"
