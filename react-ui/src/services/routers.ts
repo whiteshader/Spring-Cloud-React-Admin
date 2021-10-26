@@ -36,10 +36,14 @@ export function getMatchMenuItem(path: string, menuData: MenuDataItem[]): MenuDa
       if (item.path === path) {
         items.push(item);
       }
-      if (path.length > item.path?.length) {
-        const exp = `${item.path}/index`;
+      if (path.length >= item.path?.length) {
+        const exp = `${item.path}/*`;
         if (path.match(exp)) {
-          items.push(item);
+          if(item.children) {
+            const subpath = path.substr(item.path.length+1);
+            const subItem: MenuDataItem[] = getMatchMenuItem(subpath, item.children);
+            items = items.concat(subItem);
+          }
         }
       }
     }
