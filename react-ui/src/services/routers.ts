@@ -43,13 +43,14 @@ export function getMatchMenuItem(path: string, menuData: MenuDataItem[]): MenuDa
             const subpath = path.substr(item.path.length+1);
             const subItem: MenuDataItem[] = getMatchMenuItem(subpath, item.children);
             items = items.concat(subItem);
+          } else {
+            const paths = path.split('/');
+            if(paths.length === 2 && paths[0] === item.path && paths[1] === 'index') {
+              items.push(item);
+            }
           }
         }
       }
-    }
-    if (item.children) {
-      const subItem: MenuDataItem[] = getMatchMenuItem(path, item.children);
-      items = items.concat(subItem);
     }
   });
   return items;
