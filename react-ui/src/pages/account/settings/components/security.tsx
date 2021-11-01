@@ -106,7 +106,6 @@ class SecurityView extends Component<SecurityProps> {
   ];
 
   render() {
-    console.log(this.props)
     const data = this.getData();
     return (
       <>
@@ -122,12 +121,14 @@ class SecurityView extends Component<SecurityProps> {
         <ResetPwd
           onSubmit={async (value: any) => {
             const userData = { ...value, userId: this.props.userId };
-            const success = await resetPwd(userData);
-            if (success) {
+            const res = await resetPwd(userData);
+            if (res.code === 200) {
               this.setState({
                 resetPwdModalVisible: false,
               });
               message.success('密码重置成功。');
+            } else {
+              message.warn(res.msg);
             }
           }}
           onCancel={() => {
