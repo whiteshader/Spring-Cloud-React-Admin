@@ -5,6 +5,8 @@ export default {
   'accountandsettings.menuMap.notification': 'New Message Notification',
   'accountandsettings.basic.avatar': 'Avatar',
   'accountandsettings.basic.change-avatar': 'Change avatar',
+  'accountandsettings.basic.sex': 'sex',
+  'accountandsettings.basic.sex-message': 'Please input your sex!',
   'accountandsettings.basic.email': 'Email',
   'accountandsettings.basic.email-message': 'Please input your email!',
   'accountandsettings.basic.nickname': 'Nickname',

@@ -4,8 +4,6 @@ import { connect, FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 
 import type { CurrentUser } from '../data.d';
-import GeographicView from './GeographicView';
-import PhoneView from './PhoneView';
 import styles from './BaseView.less';
 
 const { Option } = Select;
@@ -32,29 +30,6 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
     </Upload>
   </>
 );
-interface SelectItem {
-  label: string;
-  key: string;
-}
-
-const validatorGeographic = (
-  _: any,
-  value: {
-    province: SelectItem;
-    city: SelectItem;
-  },
-  callback: (message?: string) => void,
-) => {
-  const { province, city } = value;
-  if (!province.key) {
-    callback('Please input your province!');
-  }
-  if (!city.key) {
-    callback('Please input your city!');
-  }
-  callback();
-};
-
 const validatorPhone = (rule: any, value: string, callback: (message?: string) => void) => {
   const values = value.split('-');
   if (!values[0]) {
@@ -118,7 +93,7 @@ class BaseView extends Component<BaseViewProps> {
               <Input />
             </Form.Item>
             <Form.Item
-              name="name"
+              name="nickName"
               label={formatMessage({ id: 'accountandsettings.basic.nickname' })}
               rules={[
                 {
@@ -130,7 +105,7 @@ class BaseView extends Component<BaseViewProps> {
               <Input />
             </Form.Item>
             <Form.Item
-              name="profile"
+              name="remark"
               label={formatMessage({ id: 'accountandsettings.basic.profile' })}
               rules={[
                 {
@@ -145,20 +120,21 @@ class BaseView extends Component<BaseViewProps> {
               />
             </Form.Item>
             <Form.Item
-              name="country"
-              label={formatMessage({ id: 'accountandsettings.basic.country' })}
+              name="sex"
+              label={formatMessage({ id: 'accountandsettings.basic.sex' })}
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'accountandsettings.basic.country-message' }, {}),
+                  message: formatMessage({ id: 'accountandsettings.basic.sex-message' }, {}),
                 },
               ]}
             >
               <Select style={{ maxWidth: 220 }}>
-                <Option value="China">中国</Option>
+                <Option value="0">男</Option>
+                <Option value="1">女</Option>
               </Select>
             </Form.Item>
-            <Form.Item
+            {/* <Form.Item
               name="geographic"
               label={formatMessage({ id: 'accountandsettings.basic.geographic' })}
               rules={[
@@ -184,9 +160,9 @@ class BaseView extends Component<BaseViewProps> {
               ]}
             >
               <Input />
-            </Form.Item>
+            </Form.Item> */}
             <Form.Item
-              name="phone"
+              name="phonenumber"
               label={formatMessage({ id: 'accountandsettings.basic.phone' })}
               rules={[
                 {
@@ -196,7 +172,7 @@ class BaseView extends Component<BaseViewProps> {
                 { validator: validatorPhone },
               ]}
             >
-              <PhoneView />
+              <Input />
             </Form.Item>
             <Form.Item>
               <Button htmlType="submit" type="primary">

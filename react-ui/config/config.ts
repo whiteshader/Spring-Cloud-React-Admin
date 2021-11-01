@@ -71,8 +71,8 @@ export default defineConfig({
               redirect: '/dashboard/analysis',
             },
             {
-              path: '/dashboard',
               name: 'dashboard',
+              path: '/dashboard',
               icon: 'dashboard',
               routes: [
                 {
@@ -96,6 +96,29 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/dashboard/workplace',
                   component: './dashboard/workplace',
+                },
+              ],
+            },                      
+            {
+              name: 'account',
+              path: '/account',
+              icon: 'user',
+              routes: [
+                {
+                  path: '/',
+                  redirect: '/account/center',
+                },
+                {
+                  name: 'center',
+                  icon: 'smile',
+                  path: '/account/center',
+                  component: './account/center',
+                },
+                {
+                  name: 'settings',
+                  icon: 'smile',
+                  path: '/account/settings',
+                  component: './account/settings',
                 },
               ],
             },
@@ -422,29 +445,6 @@ export default defineConfig({
                   icon: 'smile',
                   path: '/exception/500',
                   component: './exception/500',
-                },
-              ],
-            },
-            {
-              name: 'account',
-              icon: 'user',
-              path: '/account',
-              routes: [
-                {
-                  path: '/',
-                  redirect: '/account/center',
-                },
-                {
-                  name: 'center',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: 'settings',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
                 },
               ],
             },

@@ -112,12 +112,14 @@ class Settings extends Component<SettingsProps, SettingsState> {
   };
 
   renderChildren = () => {
+    
+    const { currentUser } = this.props;
     const { selectKey } = this.state;
     switch (selectKey) {
       case 'base':
         return <BaseView />;
       case 'security':
-        return <SecurityView />;
+        return <SecurityView userId={currentUser.userId} />;
       case 'binding':
         return <BindingView />;
       case 'notification':

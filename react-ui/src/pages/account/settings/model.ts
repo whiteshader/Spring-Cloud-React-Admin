@@ -49,7 +49,7 @@ const Model: ModelType = {
       const response = yield call(queryCurrent);
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.user,
       });
     },
     *fetchProvince(_, { call, put }) {

@@ -1,9 +1,14 @@
 import { FormattedMessage, formatMessage } from 'umi';
 import React, { Component } from 'react';
 
-import { List } from 'antd';
+import { List, message } from 'antd';
+import ResetPwd from '@/pages/system/user/components/ResetPwd';
+import { resetPwd } from '@/pages/system/user/service';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
+export interface SecurityProps {
+  userId: string;  
+}
 
 const passwordStrength = {
   strong: (
@@ -24,7 +29,18 @@ const passwordStrength = {
   ),
 };
 
-class SecurityView extends Component {
+class SecurityView extends Component<SecurityProps> {
+
+  state = {
+    resetPwdModalVisible: false,
+  };
+
+  resSetPassword() {
+    this.setState({
+      resetPwdModalVisible: true,
+    });
+  }
+
   getData = () => [
     {
       title: formatMessage({ id: 'accountandsettings.security.password' }, {}),
@@ -35,7 +51,12 @@ class SecurityView extends Component {
         </>
       ),
       actions: [
-        <a key="Modify">
+        <a
+          key="Modify"
+          onClick={() => {
+            this.resSetPassword();
+          }}
+        >
           <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
         </a>,
       ],
@@ -85,6 +106,7 @@ class SecurityView extends Component {
   ];
 
   render() {
+    console.log(this.props)
     const data = this.getData();
     return (
       <>
@@ -96,6 +118,25 @@ class SecurityView extends Component {
               <List.Item.Meta title={item.title} description={item.description} />
             </List.Item>
           )}
+        />
+        <ResetPwd
+          onSubmit={async (value: any) => {
+            const userData = { ...value, userId: this.props.userId };
+            const success = await resetPwd(userData);
+            if (success) {
+              this.setState({
+                resetPwdModalVisible: false,
+              });
+              message.success('密码重置成功。');
+            }
+          }}
+          onCancel={() => {
+            this.setState({
+              resetPwdModalVisible: false,
+            });
+          }}
+          resetPwdModalVisible={this.state.resetPwdModalVisible}
+          values={{}}
         />
       </>
     );
