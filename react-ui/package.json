@@ -3,7 +3,7 @@
   "version": "4.5.0",
   "private": true,
   "description": "An out-of-box UI solution for enterprise applications",
-  "scripts": {    
+  "scripts": {
     "start": "cross-env UMI_ENV=dev umi dev",
     "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
     "start:no-mock": "cross-env MOCK=none UMI_ENV=dev umi dev",
@@ -60,6 +60,7 @@
     "antd": "^4.16.0",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
+    "captchapng3": "^1.0.7",
     "classnames": "^2.2.6",
     "dva": "^2.4.0",
     "gg-editor": "^2.0.2",

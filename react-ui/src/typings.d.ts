@@ -14,6 +14,7 @@ declare module 'omit.js';
 declare module 'numeral';
 declare module '@antv/data-set';
 declare module 'mockjs';
+declare module 'captchapng3';
 declare module 'react-fittext';
 declare module 'bizcharts-plugin-slider';
 
