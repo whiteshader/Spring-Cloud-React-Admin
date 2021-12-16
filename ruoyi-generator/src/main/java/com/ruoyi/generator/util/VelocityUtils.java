@@ -58,6 +58,7 @@ public class VelocityUtils
         velocityContext.put("permissionPrefix", getPermissionPrefix(moduleName, businessName));
         velocityContext.put("columns", genTable.getColumns());
         velocityContext.put("table", genTable);
+        velocityContext.put("dicts", getDicts(genTable));
         setMenuVelocityContext(velocityContext, genTable);
         if (GenConstants.TPL_TREE.equals(tplCategory))
         {
@@ -126,7 +127,6 @@ public class VelocityUtils
     public static List<String> getTemplateList(String tplCategory)
     {
         List<String> templates = new ArrayList<String>();
-
         templates.add("vm/java/domain.java.vm");
         templates.add("vm/java/mapper.java.vm");
         templates.add("vm/java/service.java.vm");
@@ -135,7 +135,6 @@ public class VelocityUtils
         templates.add("vm/xml/mapper.xml.vm");
         templates.add("vm/sql/sql.vm");
         templates.add("vm/js/api.js.vm");
-        
         if (GenConstants.TPL_CRUD.equals(tplCategory))
         {
             templates.add("vm/vue/index.vue.vm");
@@ -149,7 +148,6 @@ public class VelocityUtils
             templates.add("vm/vue/index.vue.vm");
             templates.add("vm/java/sub-domain.java.vm");
         }
-
         return templates;
     }
 
@@ -170,7 +168,6 @@ public class VelocityUtils
         String businessName = genTable.getBusinessName();
 
         String javaPath = PROJECT_PATH + "/" + StringUtils.replace(packageName, ".", "/");
-
         String mybatisPath = MYBATIS_PATH + "/" + moduleName;
         String vuePath = "vue";
 
@@ -262,6 +259,28 @@ public class VelocityUtils
             }
         }
         return importList;
+    }
+
+    /**
+     * 根据列类型获取字典组
+     * 
+     * @param genTable 业务表对象
+     * @return 返回字典组
+     */
+    public static String getDicts(GenTable genTable)
+    {
+        List<GenTableColumn> columns = genTable.getColumns();
+        List<String> dicts = new ArrayList<String>();
+        for (GenTableColumn column : columns)
+        {
+            if (!column.isSuperColumn() && StringUtils.isNotEmpty(column.getDictType()) && StringUtils.equalsAny(
+                    column.getHtmlType(),
+                    new String[] { GenConstants.HTML_SELECT, GenConstants.HTML_RADIO, GenConstants.HTML_CHECKBOX }))
+            {
+                dicts.add("'" + column.getDictType() + "'");
+            }
+        }
+        return StringUtils.join(dicts, ", ");
     }
 
     /**

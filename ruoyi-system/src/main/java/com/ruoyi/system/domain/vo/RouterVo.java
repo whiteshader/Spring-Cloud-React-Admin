@@ -55,17 +55,6 @@ public class RouterVo
      * 子路由
      */
     private List<RouterVo> children;
-    
-    /** 权限字符串 */
-    private String perms;
-
-    public String getPerms() {
-        return perms;
-    }
-
-    public void setPerms(String perms) {
-        this.perms = perms;
-    }
 
     public String getName()
     {

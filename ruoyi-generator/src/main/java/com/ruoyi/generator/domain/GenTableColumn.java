@@ -1,8 +1,6 @@
 package com.ruoyi.generator.domain;
 
 import javax.validation.constraints.NotBlank;
-
-import com.ruoyi.common.constant.GenConstants;
 import com.ruoyi.common.core.domain.BaseEntity;
 import com.ruoyi.common.utils.StringUtils;
 
@@ -36,9 +34,6 @@ public class GenTableColumn extends BaseEntity
     /** JAVA字段名 */
     @NotBlank(message = "Java属性不能为空")
     private String javaField;
-
-    /** typescript类型 */
-    private String tsType;
 
     /** 是否主键（1是） */
     private String isPk;
@@ -123,38 +118,14 @@ public class GenTableColumn extends BaseEntity
         return columnType;
     }
 
-    private String javaTypeToTsType(String javaType) {
-        String type = javaType;
-        if(type.equals(GenConstants.TYPE_INTEGER)
-            || type.equals(GenConstants.TYPE_DOUBLE)
-            || type.equals(GenConstants.TYPE_BIGDECIMAL) 
-            || type.equals(GenConstants.TYPE_LONG)) {
-            return "number";
-        } else if(type.equals(GenConstants.TYPE_DATE)) {
-            return "Date";
-        } 
-        return type.toLowerCase();
-    }
-
     public void setJavaType(String javaType)
     {
         this.javaType = javaType;
-        setTsType(javaTypeToTsType(javaType));
     }
 
     public String getJavaType()
     {
         return javaType;
-    }
-
-    public void setTsType(String tsType)
-    {
-        this.tsType = tsType;
-    }
-
-    public String getTsType()
-    {
-        return tsType;
     }
 
     public void setJavaField(String javaField)

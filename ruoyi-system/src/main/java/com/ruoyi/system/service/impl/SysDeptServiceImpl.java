@@ -100,7 +100,7 @@ public class SysDeptServiceImpl implements ISysDeptService
      * @return 选中部门列表
      */
     @Override
-    public List<Integer> selectDeptListByRoleId(Long roleId)
+    public List<Long> selectDeptListByRoleId(Long roleId)
     {
         SysRole role = roleMapper.selectRoleById(roleId);
         return deptMapper.selectDeptListByRoleId(roleId, role.isDeptCheckStrictly());
@@ -140,7 +140,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     public boolean hasChildByDeptId(Long deptId)
     {
         int result = deptMapper.hasChildByDeptId(deptId);
-        return result > 0 ? true : false;
+        return result > 0;
     }
 
     /**
@@ -153,7 +153,7 @@ public class SysDeptServiceImpl implements ISysDeptService
     public boolean checkDeptExistUser(Long deptId)
     {
         int result = deptMapper.checkDeptExistUser(deptId);
-        return result > 0 ? true : false;
+        return result > 0;
     }
 
     /**
@@ -325,6 +325,6 @@ public class SysDeptServiceImpl implements ISysDeptService
      */
     private boolean hasChild(List<SysDept> list, SysDept t)
     {
-        return getChildList(list, t).size() > 0 ? true : false;
+        return getChildList(list, t).size() > 0;
     }
 }

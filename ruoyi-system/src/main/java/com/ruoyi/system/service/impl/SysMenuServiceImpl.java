@@ -128,7 +128,7 @@ public class SysMenuServiceImpl implements ISysMenuService
      * @return 选中菜单列表
      */
     @Override
-    public List<Integer> selectMenuListByRoleId(Long roleId)
+    public List<Long> selectMenuListByRoleId(Long roleId)
     {
         SysRole role = roleMapper.selectRoleById(roleId);
         return menuMapper.selectMenuListByRoleId(roleId, role.isMenuCheckStrictly());
@@ -151,7 +151,6 @@ public class SysMenuServiceImpl implements ISysMenuService
             router.setName(getRouteName(menu));
             router.setPath(getRouterPath(menu));
             router.setComponent(getComponent(menu));
-            router.setPerms(menu.getPerms());
             router.setQuery(menu.getQuery());
             router.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getPath()));
             List<SysMenu> cMenus = menu.getChildren();
@@ -169,8 +168,8 @@ public class SysMenuServiceImpl implements ISysMenuService
                 children.setPath(menu.getPath());
                 children.setComponent(menu.getComponent());
                 children.setName(StringUtils.capitalize(menu.getPath()));
-                children.setPerms(menu.getPerms());
                 children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), StringUtils.equals("1", menu.getIsCache()), menu.getPath()));
+                children.setQuery(menu.getQuery());
                 childrenList.add(children);
                 router.setChildren(childrenList);
             }
@@ -180,11 +179,10 @@ public class SysMenuServiceImpl implements ISysMenuService
                 router.setPath("/inner");
                 List<RouterVo> childrenList = new ArrayList<RouterVo>();
                 RouterVo children = new RouterVo();
-                String routerPath = StringUtils.replaceEach(menu.getPath(), new String[] { Constants.HTTP, Constants.HTTPS }, new String[] { "", "" });
+                String routerPath = innerLinkReplaceEach(menu.getPath());
                 children.setPath(routerPath);
                 children.setComponent(UserConstants.INNER_LINK);
                 children.setName(StringUtils.capitalize(routerPath));
-                children.setPerms(menu.getPerms());
                 children.setMeta(new MetaVo(menu.getMenuName(), menu.getIcon(), menu.getPath()));
                 childrenList.add(children);
                 router.setChildren(childrenList);
@@ -360,7 +358,7 @@ public class SysMenuServiceImpl implements ISysMenuService
         // 内链打开外网方式
         if (menu.getParentId().intValue() != 0 && isInnerLink(menu))
         {
-            routerPath = StringUtils.replaceEach(routerPath, new String[] { Constants.HTTP, Constants.HTTPS }, new String[] { "", "" });
+            routerPath = innerLinkReplaceEach(routerPath);
         }
         // 非外链并且是一级目录（类型为目录）
         if (0 == menu.getParentId().intValue() && UserConstants.TYPE_DIR.equals(menu.getMenuType())
@@ -501,5 +499,16 @@ public class SysMenuServiceImpl implements ISysMenuService
     private boolean hasChild(List<SysMenu> list, SysMenu t)
     {
         return getChildList(list, t).size() > 0 ? true : false;
+    }
+
+    /**
+     * 内链域名特殊字符替换
+     * 
+     * @return
+     */
+    public String innerLinkReplaceEach(String path)
+    {
+        return StringUtils.replaceEach(path, new String[] { Constants.HTTP, Constants.HTTPS },
+                new String[] { "", "" });
     }
 }
