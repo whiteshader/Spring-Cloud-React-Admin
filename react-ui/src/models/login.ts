@@ -57,7 +57,7 @@ const Model: LoginModelType = {
               redirect = redirect.substr(redirect.indexOf('#') + 1);
             }
           } else {
-            window.location.href = '/';
+            history.push('/');
             return;
           }
         }

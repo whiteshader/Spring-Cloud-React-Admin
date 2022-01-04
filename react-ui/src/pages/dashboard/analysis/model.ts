@@ -39,7 +39,7 @@ const Model: ModelType = {
       const response = yield call(fakeChartData);
       yield put({
         type: 'save',
-        payload: response,
+        payload: response.data,
       });
     },
     *fetchSalesData(_, { call, put }) {
@@ -47,7 +47,7 @@ const Model: ModelType = {
       yield put({
         type: 'save',
         payload: {
-          salesData: response.salesData,
+          salesData: response.data.salesData,
         },
       });
     },

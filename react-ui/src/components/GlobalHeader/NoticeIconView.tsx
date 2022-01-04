@@ -20,13 +20,12 @@ export type GlobalHeaderRightProps = {
 
 class GlobalHeaderRight extends Component<GlobalHeaderRightProps> {
   componentDidMount() {
-    // const { dispatch } = this.props;
-
-    // if (dispatch) {
-    //   dispatch({
-    //     type: 'global/fetchNotices',
-    //   });
-    // }
+    const { dispatch } = this.props;
+    if (dispatch) {
+      dispatch({
+        type: 'global/fetchNotices',
+      });
+    }
   }
 
   changeReadState = (clickedItem: NoticeItem): void => {

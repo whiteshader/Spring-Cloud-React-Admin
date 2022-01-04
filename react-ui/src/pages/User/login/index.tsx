@@ -187,13 +187,6 @@ const Login: React.FC<LoginProps> = (props) => {
                       ),
                     },
                   ]}
-                  fieldProps={{
-                    onPressEnter: ()=>{
-                      formRef.current?.validateFields().then((values) => {
-                        handleSubmit(values as LoginParamsType);
-                      });
-                    }
-                  }}
                 />
               </Col>
               <Col flex={2}>
