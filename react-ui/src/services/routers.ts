@@ -45,7 +45,7 @@ export function getMatchMenuItem(path: string, menuData: MenuDataItem[]): MenuDa
             items = items.concat(subItem);
           } else {
             const paths = path.split('/');
-            if(paths.length === 2 && paths[0] === item.path && paths[1] === 'index') {
+            if(paths.length >= 2 && paths[0] === item.path && paths[1] === 'index') {
               items.push(item);
             }
           }

@@ -287,7 +287,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               hidden={menuTypeId === 'F'}
               rules={[
                 {
-                  required: true,
+                  required: menuTypeId !== 'F',
                   message: (
                     <FormattedMessage id="请输入路由地址！" defaultMessage="请输入路由地址！" />
                   ),

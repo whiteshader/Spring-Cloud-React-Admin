@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
-import { notification } from 'antd';
+import { message, notification } from 'antd';
+import errorCode from './errorCode';
 import { getAccessToken, getRefreshToken, getTokenExpireTime, clearToken } from '@/utils/authority';
 
 const codeMessage: Record<number, string> = {
@@ -82,10 +83,19 @@ request.interceptors.request.use((url, options) => {
 
 // 响应拦截器
 request.interceptors.response.use(async (response) => {
-  const code = response.status;
-  if (code === 401 || code === 403) {
-    localStorage.removeItem('access_token');
-    window.location.href = '/user/login';
+  const {status} = response;
+  if (status === 401 || status === 403) {
+    // localStorage.removeItem('access_token');
+    // window.location.href = '/user/login';
+    const msg =  errorCode[status] || errorCode['default']
+    message.warn(`${status} ${msg}`)
+  } else if (status === 200) {
+    const data = await response.clone().json();
+    const {code} = data;
+    if (code !== 200) {
+      const msg =  errorCode[code] || data.msg || errorCode['default']
+      message.warn(`${code} ${msg}`)
+    }  
   }
   return response;
 });

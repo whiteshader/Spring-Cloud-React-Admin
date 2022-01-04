@@ -15,6 +15,17 @@
         ],
       },
       {
+        path: '/error',
+        component: '../layouts/UserLayout',
+        routes: [
+          {
+            name: 'error',
+            path: '/error',
+            component: './500',
+          },
+        ],
+      },
+      {
         path: '/',
         component: '../layouts/SecurityLayout',
         routes: [
