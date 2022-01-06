@@ -107,7 +107,10 @@ function getFakeList(req: Request, res: Response) {
   const count = (params?.count as number) * 1 || 20;
 
   const result = fakeList(count);
-  return res.json(result);
+  return res.json({code: 200, 
+    msg: 'success',
+    data: result
+  });
 }
 
 export default {

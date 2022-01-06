@@ -1,5 +1,5 @@
 import moment from 'moment';
-import type { AnalysisData, RadarData, VisitDataType } from './data.d';
+import type { RadarData, VisitDataType } from './data.d';
 
 // mock data
 const visitData: VisitDataType[] = [];
@@ -179,17 +179,21 @@ radarOriginData.forEach((item) => {
   });
 });
 
-const getFakeChartData: AnalysisData = {
-  visitData,
-  visitData2,
-  salesData,
-  searchData,
-  offlineData,
-  offlineChartData,
-  salesTypeData,
-  salesTypeDataOnline,
-  salesTypeDataOffline,
-  radarData,
+const getFakeChartData = {
+  code: 200,
+  msg: 'success',
+  data: {
+    visitData,
+    visitData2,
+    salesData,
+    searchData,
+    offlineData,
+    offlineChartData,
+    salesTypeData,
+    salesTypeDataOnline,
+    salesTypeDataOffline,
+    radarData,
+   }
 };
 
 export default {

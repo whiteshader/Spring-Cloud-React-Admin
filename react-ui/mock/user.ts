@@ -51,7 +51,7 @@ export default {
       email: "ry@163.com", 
       phonenumber: "15888888888", 
       sex: "1", 
-      avatar: "", 
+      avatar: "/static/img/profile.473f5971.jpg", 
       status: "0", 
       delFlag: "0", 
       loginIp: "61.140.198.155", 

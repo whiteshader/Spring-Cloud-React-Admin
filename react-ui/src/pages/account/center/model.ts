@@ -1,6 +1,6 @@
 import type { Reducer, Effect } from 'umi';
 import type { CurrentUser, ListItemDataType } from './data.d';
-import { queryCurrent, queryFakeList } from './service';
+import { queryCurrentUser, queryFakeList } from './service';
 
 export interface ModalState {
   currentUser: Partial<CurrentUser>;
@@ -30,17 +30,17 @@ const Model: ModelType = {
 
   effects: {
     *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
+      const response = yield call(queryCurrentUser);
       yield put({
         type: 'saveCurrentUser',
-        payload: response,
+        payload: response.user,
       });
     },
     *fetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
         type: 'queryList',
-        payload: Array.isArray(response) ? response : [],
+        payload: Array.isArray(response.data) ? response.data : [],
       });
     },
   },

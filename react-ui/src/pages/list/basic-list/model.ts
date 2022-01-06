@@ -33,14 +33,14 @@ const Model: ModelType = {
       const response = yield call(queryFakeList, payload);
       yield put({
         type: 'queryList',
-        payload: Array.isArray(response) ? response : [],
+        payload: Array.isArray(response.data) ? response.data : [],
       });
     },
     *appendFetch({ payload }, { call, put }) {
       const response = yield call(queryFakeList, payload);
       yield put({
         type: 'appendList',
-        payload: Array.isArray(response) ? response : [],
+        payload: Array.isArray(response.data) ? response.data : [],
       });
     },
     *submit({ payload }, { call, put }) {

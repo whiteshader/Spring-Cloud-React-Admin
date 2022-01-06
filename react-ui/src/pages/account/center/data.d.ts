@@ -24,17 +24,30 @@ export interface NoticeType {
   href: string;
   memberLink: string;
 }
+export interface RoleType {
+  roleId: string;
+  roleKey: string;
+  roleName: string;
+}
 
+export interface DeptType {
+  deptId: string;
+  deptName: string;
+}
 export interface CurrentUser {
-  name: string;
+  nickName: string;
+  userName: string;
   avatar: string;
   userid: string;
   notice: NoticeType[];
   email: string;
-  signature: string;
+  remark: string;
   title: string;
+  sex: string;
   group: string;
   tags: TagType[];
+  roles: RoleType[];
+  dept: DeptType;
   notifyCount: number;
   unreadCount: number;
   country: string;

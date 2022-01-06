@@ -168,7 +168,7 @@ class Center extends Component<CenterProps, CenterState> {
             marginRight: 8,
           }}
         />
-        {currentUser.title}
+        {currentUser.userName}
       </p>
       <p>
         <ClusterOutlined
@@ -176,7 +176,7 @@ class Center extends Component<CenterProps, CenterState> {
             marginRight: 8,
           }}
         />
-        {currentUser.group}
+        {currentUser.dept?.deptName}
       </p>
       <p>
         <HomeOutlined
@@ -184,16 +184,7 @@ class Center extends Component<CenterProps, CenterState> {
             marginRight: 8,
           }}
         />
-        {(currentUser.geographic || { province: { label: '' } }).province.label}
-        {
-          (
-            currentUser.geographic || {
-              city: {
-                label: '',
-              },
-            }
-          ).city.label
-        }
+        {currentUser.sex === '1'?'女':'男'}
       </p>
     </div>
   );
@@ -211,22 +202,22 @@ class Center extends Component<CenterProps, CenterState> {
                 <div>
                   <div className={styles.avatarHolder}>
                     <img alt="" src={currentUser.avatar} />
-                    <div className={styles.name}>{currentUser.name}</div>
-                    <div>{currentUser.signature}</div>
+                    <div className={styles.name}>{currentUser.nickName}</div>
+                    <div>{currentUser.remark}</div>
                   </div>
                   {this.renderUserInfo(currentUser)}
                   <Divider dashed />
                   <TagList tags={currentUser.tags || []} />
                   <Divider style={{ marginTop: 16 }} dashed />
                   <div className={styles.team}>
-                    <div className={styles.teamTitle}>团队</div>
+                    <div className={styles.teamTitle}>角色</div>
                     <Row gutter={36}>
-                      {currentUser.notice &&
-                        currentUser.notice.map((item) => (
-                          <Col key={item.id} lg={24} xl={12}>
-                            <Link to={item.href}>
-                              <Avatar size="small" src={item.logo} />
-                              {item.member}
+                      {currentUser.roles &&
+                        currentUser.roles.map((item) => (
+                          <Col key={item.roleId} lg={24} xl={12}>
+                            <Link to={""}>
+                              <Avatar size="small" src={""} />
+                              {item.roleName}
                             </Link>
                           </Col>
                         ))}
