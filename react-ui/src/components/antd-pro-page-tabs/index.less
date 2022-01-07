@@ -1,0 +1,75 @@
+:global {
+  .ant-layout-content .ant-page-tabs {
+    margin-top: -24px;
+    .ant-page-tab-list {
+      overflow: visible;
+      & > .ant-tabs-nav {
+        margin-bottom: 24px;
+        & > .ant-tabs-nav-wrap {
+          margin-left: -24px;
+          margin-right: -24px;
+          background-color: #fff;
+        }
+      }
+    }
+  }
+
+  .ant-pro-basicLayout-content-disable-margin .ant-page-tabs {
+    margin-top: 0;
+    .ant-page-tab-list > .ant-tabs-nav {
+      margin-bottom: unset;
+      & > .ant-tabs-nav-wrap {
+        margin-left: 0;
+        margin-right: 0;
+      }
+    }
+  }
+
+  .ant-page-tabs {
+    .ant-tabs-nav {
+      width: 100%;
+      background-color: #fff;
+    }
+  }
+}
+
+.contextMenu {
+  position: fixed;
+  display: none;
+  background-color: rgba(255, 255, 255, 0.98);
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 4px 0;
+  border-radius: 4px;
+  box-shadow: 0px 2px 6px 2px #ddd;
+
+  li {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f2f5;
+    user-select: none;
+    transition: all 0.1s;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      cursor: pointer;
+      background-color: #0170fe;
+      color: #fff;
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.6);
+      color: #000;
+    }
+  }
+}
+
+.show {
+  display: block;
+}
+
+.tabLabel {
+  user-select: none;
+}

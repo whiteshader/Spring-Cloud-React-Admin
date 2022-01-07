@@ -26,6 +26,8 @@ import { getAccessToken, clearToken } from '@/utils/authority';
 import { getMatchMenuItem, getRoutersData } from '@/services/routers';
 import logo from '../assets/logo.svg';
 import { createIcon } from '@/utils/IconUtil';
+import { TabLayout } from '@/components/antd-pro-page-tabs';
+
 
 /**
  *
@@ -106,6 +108,13 @@ const SecurityBasicLayout: React.FC<SecurityBasicLayoutProps> = (props) => {
 
   const [remoteMenuData, setRemoteMenuData] = useState<MenuDataItem[]>([]);
   const menuDataRef = useRef<MenuDataItem[]>([]);
+  const intl = useIntl();
+  
+  const contextMenuLabels = {
+    closeTab: intl.formatMessage({ id: 'tabs.context.close', defaultMessage: '关闭标签' }),
+    closeRightTabs: intl.formatMessage({ id: 'tabs.context.close-right', defaultMessage: '关闭右侧标签' }),
+    closeAllTabs: intl.formatMessage({ id: 'tabs.context.close-all', defaultMessage: '关闭所有标签' }),
+  }
 
   useEffect(() => {
     if (dispatch) {
@@ -224,7 +233,9 @@ const SecurityBasicLayout: React.FC<SecurityBasicLayoutProps> = (props) => {
         }}
       >
         <Authorized authority={authorized.authority} noMatch={noMatch} currentUser={currentUser}>
-          {children}
+          <TabLayout contextMenuLabels={contextMenuLabels} {...props}>
+            {children}
+          </TabLayout>
         </Authorized>
       </ProLayout>
       <SettingDrawer
