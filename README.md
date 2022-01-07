@@ -48,6 +48,10 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
     <tr>
         <td><img src="https://gitee.com/whiteshader/images/raw/master/login.png"/></td>
         <td><img src="https://gitee.com/whiteshader/images/raw/master/dashboard.png"/></td>
+    </tr>    
+    <tr>
+        <td><img src="https://gitee.com/whiteshader/images/raw/master/monitor.png"/></td>
+        <td><img src="https://gitee.com/whiteshader/images/raw/master/workplace.png"/></td>
     </tr>
     <tr>
         <td><img src="https://gitee.com/whiteshader/images/raw/master/user.png"/></td>
