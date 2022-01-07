@@ -231,12 +231,12 @@ const SecurityBasicLayout: React.FC<SecurityBasicLayoutProps> = (props) => {
           menuDataRef.current = menuData || [];
           return menuData || [];
         }}
-      >
-        <Authorized authority={authorized.authority} noMatch={noMatch} currentUser={currentUser}>
-          <TabLayout contextMenuLabels={contextMenuLabels} {...props}>
+      >  
+        <TabLayout contextMenuLabels={contextMenuLabels} {...props}>
+          <Authorized authority={authorized.authority} noMatch={noMatch} currentUser={currentUser}>
             {children}
-          </TabLayout>
-        </Authorized>
+          </Authorized>
+        </TabLayout>
       </ProLayout>
       <SettingDrawer
         settings={settings}

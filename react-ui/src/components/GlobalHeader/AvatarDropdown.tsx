@@ -1,4 +1,4 @@
-import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import { DashboardOutlined, HomeOutlined, LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
 import React from 'react';
 import type { ConnectProps } from 'umi';
@@ -33,7 +33,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       return;
     }
 
-    history.push(`/account/${key}`);
+    history.push(`${key}`);
   };
 
   render(): React.ReactNode {
@@ -45,15 +45,27 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       menu,
     } = this.props;
     const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+      <Menu className={styles.menu} selectedKeys={[]} onClick={(e: any) => {this.onMenuClick(e)}}>
         {menu && (
-          <Menu.Item key="center">
+          <Menu.Item key="/account/center">
             <UserOutlined />
             个人中心
           </Menu.Item>
+        )}        
+        {menu && (
+          <Menu.Item key="/dashboard/workplace">
+            <HomeOutlined />
+            工作台
+          </Menu.Item>
         )}
         {menu && (
-          <Menu.Item key="settings">
+          <Menu.Item key="/dashboard/monitor">
+            <DashboardOutlined />
+            监控分析
+          </Menu.Item>
+        )}
+        {menu && (
+          <Menu.Item key="/account/settings">
             <SettingOutlined />
             个人设置
           </Menu.Item>

@@ -64,7 +64,7 @@ export default [
               {
                 name: 'monitor',
                 title: 'menu.title.monitor',
-                icon: 'smile',
+                icon: 'dashboard',
                 path: '/dashboard/monitor',
                 component: './dashboard/monitor',
                 wrappers: [RouteWatcher],
@@ -72,7 +72,7 @@ export default [
               {
                 name: 'workplace',
                 title: 'menu.title.workplace',
-                icon: 'smile',
+                icon: 'home',
                 path: '/dashboard/workplace',
                 component: './dashboard/workplace',
                 wrappers: [RouteWatcher],
@@ -90,16 +90,16 @@ export default [
               },
               {
                 name: 'center',
-                title: 'menu.title.center',
-                icon: 'smile',
+                title: 'menu.title.account.center',
+                icon: 'user',
                 path: '/account/center',
                 component: './account/center',
                 wrappers: [RouteWatcher],
               },
               {
                 name: 'settings',
-                title: 'menu.title.settings',
-                icon: 'smile',
+                title: 'menu.title.account.settings',
+                icon: 'settings',
                 path: '/account/settings',
                 component: './account/settings',
                 wrappers: [RouteWatcher],
