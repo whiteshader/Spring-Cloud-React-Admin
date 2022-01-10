@@ -1,5 +1,4 @@
 import request from '@/utils/request';
-import { RequestResponse } from 'umi-request';
 
 const mimeMap = {
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',

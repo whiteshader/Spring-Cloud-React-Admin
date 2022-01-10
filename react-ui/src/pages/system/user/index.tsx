@@ -25,6 +25,8 @@ import ResetPwd from './components/ResetPwd';
 import { getTreeList as getDeptTreeList } from '../dept/service';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
+import { getPostList } from '../post/service';
+import { getRoleList } from '../role/service';
 
 /* *
  *
@@ -342,6 +344,26 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
                     setDeptTree(treeData);
                     setCurrentRow(undefined);
                     setModalVisible(true);
+                  });
+                  getPostList().then((res) => {
+                    if(res.code === 200) {
+                      setPostList(res.rows.map((item: any) => {
+                        return {
+                          value: item.postId,
+                          label: item.postName,
+                        };
+                      }));
+                    }
+                  });
+                  getRoleList().then((res) => {
+                    if(res.code === 200) {
+                      setRoleList(res.rows.map((item: any) => {
+                        return {
+                          value: item.roleId,
+                          label: item.roleName,
+                        };
+                      }));
+                    }
                   });
                 }
               }}
