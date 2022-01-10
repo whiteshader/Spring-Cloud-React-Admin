@@ -10,7 +10,7 @@ import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { MenuType, MenuListParams } from './data.d';
-import { getMenuList, removeMenu, addMenu, updateMenu, exportMenu } from './service';
+import { getMenuList, removeMenu, addMenu, updateMenu } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 import { buildTreeData } from '@/utils/utils';
@@ -95,25 +95,6 @@ const handleRemoveOne = async (selectedRow: MenuType) => {
   } catch (error) {
     hide();
     message.error('删除失败，请重试');
-    return false;
-  }
-};
-
-/**
- * 导出数据
- *
- * @param id
- */
-const handleExport = async () => {
-  const hide = message.loading('正在导出');
-  try {
-    await exportMenu();
-    hide();
-    message.success('导出成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('导出失败，请重试');
     return false;
   }
 };
@@ -303,18 +284,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
             >
               <DeleteOutlined />
               <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
-            </Button>,
-            <Button
-              type="primary"
-              key="export"
-              hidden={!hasPerms('system:menu:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <PlusOutlined />
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
+            </Button>
           ]}
           request={(params) =>
             getMenuList({ ...params } as MenuListParams).then((res) => {

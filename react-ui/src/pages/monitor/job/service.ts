@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { JobType, JobListParams } from './data.d';
 
@@ -56,10 +57,7 @@ export async function removeJob(ids: string) {
 
 // 导出定时任务调度
 export function exportJob(params?: JobListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/job/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/monitor/job/export`, { params }, `job_${new Date().getTime()}.xlsx`);
 }
 
 // 定时任务立即执行一次

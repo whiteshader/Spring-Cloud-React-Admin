@@ -82,7 +82,7 @@ request.interceptors.request.use((url, options) => {
 });
 
 // 响应拦截器
-request.interceptors.response.use(async (response) => {
+request.interceptors.response.use(async (response: Response) => {
   const {status} = response;
   if (status === 401 || status === 403) {
     // localStorage.removeItem('access_token');
@@ -90,12 +90,19 @@ request.interceptors.response.use(async (response) => {
     const msg =  errorCode[status] || errorCode['default']
     message.warn(`${status} ${msg}`)
   } else if (status === 200) {
-    const data = await response.clone().json();
-    const {code} = data;
-    if (code !== 200) {
-      const msg =  errorCode[code] || data.msg || errorCode['default']
-      message.warn(`${code} ${msg}`)
-    }  
+    const contentType = response.headers.get('content-type');    
+    const isJson = contentType?.includes('application/json');
+    if(isJson === true) {
+      const resp = response.clone();
+      const data = await resp.json();
+      if(data) {
+        const {code} = data;
+        if (code !== 200) {
+          const msg =  errorCode[code] || data.msg || errorCode['default']
+          message.warn(`${code} ${msg}`)
+        }  
+      } 
+    }
   }
   return response;
 });

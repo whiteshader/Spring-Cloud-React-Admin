@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { JobLogType, JobLogListParams } from './data.d';
 
@@ -57,10 +58,7 @@ export async function removeJobLog(ids: string) {
 
 // 导出定时任务调度日志
 export function exportJobLog(params?: JobLogListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/jobLog/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/monitor/jobLog/export`, { params }, `job_log_${new Date().getTime()}.xlsx`);
 }
 
 // 清空调度日志

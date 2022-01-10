@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { PostType, PostListParams } from './data.d';
 
@@ -57,8 +58,5 @@ export async function removePost (ids: string) {
 
 // 导出岗位信息
 export function exportPost (params?: PostListParams) {  
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/post/export?${queryString}`, {
-    method: 'GET'
-  });
+  return downLoadXlsx(`/api/system/post/export`, { params }, `post_${new Date().getTime()}.xlsx`);
 }

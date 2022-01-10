@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import { formatTreeSelectData } from '@/utils/utils';
 import type { DataNode } from 'antd/lib/tree';
@@ -66,10 +67,7 @@ export async function removeDept(ids: string) {
 
 // 导出部门
 export function exportDept(params?: DeptListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/dept/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/dept/export`, { params }, `dept_${new Date().getTime()}.xlsx`);
 }
 
 // 获取数据列表

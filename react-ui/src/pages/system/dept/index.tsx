@@ -16,7 +16,6 @@ import {
   removeDept,
   addDept,
   updateDept,
-  exportDept,
 } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
@@ -105,24 +104,6 @@ const handleRemoveOne = async (selectedRow: DeptType) => {
   }
 };
 
-/**
- * 导出数据
- *
- * @param id
- */
-const handleExport = async () => {
-  const hide = message.loading('正在导出');
-  try {
-    await exportDept();
-    hide();
-    message.success('导出成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('导出失败，请重试');
-    return false;
-  }
-};
 
 export type DeptTableProps = {
   currentUser?: CurrentUser;
@@ -292,18 +273,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
             >
               <DeleteOutlined />
               <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
-            </Button>,
-            <Button
-              type="primary"
-              key="export"
-              hidden={!hasPerms('system:dept:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <PlusOutlined />
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
+            </Button>
           ]}
           request={(params) =>
             getDeptList({ ...params } as DeptListParams).then((res) => {

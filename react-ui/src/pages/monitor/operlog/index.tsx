@@ -20,7 +20,6 @@ import {
 } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { download } from '@/utils/utils';
 
 /* *
  *
@@ -112,14 +111,9 @@ const handleRemoveAll = async () => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    const res = await exportOperlog();
+    await exportOperlog();
     hide();
-    if (res.code === 200) {
-      download(res.msg);
-      message.success('导出成功');
-    } else {
-      message.error('导出失败，请重试');
-    }
+    message.success('导出成功');
     return true;
   } catch (error) {
     hide();

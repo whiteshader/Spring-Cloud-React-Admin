@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { ConfigType, ConfigListParams } from './data.d';
 
@@ -56,8 +57,5 @@ export async function removeConfig(ids: string) {
 
 // 导出参数配置
 export function exportConfig(params?: ConfigListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/config/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/config/export`, { params }, `config_${new Date().getTime()}.xlsx`);
 }

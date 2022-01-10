@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { UserType, UserListParams } from './data.d';
 
@@ -57,10 +58,7 @@ export async function removeUser(ids: string) {
 
 // 导出用户信息
 export function exportUser(params?: UserListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/user/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/user/export`, { params }, `user_${new Date().getTime()}.xlsx`);
 }
 
 // 更新密码

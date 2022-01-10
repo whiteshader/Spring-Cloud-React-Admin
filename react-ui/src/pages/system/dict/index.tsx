@@ -19,7 +19,6 @@ import {
   exportDictType,
 } from './service';
 import UpdateForm from './components/edit';
-import { download } from '@/utils/utils';
 
 /* *
  *
@@ -110,14 +109,9 @@ const handleRemoveOne = async (selectedRow: DictTypeType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    const res = await exportDictType();
+    await exportDictType();
     hide();
-    if (res.code === 200) {
-      download(res.msg);
-      message.success('导出成功');
-    } else {
-      message.error('导出失败，请重试');
-    }
+    message.success('导出成功');
     return true;
   } catch (error) {
     hide();

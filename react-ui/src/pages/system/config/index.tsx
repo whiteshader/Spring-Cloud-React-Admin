@@ -13,7 +13,6 @@ import type { ConfigType, ConfigListParams } from './data.d';
 import { getConfigList, removeConfig, addConfig, updateConfig, exportConfig } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
-import { download } from '@/utils/utils';
 
 /**
  *
@@ -104,14 +103,9 @@ const handleRemoveOne = async (selectedRow: ConfigType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    const res = await exportConfig();    
+    await exportConfig();    
     hide();
-    if (res.code === 200) {
-      download(res.msg);
-      message.success('导出成功');
-    } else {
-      message.error('导出失败，请重试');
-    }
+    message.success('导出成功');
     return true;
   } catch (error) {
     hide();

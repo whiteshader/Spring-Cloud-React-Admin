@@ -19,7 +19,6 @@ import {
 } from './service';
 import UpdateForm from './components/edit';
 import { getDict, getDictType, getDictTypeList } from '../dict/service';
-import { download } from '@/utils/utils';
 
 /* *
  *
@@ -102,29 +101,6 @@ const handleRemoveOne = async (selectedRow: DictDataType) => {
   }
 };
 
-/**
- * 导出数据
- *
- * @param id
- */
-const handleExport = async () => {
-  const hide = message.loading('正在导出');
-  try {
-    const res = await exportDictData();
-    hide();
-    if (res.code === 200) {
-      download(res.msg);
-      message.success('导出成功');
-    } else {
-      message.error('导出失败，请重试');
-    }
-    return true;
-  } catch (error) {
-    hide();
-    message.error('导出失败，请重试');
-    return false;
-  }
-};
 
 export type DictDataTableProps = {
   currentUser?: CurrentUser;
@@ -193,6 +169,26 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
       });
     }
   }, [dictId, dictType, props.match?.params]);
+
+    
+  /**
+   * 导出数据
+   *
+   * @param id
+   */
+  const handleExport = async () => {
+    const hide = message.loading('正在导出');
+    try {
+      await exportDictData({dictType});
+      hide();
+      message.success('导出成功');    
+      return true;
+    } catch (error) {
+      hide();
+      message.error('导出失败，请重试');
+      return false;
+    }
+  };
 
   const columns: ProColumns<DictDataType>[] = [
     {

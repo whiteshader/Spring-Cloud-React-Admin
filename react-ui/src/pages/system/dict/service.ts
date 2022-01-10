@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { DictTypeType, DictTypeListParams } from './data.d';
 
@@ -63,8 +64,5 @@ export async function removeDictType(ids: string) {
 
 // 导出字典类型
 export function exportDictType(params?: DictTypeListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/dict/type/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/dict/type/export`, { params }, `dict_type_${new Date().getTime()}.xlsx`);
 }

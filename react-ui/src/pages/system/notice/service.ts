@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { NoticeType, NoticeListParams } from './data.d';
 
@@ -55,8 +56,5 @@ export async function removeNotice(ids: string) {
 
 // 导出通知公告
 export function exportNotice(params?: NoticeListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/notice/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/notice/export`, { params }, `notice_${new Date().getTime()}.xlsx`);
 }

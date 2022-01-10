@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { RoleType, RoleListParams } from './data.d';
 
@@ -55,11 +56,8 @@ export async function removeRole(ids: string) {
 }
 
 // 导出角色信息
-export function exportRole(params?: RoleListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/role/export?${queryString}`, {
-    method: 'GET',
-  });
+export async function exportRole(params?: RoleListParams) {
+  return downLoadXlsx(`/api/system/role/export`, { params }, `role_${new Date().getTime()}.xlsx`)
 }
 
 // 获取角色菜单列表

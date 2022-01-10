@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { LogininforType, LogininforListParams } from './data.d';
 
@@ -57,10 +58,7 @@ export async function removeLogininfor(ids: string) {
 
 // 导出系统访问记录
 export function exportLogininfor(params?: LogininforListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/logininfor/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/monitor/logininfor/export`, { params }, `login_infor_${new Date().getTime()}.xlsx`);
 }
 
 // 清空登录日志

@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { DictDataType, DictDataListParams } from './data.d';
 
@@ -56,8 +57,5 @@ export async function removeDictData(ids: string) {
 
 // 导出字典数据
 export function exportDictData(params?: DictDataListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/dict/data/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/dict/data/export`, { params }, `dict_data_${new Date().getTime()}.xlsx`);
 }

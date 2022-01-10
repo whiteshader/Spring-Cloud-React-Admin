@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { OperlogType, OperlogListParams } from './data.d';
 
@@ -56,10 +57,7 @@ export async function removeOperlog(ids: string) {
 
 // 导出操作日志记录
 export function exportOperlog(params?: OperlogListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/operlog/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/monitor/operlog/export`, { params }, `oper_log_${new Date().getTime()}.xlsx`);
 }
 
 // 清空操作日志

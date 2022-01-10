@@ -1,4 +1,5 @@
 import request from '@/utils/request';
+import { RequestResponse } from 'umi-request';
 
 const mimeMap = {
   xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -28,7 +29,7 @@ export function resolveBlob(res: any, mimeType: string) {
   const contentDisposition = decodeURI(res.response.headers.get('content-disposition'));
   const result = patt.exec(contentDisposition);
   let fileName = result ? result[1] : 'file';
-  fileName = fileName.replace(/"/g, '');
+  fileName = fileName.replace(/"/g, '');  
   aLink.style.display = 'none';
   aLink.href = URL.createObjectURL(blob);
   aLink.setAttribute('download', fileName); // 设置下载文件名称
@@ -36,4 +37,23 @@ export function resolveBlob(res: any, mimeType: string) {
   aLink.click();
   URL.revokeObjectURL(aLink.href); // 清除引用
   document.body.removeChild(aLink);
+}
+
+
+export async function downLoadXlsx(url: string, params: any, fileName: string) {
+  return request(url, {
+    ...params,
+    method: 'POST',
+    responseType: 'blob'
+  }).then((data) => {
+    const aLink = document.createElement('a');
+    const blob = data; // new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });  
+    aLink.style.display = 'none';
+    aLink.href = URL.createObjectURL(blob);
+    aLink.setAttribute('download', fileName); // 设置下载文件名称
+    document.body.appendChild(aLink);
+    aLink.click();
+    URL.revokeObjectURL(aLink.href); // 清除引用
+    document.body.removeChild(aLink);
+  });
 }

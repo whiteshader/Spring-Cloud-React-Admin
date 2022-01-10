@@ -22,7 +22,7 @@ import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 import type { DataNode } from 'antd/lib/tree';
 import { getMenuTree } from '../menu/service';
-import { download, formatTreeSelectData } from '@/utils/utils';
+import { formatTreeSelectData } from '@/utils/utils';
 
 /* *
  *
@@ -114,14 +114,9 @@ const handleRemoveOne = async (selectedRow: RoleType) => {
 const handleExport = async () => {
   const hide = message.loading('正在导出');
   try {
-    const res = await exportRole();    
+    await exportRole();   
     hide();
-    if (res.code === 200) {
-      download(res.msg);
-      message.success('导出成功');
-    } else {
-      message.error('导出失败，请重试');
-    }
+    message.success('导出成功');
     return true;
   } catch (error) {
     hide();

@@ -1,3 +1,4 @@
+import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
 import type { MenuType, MenuListParams } from './data.d';
 
@@ -63,8 +64,5 @@ export async function removeMenu(ids: string) {
 
 // 导出菜单权限
 export function exportMenu(params?: MenuListParams) {
-  const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/menu/export?${queryString}`, {
-    method: 'GET',
-  });
+  return downLoadXlsx(`/api/system/menu/export`, { params }, `menu_${new Date().getTime()}.xlsx`);
 }
