@@ -9,4 +9,5 @@ export default {
 	'system.Post.update_by': '更新者',
 	'system.Post.update_time': '更新时间',
 	'system.Post.remark': '备注',
+	'system.Post.modify': '编辑岗位信息',
 };

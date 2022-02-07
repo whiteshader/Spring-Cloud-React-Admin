@@ -88,7 +88,7 @@ const OperlogForm: React.FC<OperlogFormProps> = (props) => {
         </Descriptions.Item>
         <Descriptions.Item
           span={12}
-          label={<FormattedMessage id="monitor.Job.request_method" defaultMessage="创建时间" />}
+          label={<FormattedMessage id="monitor.Job.create_time" defaultMessage="创建时间" />}
         >
           {values.createTime}
         </Descriptions.Item>

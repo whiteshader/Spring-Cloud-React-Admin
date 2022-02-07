@@ -20,4 +20,5 @@ export default {
   'monitor.Job.update_by': '更新者',
   'monitor.Job.update_time': '更新时间',
   'monitor.Job.remark': '备注信息',
+	'monitor.Job.modify': '编辑定时任务调度',
 };

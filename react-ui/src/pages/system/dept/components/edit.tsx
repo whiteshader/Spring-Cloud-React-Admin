@@ -63,7 +63,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑Dept',
+        id: 'system.Dept.modify',
         defaultMessage: '编辑Dept',
       })}
       visible={props.visible}

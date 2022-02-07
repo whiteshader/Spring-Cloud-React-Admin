@@ -36,6 +36,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
   const { menuTree, menuCheckedKeys } = props;
   const [menuIds, setMenuIds] = useState<any>();
   const { statusOptions } = props;
+
   useEffect(() => {
     form.resetFields();
     form.setFieldsValue({
@@ -73,7 +74,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑角色信息',
+        id: 'system.Role.modify_info',
         defaultMessage: '编辑角色信息',
       })}
       visible={props.visible}
@@ -197,7 +198,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
               // width="xl"
               name="menuIds"
               label={intl.formatMessage({
-                id: 'menu.auth',
+                id: 'system.Role.auth',
                 defaultMessage: '菜单权限',
               })}
             >
@@ -206,10 +207,9 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
                 multiple={true}
                 defaultExpandAll={false}
                 treeData={menuTree}
-              //  checkedKeys={menuCheckedKeys}
                 defaultCheckedKeys={menuCheckedKeys}
-                onCheck={(keys, e) => {
-                  setMenuIds(keys.concat(e.halfCheckedKeys));
+                onCheck={(checkedKeys) => {
+                  setMenuIds(checkedKeys);
                 }}
               />
             </ProForm.Item>

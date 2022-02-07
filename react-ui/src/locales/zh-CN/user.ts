@@ -26,4 +26,6 @@ export default {
   'system.User.update_by': '更新者',
   'system.User.update_time': '更新时间',
   'system.User.remark': '备注',
+  'system.User.reset.password': '密码重置',
+  'system.User.modify_info': '编辑用户信息',
 };

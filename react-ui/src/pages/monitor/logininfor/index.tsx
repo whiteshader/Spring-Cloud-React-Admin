@@ -13,12 +13,9 @@ import type { LogininforType, LogininforListParams } from './data.d';
 import {
   getLogininforList,
   removeLogininfor,
-  addLogininfor,
-  updateLogininfor,
   exportLogininfor,
   cleanLogininfor,
 } from './service';
-import UpdateForm from './components/edit';
 import { getDict } from '@/pages/system/dict/service';
 
 /* *
@@ -29,44 +26,6 @@ import { getDict } from '@/pages/system/dict/service';
  * */
 
 const { confirm } = Modal;
-
-/**
- * 添加节点
- *
- * @param fields
- */
-const handleAdd = async (fields: LogininforType) => {
-  const hide = message.loading('正在添加');
-  try {
-    await addLogininfor({ ...fields });
-    hide();
-    message.success('添加成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('添加失败请重试！');
-    return false;
-  }
-};
-
-/**
- * 更新节点
- *
- * @param fields
- */
-const handleUpdate = async (fields: LogininforType) => {
-  const hide = message.loading('正在配置');
-  try {
-    await updateLogininfor(fields);
-    hide();
-    message.success('配置成功');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('配置失败请重试！');
-    return false;
-  }
-};
 
 /**
  * 删除节点
@@ -136,10 +95,7 @@ export type LogininforTableProps = {
 const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
   const formTableRef = useRef<FormInstance>();
 
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<LogininforType>();
   const [selectedRowsState, setSelectedRows] = useState<LogininforType[]>([]);
 
   const [statusOptions, setStatusOptions] = useState<any>([]);
@@ -332,30 +288,6 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
           </Button>
         </FooterToolbar>
       )}
-      <UpdateForm
-        onSubmit={async (values) => {
-          let success = false;
-          if (values.infoId) {
-            success = await handleUpdate({ ...values } as LogininforType);
-          } else {
-            success = await handleAdd({ ...values } as LogininforType);
-          }
-          if (success) {
-            setModalVisible(false);
-            setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
-            }
-          }
-        }}
-        onCancel={() => {
-          setModalVisible(false);
-          setCurrentRow(undefined);
-        }}
-        visible={modalVisible}
-        values={currentRow || {}}
-        statusOptions={statusOptions}
-      />
     </PageContainer>
   );
 };

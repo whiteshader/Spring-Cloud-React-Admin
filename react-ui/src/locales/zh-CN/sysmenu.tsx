@@ -24,6 +24,8 @@ export default {
   'system.Menu.update_by': '更新者',
   'system.Menu.update_time': '更新时间',
   'system.Menu.remark': '备注',
+  'system.Menu.query': '路由参数',
+  'system.Menu.modify': '编辑菜单',
   'icon.selector.tab.direction': '方向性图标',
   'icon.selector.tab.suggestion': '提示建议性图标',
   'icon.selector.tab.editor': '编辑类图标',

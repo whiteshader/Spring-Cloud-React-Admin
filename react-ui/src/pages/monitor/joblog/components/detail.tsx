@@ -52,7 +52,7 @@ const JobLogForm: React.FC<JobLogFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '定时任务调度日志',
+        id: 'monitor.JobLog.title',
         defaultMessage: '定时任务调度日志',
       })}
       visible={props.visible}

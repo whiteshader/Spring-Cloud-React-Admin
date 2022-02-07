@@ -22,4 +22,5 @@ export default {
   'system.Dept.create_time': '创建时间',
   'system.Dept.update_by': '更新者',
   'system.Dept.update_time': '更新时间',
+	'system.Dept.modify': '编辑部门信息',
 };

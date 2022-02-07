@@ -62,7 +62,7 @@ const JobForm: React.FC<JobFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑定时任务调度',
+        id: 'monitor.Job.modify',
         defaultMessage: '编辑定时任务调度',
       })}
       visible={props.visible}

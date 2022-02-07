@@ -7,6 +7,7 @@
  * */
 
 export default {
+  'monitor.JobLog.title': '定时任务调度日志',
   'monitor.JobLog.job_log_id': '任务日志ID',
   'monitor.JobLog.job_name': '任务名称',
   'monitor.JobLog.job_group': '任务组名',

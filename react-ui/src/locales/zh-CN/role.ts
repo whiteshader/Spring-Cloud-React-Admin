@@ -20,4 +20,6 @@ export default {
   'system.Role.update_by': '更新者',
   'system.Role.update_time': '更新时间',
   'system.Role.remark': '备注',
+  'system.Role.modify_info': '编辑角色信息',
+  'system.Role.auth': '菜单权限',
 };

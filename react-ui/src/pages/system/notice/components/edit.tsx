@@ -66,7 +66,7 @@ const NoticeForm: React.FC<NoticeFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑通知公告',
+        id: 'system.Notice.modify',
         defaultMessage: '编辑通知公告',
       })}
       visible={props.visible}

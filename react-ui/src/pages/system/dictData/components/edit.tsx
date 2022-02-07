@@ -66,7 +66,7 @@ const DictDataForm: React.FC<DictDataFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑DictData',
+        id: 'system.DictData.modify',
         defaultMessage: '编辑DictData',
       })}
       visible={props.visible}

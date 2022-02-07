@@ -16,4 +16,5 @@ export default {
   'system.Config.update_by': '更新者',
   'system.Config.update_time': '更新时间',
   'system.Config.remark': '备注',
+	'system.Config.modify': '编辑参数配置',
 };

@@ -58,7 +58,7 @@ const ConfigForm: React.FC<ConfigFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑参数配置',
+        id: 'system.Config.modify',
         defaultMessage: '编辑参数配置',
       })}
       visible={props.visible}

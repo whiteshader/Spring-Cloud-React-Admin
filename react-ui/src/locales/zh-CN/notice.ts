@@ -9,4 +9,5 @@ export default {
   'system.Notice.update_by': '更新者',
   'system.Notice.update_time': '更新时间',
   'system.Notice.remark': '备注',
+	'system.Notice.modify': '编辑通知公告',
 };

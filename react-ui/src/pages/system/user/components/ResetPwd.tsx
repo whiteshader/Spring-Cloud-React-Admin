@@ -59,7 +59,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: 'reset.password',
+        id: 'system.User.reset.password',
         defaultMessage: '密码重置',
       })}
       visible={props.resetPwdModalVisible}

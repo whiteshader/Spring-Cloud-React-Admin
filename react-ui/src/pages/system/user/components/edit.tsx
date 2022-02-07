@@ -87,7 +87,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑用户信息',
+        id: 'system.User.modify_info',
         defaultMessage: '编辑用户信息',
       })}
       visible={props.visible}

@@ -59,7 +59,7 @@ const PostForm: React.FC<PostFormProps> = (props) => {
     <Modal
       width={640}
       title={intl.formatMessage({
-        id: '编辑岗位信息',
+        id: 'system.Post.modify',
         defaultMessage: '编辑岗位信息',
       })}
       visible={props.visible}

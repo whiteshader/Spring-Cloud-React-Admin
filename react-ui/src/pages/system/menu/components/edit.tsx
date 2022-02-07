@@ -83,7 +83,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
     <Modal
       width={680}
       title={intl.formatMessage({
-        id: '编辑菜单',
+        id: 'system.Menu.modify',
         defaultMessage: '编辑菜单',
       })}
       visible={props.visible}
