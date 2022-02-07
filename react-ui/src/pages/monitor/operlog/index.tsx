@@ -322,7 +322,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:operlog:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -345,7 +345,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:operlog:del')}
+              hidden={!hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -404,7 +404,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:operlog:del')}
+            hidden={!hasPerms('monitor:operlog:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

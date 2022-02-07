@@ -198,7 +198,7 @@ const NoticeTableList: React.FC<NoticeTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:notice:del')}
+          hidden={!hasPerms('system:notice:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -252,7 +252,7 @@ const NoticeTableList: React.FC<NoticeTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:notice:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:notice:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -295,7 +295,7 @@ const NoticeTableList: React.FC<NoticeTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:notice:del')}
+            hidden={!hasPerms('system:notice:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

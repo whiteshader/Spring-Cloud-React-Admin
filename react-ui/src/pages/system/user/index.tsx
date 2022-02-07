@@ -268,7 +268,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:user:del')}
+          hidden={!hasPerms('system:user:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -373,7 +373,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:user:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:user:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -427,7 +427,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:user:del')}
+            hidden={!hasPerms('system:user:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

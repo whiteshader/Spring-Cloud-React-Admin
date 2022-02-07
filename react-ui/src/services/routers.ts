@@ -31,6 +31,7 @@ export async function getRoutersData(): Promise<MenuDataItem[]> {
 
 export function getMatchMenuItem(path: string, menuData: MenuDataItem[]): MenuDataItem[] {
   let items: MenuDataItem[] = [];
+  // console.log(path);
   menuData.forEach((item) => {
     if (item.path) {
       if (item.path === path) {

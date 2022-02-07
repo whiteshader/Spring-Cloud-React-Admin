@@ -246,7 +246,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:role:del')}
+          hidden={!hasPerms('system:role:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -309,7 +309,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:role:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:role:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -363,7 +363,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:role:del')}
+            hidden={!hasPerms('system:role:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

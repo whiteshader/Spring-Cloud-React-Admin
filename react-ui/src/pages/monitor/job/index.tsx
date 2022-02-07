@@ -236,7 +236,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('monitor:job:del')}
+          hidden={!hasPerms('monitor:job:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -352,7 +352,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:job:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:job:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认删除所选数据项?',
@@ -413,7 +413,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:job:del')}
+            hidden={!hasPerms('monitor:job:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

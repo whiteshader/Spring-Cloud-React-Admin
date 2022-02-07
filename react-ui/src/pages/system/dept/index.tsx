@@ -201,7 +201,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:dept:del')}
+          hidden={!hasPerms('system:dept:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -262,7 +262,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:dept:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:dept:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -305,7 +305,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:dept:del')}
+            hidden={!hasPerms('system:dept:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

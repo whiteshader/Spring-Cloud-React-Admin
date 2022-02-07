@@ -212,7 +212,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:config:del')}
+          hidden={!hasPerms('system:config:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -266,7 +266,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:config:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:config:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -320,7 +320,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:config:del')}
+            hidden={!hasPerms('system:config:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

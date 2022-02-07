@@ -219,7 +219,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:menu:del')}
+          hidden={!hasPerms('system:menu:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -273,7 +273,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:menu:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:menu:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -322,7 +322,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:menu:del')}
+            hidden={!hasPerms('system:menu:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

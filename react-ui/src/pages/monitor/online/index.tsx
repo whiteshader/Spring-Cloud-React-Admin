@@ -115,7 +115,7 @@ const OnlineUserTableList: React.FC<OnlineUserTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:user:del')}
+          hidden={!hasPerms('system:user:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '强踢',

@@ -199,7 +199,7 @@ const PostTableList: React.FC<PostTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:post:del')}
+          hidden={!hasPerms('system:post:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -253,7 +253,7 @@ const PostTableList: React.FC<PostTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:post:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:post:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -307,7 +307,7 @@ const PostTableList: React.FC<PostTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:post:del')}
+            hidden={!hasPerms('system:post:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

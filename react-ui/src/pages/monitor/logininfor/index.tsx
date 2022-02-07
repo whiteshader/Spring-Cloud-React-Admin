@@ -245,7 +245,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:logininfor:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:logininfor:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -260,7 +260,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:logininfor:del')}
+              hidden={!hasPerms('monitor:logininfor:remove')}
               onClick={async () => {
                 handleRemoveAll();
                 actionRef.current?.reloadAndRest?.();
@@ -311,7 +311,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:logininfor:del')}
+            hidden={!hasPerms('monitor:logininfor:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

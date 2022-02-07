@@ -262,7 +262,7 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:dictData:del')}
+          hidden={!hasPerms('system:dictData:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -316,7 +316,7 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:dictData:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('system:dictData:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -385,7 +385,7 @@ const DictDataTableList: React.FC<DictDataTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:dictData:del')}
+            hidden={!hasPerms('system:dictData:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',

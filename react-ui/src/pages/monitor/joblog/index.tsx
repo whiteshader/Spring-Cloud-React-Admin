@@ -194,7 +194,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('monitor:log:del')}
+          hidden={!hasPerms('monitor:log:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -237,7 +237,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:log:del')}
+              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:log:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认删除所选数据项?',
@@ -260,7 +260,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:operlog:del')}
+              hidden={!hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -329,7 +329,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:log:del')}
+            hidden={!hasPerms('monitor:log:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
