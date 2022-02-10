@@ -1,147 +1,62 @@
-import { FormattedMessage, formatMessage } from 'umi';
-import React, { Component } from 'react';
-
-import { List, message } from 'antd';
-import ResetPwd from '@/pages/system/user/components/ResetPwd';
-import { resetPwd } from '@/pages/system/user/service';
+import React from 'react';
+import { List } from 'antd';
 
 type Unpacked<T> = T extends (infer U)[] ? U : T;
-export interface SecurityProps {
-  userId: string;  
-}
 
 const passwordStrength = {
-  strong: (
-    <span className="strong">
-      <FormattedMessage id="accountandsettings.security.strong" defaultMessage="Strong" />
-    </span>
-  ),
-  medium: (
-    <span className="medium">
-      <FormattedMessage id="accountandsettings.security.medium" defaultMessage="Medium" />
-    </span>
-  ),
-  weak: (
-    <span className="weak">
-      <FormattedMessage id="accountandsettings.security.weak" defaultMessage="Weak" />
-      Weak
-    </span>
-  ),
+  strong: <span className="strong">强</span>,
+  medium: <span className="medium">中</span>,
+  weak: <span className="weak">弱 Weak</span>,
 };
 
-class SecurityView extends Component<SecurityProps> {
-
-  state = {
-    resetPwdModalVisible: false,
-  };
-
-  resSetPassword() {
-    this.setState({
-      resetPwdModalVisible: true,
-    });
-  }
-
-  getData = () => [
+const SecurityView: React.FC = () => {
+  const getData = () => [
     {
-      title: formatMessage({ id: 'accountandsettings.security.password' }, {}),
+      title: '账户密码',
       description: (
         <>
-          {formatMessage({ id: 'accountandsettings.security.password-description' })}：
+          当前密码强度：
           {passwordStrength.strong}
         </>
       ),
-      actions: [
-        <a
-          key="Modify"
-          onClick={() => {
-            this.resSetPassword();
-          }}
-        >
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      actions: [<a key="Modify">修改</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.phone' }, {}),
-      description: `${formatMessage(
-        { id: 'accountandsettings.security.phone-description' },
-        {},
-      )}：138****8293`,
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      title: '密保手机',
+      description: `已绑定手机：138****8293`,
+      actions: [<a key="Modify">修改</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.question' }, {}),
-      description: formatMessage({ id: 'accountandsettings.security.question-description' }, {}),
-      actions: [
-        <a key="Set">
-          <FormattedMessage id="accountandsettings.security.set" defaultMessage="Set" />
-        </a>,
-      ],
+      title: '密保问题',
+      description: '未设置密保问题，密保问题可有效保护账户安全',
+      actions: [<a key="Set">设置</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.email' }, {}),
-      description: `${formatMessage(
-        { id: 'accountandsettings.security.email-description' },
-        {},
-      )}：ant***sign.com`,
-      actions: [
-        <a key="Modify">
-          <FormattedMessage id="accountandsettings.security.modify" defaultMessage="Modify" />
-        </a>,
-      ],
+      title: '备用邮箱',
+      description: `已绑定邮箱：ant***sign.com`,
+      actions: [<a key="Modify">修改</a>],
     },
     {
-      title: formatMessage({ id: 'accountandsettings.security.mfa' }, {}),
-      description: formatMessage({ id: 'accountandsettings.security.mfa-description' }, {}),
-      actions: [
-        <a key="bind">
-          <FormattedMessage id="accountandsettings.security.bind" defaultMessage="Bind" />
-        </a>,
-      ],
+      title: 'MFA 设备',
+      description: '未绑定 MFA 设备，绑定后，可以进行二次确认',
+      actions: [<a key="bind">绑定</a>],
     },
   ];
 
-  render() {
-    const data = this.getData();
-    return (
-      <>
-        <List<Unpacked<typeof data>>
-          itemLayout="horizontal"
-          dataSource={data}
-          renderItem={(item) => (
-            <List.Item actions={item.actions}>
-              <List.Item.Meta title={item.title} description={item.description} />
-            </List.Item>
-          )}
-        />
-        <ResetPwd
-          onSubmit={async (value: any) => {
-            const userData = { ...value, userId: this.props.userId };
-            const res = await resetPwd(userData);
-            if (res.code === 200) {
-              this.setState({
-                resetPwdModalVisible: false,
-              });
-              message.success('密码重置成功。');
-            } else {
-              message.warn(res.msg);
-            }
-          }}
-          onCancel={() => {
-            this.setState({
-              resetPwdModalVisible: false,
-            });
-          }}
-          resetPwdModalVisible={this.state.resetPwdModalVisible}
-          values={{}}
-        />
-      </>
-    );
-  }
-}
+  const data = getData();
+  return (
+    <>
+      <List<Unpacked<typeof data>>
+        itemLayout="horizontal"
+        dataSource={data}
+        renderItem={(item) => (
+          <List.Item actions={item.actions}>
+            <List.Item.Meta title={item.title} description={item.description} />
+          </List.Item>
+        )}
+      />
+    </>
+  );
+};
 
 export default SecurityView;

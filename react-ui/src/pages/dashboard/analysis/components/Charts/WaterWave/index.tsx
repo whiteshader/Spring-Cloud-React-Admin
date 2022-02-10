@@ -7,13 +7,13 @@ import styles from './index.less';
 /* eslint no-mixed-operators: 0 */
 // riddle: https://riddle.alibaba-inc.com/riddles/2d9a4b90
 
-export interface WaterWaveProps {
+export type WaterWaveProps = {
   title: React.ReactNode;
   color?: string;
   height?: number;
   percent: number;
   style?: React.CSSProperties;
-}
+};
 
 class WaterWave extends Component<WaterWaveProps> {
   state = {

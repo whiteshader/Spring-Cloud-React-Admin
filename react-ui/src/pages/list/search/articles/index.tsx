@@ -1,14 +1,13 @@
-import type { FC} from 'react';
-import React, { useEffect } from 'react';
+import { LikeOutlined, LoadingOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
 import { Button, Card, Col, Form, List, Row, Select, Tag } from 'antd';
-import { LoadingOutlined, StarOutlined, LikeOutlined, MessageOutlined } from '@ant-design/icons';
-import type { Dispatch } from 'umi';
-import { connect } from 'umi';
+import type { FC } from 'react';
+import React from 'react';
+import { useRequest } from 'umi';
 import ArticleListContent from './components/ArticleListContent';
-import type { StateType } from './model';
-import type { ListItemDataType } from './data.d';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
 import styles from './style.less';
 
 const { Option } = Select;
@@ -16,33 +15,25 @@ const FormItem = Form.Item;
 
 const pageSize = 5;
 
-interface ArticlesProps {
-  dispatch: Dispatch;
-  listAndsearchAndarticles: StateType;
-  loading: boolean;
-}
-const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { list }, loading }) => {
+const Articles: FC = () => {
   const [form] = Form.useForm();
-  useEffect(() => {
-    dispatch({
-      type: 'listAndsearchAndarticles/fetch',
-      payload: {
-        count: 5,
-      },
-    });
-  }, []);
+
+  const { data, reload, loading, loadMore, loadingMore } = useRequest(
+    () => {
+      return queryFakeList({
+        count: pageSize,
+      });
+    },
+    {
+      loadMore: true,
+    },
+  );
+
+  const list = data?.list || [];
+
   const setOwner = () => {
     form.setFieldsValue({
       owner: ['wzj'],
-    });
-  };
-
-  const fetchMore = () => {
-    dispatch({
-      type: 'listAndsearchAndarticles/appendFetch',
-      payload: {
-        count: pageSize,
-      },
     });
   };
 
@@ -108,10 +99,10 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
     },
   };
 
-  const loadMore = list.length > 0 && (
+  const loadMoreDom = list.length > 0 && (
     <div style={{ textAlign: 'center', marginTop: 16 }}>
-      <Button onClick={fetchMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
-        {loading ? (
+      <Button onClick={loadMore} style={{ paddingLeft: 48, paddingRight: 48 }}>
+        {loadingMore ? (
           <span>
             <LoadingOutlined /> 加载中...
           </span>
@@ -131,14 +122,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
           initialValues={{
             owner: ['wjh', 'zxx'],
           }}
-          onValuesChange={() => {
-            dispatch({
-              type: 'listAndsearchAndarticles/fetch',
-              payload: {
-                count: 8,
-              },
-            });
-          }}
+          onValuesChange={reload}
         >
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
             <FormItem name="category">
@@ -160,7 +144,7 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
           </StandardFormRow>
           <StandardFormRow title="owner" grid>
             <FormItem name="owner" noStyle>
-              <Select mode="multiple" placeholder="选择 owner">
+              <Select mode="multiple" placeholder="选择 owner" style={{'minWidth': '6rem'}}>
                 {owners.map((owner) => (
                   <Option key={owner.id} value={owner.id}>
                     {owner.name}
@@ -199,10 +183,10 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
       >
         <List<ListItemDataType>
           size="large"
-          loading={list.length === 0 ? loading : false}
+          loading={loading}
           rowKey="id"
           itemLayout="vertical"
-          loadMore={loadMore}
+          loadMore={loadMoreDom}
           dataSource={list}
           renderItem={(item) => (
             <List.Item
@@ -237,15 +221,4 @@ const Articles: FC<ArticlesProps> = ({ dispatch, listAndsearchAndarticles: { lis
   );
 };
 
-export default connect(
-  ({
-    listAndsearchAndarticles,
-    loading,
-  }: {
-    listAndsearchAndarticles: StateType;
-    loading: { models: Record<string, boolean> };
-  }) => ({
-    listAndsearchAndarticles,
-    loading: loading.models.listAndsearchAndarticles,
-  }),
-)(Articles);
+export default Articles;

@@ -39,14 +39,14 @@ function getRule(req: Request, res: Response, u: string) {
     realUrl = req.url;
   }
   const { current = 1, pageSize = 10 } = req.query;
-  const params = (parse(realUrl, true).query as unknown) as TableListParams;
+  const params = parse(realUrl, true).query as unknown as TableListParams;
 
   let dataSource = [...tableListDataSource].slice(
     ((current as number) - 1) * (pageSize as number),
     (current as number) * (pageSize as number),
   );
-  const sorter = JSON.parse(params.sorter as any);
-  if (sorter) {
+  if (params.sorter) {
+    const sorter = JSON.parse(params.sorter as any);
     dataSource = dataSource.sort((prev, next) => {
       let sortNumber = 0;
       Object.keys(sorter).forEach((key) => {
@@ -87,11 +87,17 @@ function getRule(req: Request, res: Response, u: string) {
   if (params.name) {
     dataSource = dataSource.filter((data) => data.name.includes(params.name || ''));
   }
+
+  let finalPageSize = 10;
+  if (params.pageSize) {
+    finalPageSize = parseInt(`${params.pageSize}`, 10);
+  }
+
   const result = {
     data: dataSource,
     total: tableListDataSource.length,
     success: true,
-    pageSize,
+    pageSize: finalPageSize,
     current: parseInt(`${params.currentPage}`, 10) || 1,
   };
 
@@ -105,14 +111,14 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
   }
 
   const body = (b && b.body) || req.body;
-  const { method, name, desc, key } = body;
+  const { name, desc, key } = body;
 
-  switch (method) {
+  switch (req.method) {
     /* eslint no-case-declarations:0 */
-    case 'delete':
+    case 'DELETE':
       tableListDataSource = tableListDataSource.filter((item) => key.indexOf(item.key) === -1);
       break;
-    case 'post':
+    case 'POST':
       (() => {
         const i = Math.ceil(Math.random() * 10000);
         const newRule = {
@@ -136,7 +142,7 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
       })();
       return;
 
-    case 'update':
+    case 'PUT':
       (() => {
         let newRule = {};
         tableListDataSource = tableListDataSource.map((item) => {
@@ -166,4 +172,6 @@ function postRule(req: Request, res: Response, u: string, b: Request) {
 export default {
   'GET /api/rule': getRule,
   'POST /api/rule': postRule,
+  'DELETE /api/rule': postRule,
+  'PUT /api/rule': postRule,
 };

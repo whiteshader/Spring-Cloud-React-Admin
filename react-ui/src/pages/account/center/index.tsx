@@ -1,15 +1,14 @@
 import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
 import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
-import React, { Component, useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
-import type { Dispatch } from 'umi';
-import { Link, connect } from 'umi';
+import { Link, useRequest } from 'umi';
 import type { RouteChildrenProps } from 'react-router';
-import type { ModalState } from './model';
 import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Applications from './components/Applications';
-import type { CurrentUser, TagType } from './data.d';
+import type { CurrentUser, TagType, tabKeyType } from './data.d';
+import { queryCurrent } from './service';
 import styles from './Center.less';
 
 const operationTabList = [
@@ -38,15 +37,6 @@ const operationTabList = [
     ),
   },
 ];
-
-interface CenterProps extends RouteChildrenProps {
-  dispatch: Dispatch;
-  currentUser: Partial<CurrentUser>;
-  currentUserLoading: boolean;
-}
-interface CenterState {
-  tabKey?: 'articles' | 'applications' | 'projects';
-}
 
 const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
   const ref = useRef<Input | null>(null);
@@ -103,156 +93,118 @@ const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
   );
 };
 
-class Center extends Component<CenterProps, CenterState> {
-  // static getDerivedStateFromProps(
-  //   props: accountAndcenterProps,
-  //   state: accountAndcenterState,
-  // ) {
-  //   const { match, location } = props;
-  //   const { tabKey } = state;
-  //   const path = match && match.path;
+const Center: React.FC<RouteChildrenProps> = () => {
+  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
 
-  //   const urlTabKey = location.pathname.replace(`${path}/`, '');
-  //   if (urlTabKey && urlTabKey !== '/' && tabKey !== urlTabKey) {
-  //     return {
-  //       tabKey: urlTabKey,
-  //     };
-  //   }
+  //  获取用户信息
+  const { data: currentUser, loading } = useRequest(() => {
+    return queryCurrent();
+  });
 
-  //   return null;
-  // }
-
-  state: CenterState = {
-    tabKey: 'articles',
+  //  渲染用户信息
+  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
+    return (
+      <div className={styles.detail}>
+        <p>
+          <ContactsOutlined
+            style={{
+              marginRight: 8,
+            }}
+          />
+          {title}
+        </p>
+        <p>
+          <ClusterOutlined
+            style={{
+              marginRight: 8,
+            }}
+          />
+          {group}
+        </p>
+        <p>
+          <HomeOutlined
+            style={{
+              marginRight: 8,
+            }}
+          />
+          {(geographic || { province: { label: '' } }).province.label}
+          {
+            (
+              geographic || {
+                city: {
+                  label: '',
+                },
+              }
+            ).city.label
+          }
+        </p>
+      </div>
+    );
   };
 
-  public input: Input | null | undefined = undefined;
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch({
-      type: 'accountAndcenter/fetchCurrent',
-    });
-    dispatch({
-      type: 'accountAndcenter/fetch',
-    });
-  }
-
-  onTabChange = (key: string) => {
-    // If you need to sync state to url
-    // const { match } = this.props;
-    // router.push(`${match.url}/${key}`);
-    this.setState({
-      tabKey: key as CenterState['tabKey'],
-    });
-  };
-
-  renderChildrenByTabKey = (tabKey: CenterState['tabKey']) => {
-    if (tabKey === 'projects') {
+  // 渲染tab切换
+  const renderChildrenByTabKey = (tabValue: tabKeyType) => {
+    if (tabValue === 'projects') {
       return <Projects />;
     }
-    if (tabKey === 'applications') {
+    if (tabValue === 'applications') {
       return <Applications />;
     }
-    if (tabKey === 'articles') {
+    if (tabValue === 'articles') {
       return <Articles />;
     }
     return null;
   };
 
-  renderUserInfo = (currentUser: Partial<CurrentUser>) => (
-    <div className={styles.detail}>
-      <p>
-        <ContactsOutlined
-          style={{
-            marginRight: 8,
-          }}
-        />
-        {currentUser.userName}
-      </p>
-      <p>
-        <ClusterOutlined
-          style={{
-            marginRight: 8,
-          }}
-        />
-        {currentUser.dept?.deptName}
-      </p>
-      <p>
-        <HomeOutlined
-          style={{
-            marginRight: 8,
-          }}
-        />
-        {currentUser.sex === '1'?'女':'男'}
-      </p>
-    </div>
-  );
-
-  render() {
-    const { tabKey } = this.state;
-    const { currentUser = {}, currentUserLoading } = this.props;
-    const dataLoading = currentUserLoading || !(currentUser && Object.keys(currentUser).length);
-    return (
-      <GridContent>
-        <Row gutter={24}>
-          <Col lg={7} md={24}>
-            <Card bordered={false} style={{ marginBottom: 24 }} loading={dataLoading}>
-              {!dataLoading && (
-                <div>
-                  <div className={styles.avatarHolder}>
-                    <img alt="" src={currentUser.avatar} />
-                    <div className={styles.name}>{currentUser.nickName}</div>
-                    <div>{currentUser.remark}</div>
-                  </div>
-                  {this.renderUserInfo(currentUser)}
-                  <Divider dashed />
-                  <TagList tags={currentUser.tags || []} />
-                  <Divider style={{ marginTop: 16 }} dashed />
-                  <div className={styles.team}>
-                    <div className={styles.teamTitle}>角色</div>
-                    <Row gutter={36}>
-                      {currentUser.roles &&
-                        currentUser.roles.map((item) => (
-                          <Col key={item.roleId} lg={24} xl={12}>
-                            <Link to={""}>
-                              <Avatar size="small" src={""} />
-                              {item.roleName}
-                            </Link>
-                          </Col>
-                        ))}
-                    </Row>
-                  </div>
+  return (
+    <GridContent>
+      <Row gutter={24}>
+        <Col lg={7} md={24}>
+          <Card bordered={false} style={{ marginBottom: 24 }} loading={loading}>
+            {!loading && currentUser && (
+              <div>
+                <div className={styles.avatarHolder}>
+                  <img alt="" src={currentUser.avatar} />
+                  <div className={styles.name}>{currentUser.name}</div>
+                  <div>{currentUser?.signature}</div>
                 </div>
-              )}
-            </Card>
-          </Col>
-          <Col lg={17} md={24}>
-            <Card
-              className={styles.tabsCard}
-              bordered={false}
-              tabList={operationTabList}
-              activeTabKey={tabKey}
-              onTabChange={this.onTabChange}
-            >
-              {this.renderChildrenByTabKey(tabKey)}
-            </Card>
-          </Col>
-        </Row>
-      </GridContent>
-    );
-  }
-}
-
-export default connect(
-  ({
-    loading,
-    accountAndcenter,
-  }: {
-    loading: { effects: Record<string, boolean> };
-    accountAndcenter: ModalState;
-  }) => ({
-    currentUser: accountAndcenter.currentUser,
-    currentUserLoading: loading.effects['accountAndcenter/fetchCurrent'],
-  }),
-)(Center);
+                {renderUserInfo(currentUser)}
+                <Divider dashed />
+                <TagList tags={currentUser.tags || []} />
+                <Divider style={{ marginTop: 16 }} dashed />
+                <div className={styles.team}>
+                  <div className={styles.teamTitle}>团队</div>
+                  <Row gutter={36}>
+                    {currentUser.notice &&
+                      currentUser.notice.map((item) => (
+                        <Col key={item.id} lg={24} xl={12}>
+                          <Link to={item.href}>
+                            <Avatar size="small" src={item.logo} />
+                            {item.member}
+                          </Link>
+                        </Col>
+                      ))}
+                  </Row>
+                </div>
+              </div>
+            )}
+          </Card>
+        </Col>
+        <Col lg={17} md={24}>
+          <Card
+            className={styles.tabsCard}
+            bordered={false}
+            tabList={operationTabList}
+            activeTabKey={tabKey}
+            onTabChange={(_tabKey: string) => {
+              setTabKey(_tabKey as tabKeyType);
+            }}
+          >
+            {renderChildrenByTabKey(tabKey)}
+          </Card>
+        </Col>
+      </Row>
+    </GridContent>
+  );
+};
+export default Center;

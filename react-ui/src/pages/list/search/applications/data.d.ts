@@ -1,7 +1,11 @@
-export interface Member {
+export type Member = {
   avatar: string;
   name: string;
   id: string;
+};
+
+export interface Params {
+  count: number;
 }
 
 export interface ListItemDataType {

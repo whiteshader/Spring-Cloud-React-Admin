@@ -6,7 +6,7 @@ export default {
   'menu.admin.sub-page': 'Sub-Page',
   'menu.login': 'Login',
   'menu.register': 'Register',
-  'menu.register.result': 'Register Result',
+  'menu.register-result': 'Register Result',
   'menu.dashboard': 'Dashboard',
   'menu.dashboard.analysis': 'Analysis',
   'menu.dashboard.monitor': 'Monitor',
@@ -49,7 +49,4 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
-  'menu.test': 'Test',
-  'menu.test.mqtt': 'Mqtt',
-  'menu.System': 'System',
 };

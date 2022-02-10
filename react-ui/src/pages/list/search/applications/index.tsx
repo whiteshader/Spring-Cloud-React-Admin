@@ -4,17 +4,16 @@ import {
   EllipsisOutlined,
   ShareAltOutlined,
 } from '@ant-design/icons';
-import { Avatar, Card, Col, Dropdown, List, Menu, Row, Select, Tooltip, Form } from 'antd';
-import type { FC} from 'react';
-import React, { useEffect } from 'react';
-import type { Dispatch } from 'umi';
-import { connect } from 'umi';
+import { Avatar, Card, Col, Dropdown, Form, List, Menu, Row, Select, Tooltip } from 'antd';
 import numeral from 'numeral';
-import type { ListItemDataType } from './data.d';
+import type { FC } from 'react';
+import React from 'react';
+import { useRequest } from 'umi';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
 import styles from './style.less';
-import type { StateType } from './model';
 
 const { Option } = Select;
 
@@ -44,12 +43,6 @@ export function formatWan(val: number) {
   return result;
 }
 
-interface ApplicationsProps {
-  dispatch: Dispatch;
-  listAndsearchAndapplications: StateType;
-  loading: boolean;
-}
-
 const formItemLayout = {
   wrapperCol: {
     xs: { span: 24 },
@@ -73,30 +66,15 @@ const CardInfo: React.FC<{
   </div>
 );
 
-export const Applications: FC<ApplicationsProps> = (props) => {
-  const {
-    dispatch,
-    loading,
-    listAndsearchAndapplications: { list },
-  } = props;
-
-  useEffect(() => {
-    dispatch({
-      type: 'listAndsearchAndapplications/fetch',
-      payload: {
-        count: 8,
-      },
+export const Applications: FC<Record<string, any>> = () => {
+  const { data, loading, run } = useRequest((values: any) => {
+    console.log('form data', values);
+    return queryFakeList({
+      count: 8,
     });
-  }, [1]);
+  });
 
-  const handleValuesChange = () => {
-    dispatch({
-      type: 'listAndsearchAndapplications/fetch',
-      payload: {
-        count: 8,
-      },
-    });
-  };
+  const list = data?.list || [];
 
   const itemMenu = (
     <Menu>
@@ -121,7 +99,11 @@ export const Applications: FC<ApplicationsProps> = (props) => {
   return (
     <div className={styles.filterCardList}>
       <Card bordered={false}>
-        <Form onValuesChange={handleValuesChange}>
+        <Form
+          onValuesChange={(_, values) => {
+            run(values);
+          }}
+        >
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
             <Form.Item name="category">
               <TagSelect expandable>
@@ -210,15 +192,4 @@ export const Applications: FC<ApplicationsProps> = (props) => {
   );
 };
 
-export default connect(
-  ({
-    listAndsearchAndapplications,
-    loading,
-  }: {
-    listAndsearchAndapplications: StateType;
-    loading: { models: Record<string, boolean> };
-  }) => ({
-    listAndsearchAndapplications,
-    loading: loading.models.listAndsearchAndapplications,
-  }),
-)(Applications);
+export default Applications;

@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-
-import { Input } from 'antd';
 import { PageContainer } from '@ant-design/pro-layout';
+import { Input } from 'antd';
+import type { FC } from 'react';
 import { history } from 'umi';
 
-interface SearchProps {
+type SearchProps = {
   match: {
     url: string;
     path: string;
@@ -12,11 +11,26 @@ interface SearchProps {
   location: {
     pathname: string;
   };
-}
+};
 
-class Search extends Component<SearchProps> {
-  handleTabChange = (key: string) => {
-    const { match } = this.props;
+const tabList = [
+  {
+    key: 'articles',
+    tab: '文章',
+  },
+  {
+    key: 'projects',
+    tab: '项目',
+  },
+  {
+    key: 'applications',
+    tab: '应用',
+  },
+];
+
+const Search: FC<SearchProps> = (props) => {
+  const handleTabChange = (key: string) => {
+    const { match } = props;
     const url = match.url === '/' ? '' : match.url;
     switch (key) {
       case 'articles':
@@ -33,13 +47,13 @@ class Search extends Component<SearchProps> {
     }
   };
 
-  handleFormSubmit = (value: string) => {
+  const handleFormSubmit = (value: string) => {
     // eslint-disable-next-line no-console
     console.log(value);
   };
 
-  getTabKey = () => {
-    const { match, location } = this.props;
+  const getTabKey = () => {
+    const { match, location } = props;
     const url = match.path === '/' ? '' : match.path;
     const tabKey = location.pathname.replace(`${url}/`, '');
     if (tabKey && tabKey !== '/') {
@@ -48,47 +62,26 @@ class Search extends Component<SearchProps> {
     return 'articles';
   };
 
-  render() {
-    const tabList = [
-      {
-        key: 'articles',
-        tab: '文章',
-      },
-      {
-        key: 'projects',
-        tab: '项目',
-      },
-      {
-        key: 'applications',
-        tab: '应用',
-      },
-    ];
-
-    const mainSearch = (
-      <div style={{ textAlign: 'center' }}>
-        <Input.Search
-          placeholder="请输入"
-          enterButton="搜索"
-          size="large"
-          onSearch={this.handleFormSubmit}
-          style={{ maxWidth: 522, width: '100%' }}
-        />
-      </div>
-    );
-
-    const { children } = this.props;
-
-    return (
-      <PageContainer
-        content={mainSearch}
-        tabList={tabList}
-        tabActiveKey={this.getTabKey()}
-        onTabChange={this.handleTabChange}
-      >
-        {children}
-      </PageContainer>
-    );
-  }
-}
+  return (
+    <PageContainer
+      content={
+        <div style={{ textAlign: 'center' }}>
+          <Input.Search
+            placeholder="请输入"
+            enterButton="搜索"
+            size="large"
+            onSearch={handleFormSubmit}
+            style={{ maxWidth: 522, width: '100%' }}
+          />
+        </div>
+      }
+      tabList={tabList}
+      tabActiveKey={getTabKey()}
+      onTabChange={handleTabChange}
+    >
+      {props.children}
+    </PageContainer>
+  );
+};
 
 export default Search;

@@ -10,14 +10,14 @@ export default (): React.ReactNode => {
     <PageHeaderWrapper
       content={intl.formatMessage({
         id: 'pages.admin.subPage.title',
-        defaultMessage: ' 这个页面只有 admin 权限才能查看',
+        defaultMessage: 'This page can only be viewed by admin',
       })}
     >
       <Card>
         <Alert
           message={intl.formatMessage({
             id: 'pages.welcome.alertMessage',
-            defaultMessage: '更快更强的重型组件，已经发布。',
+            defaultMessage: 'Faster and stronger heavy-duty components have been released.',
           })}
           type="success"
           showIcon
@@ -32,7 +32,7 @@ export default (): React.ReactNode => {
         </Typography.Title>
       </Card>
       <p style={{ textAlign: 'center', marginTop: 24 }}>
-        Want to add more pages? Please refer to
+        Want to add more pages? Please refer to{' '}
         <a href="https://pro.ant.design/docs/block-cn" target="_blank" rel="noopener noreferrer">
           use block
         </a>

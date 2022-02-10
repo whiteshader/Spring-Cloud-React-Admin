@@ -1,41 +1,30 @@
 import { Card, Col, Form, List, Row, Select, Typography } from 'antd';
-import type { FC} from 'react';
-import React, { useEffect } from 'react';
-import type { Dispatch } from 'umi';
-import { connect } from 'umi';
 import moment from 'moment';
+import type { FC } from 'react';
+import { useRequest } from 'umi';
 import AvatarList from './components/AvatarList';
-import type { StateType } from './model';
-import type { ListItemDataType } from './data.d';
 import StandardFormRow from './components/StandardFormRow';
 import TagSelect from './components/TagSelect';
+import type { ListItemDataType } from './data.d';
+import { queryFakeList } from './service';
 import styles from './style.less';
 
 const { Option } = Select;
 const FormItem = Form.Item;
 const { Paragraph } = Typography;
 
-interface ProjectsProps {
-  dispatch: Dispatch;
-  listAndsearchAndprojects: StateType;
-  loading: boolean;
-}
-
 const getKey = (id: string, index: number) => `${id}-${index}`;
 
-const Projects: FC<ProjectsProps> = ({
-  dispatch,
-  listAndsearchAndprojects: { list = [] },
-  loading,
-}) => {
-  useEffect(() => {
-    dispatch({
-      type: 'listAndsearchAndprojects/fetch',
-      payload: {
-        count: 8,
-      },
+const Projects: FC = () => {
+  const { data, loading, run } = useRequest((values: any) => {
+    console.log('form data', values);
+    return queryFakeList({
+      count: 8,
     });
-  }, []);
+  });
+
+  const list = data?.list || [];
+
   const cardList = list && (
     <List<ListItemDataType>
       rowKey="id"
@@ -93,15 +82,10 @@ const Projects: FC<ProjectsProps> = ({
       <Card bordered={false}>
         <Form
           layout="inline"
-          onValuesChange={() => {
+          onValuesChange={(_, values) => {
             // 表单项变化时请求数据
             // 模拟查询表单生效
-            dispatch({
-              type: 'listAndsearchAndprojects/fetch',
-              payload: {
-                count: 8,
-              },
-            });
+            run(values);
           }}
         >
           <StandardFormRow title="所属类目" block style={{ paddingBottom: 11 }}>
@@ -148,15 +132,4 @@ const Projects: FC<ProjectsProps> = ({
   );
 };
 
-export default connect(
-  ({
-    listAndsearchAndprojects,
-    loading,
-  }: {
-    listAndsearchAndprojects: StateType;
-    loading: { models: Record<string, boolean> };
-  }) => ({
-    listAndsearchAndprojects,
-    loading: loading.models.listAndsearchAndprojects,
-  }),
-)(Projects);
+export default Projects;
