@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { getCacheInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
-import styles from './style.less';
+import styles from './index.less';
 import type { CacheInfoResponseType } from './data';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Pie } from '@/pages/dashboard/analysis/components/Charts';
 import type { VisitDataType } from '@/pages/dashboard/analysis/data';
 import Gauge from '@/pages/dashboard/monitor/components/Charts/Gauge';
+import Pie from '@/pages/dashboard/analysis/components/Charts/Pie';
+
 
 
 /* *

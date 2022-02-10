@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -114,11 +111,8 @@ const handleExport = async () => {
   }
 };
 
-export type ConfigTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
 
-const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
+const ConfigTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -129,8 +123,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
 
   const [configTypeOptions, setConfigTypeOptions] = useState<any>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -199,7 +192,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('system:config:edit')}
+          hidden={!access.hasPerms('system:config:edit')}
           onClick={() => {
             setModalVisible(true);
             setCurrentRow(record);
@@ -212,7 +205,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:config:remove')}
+          hidden={!access.hasPerms('system:config:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -255,7 +248,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('system:config:add')}
+              hidden={!access.hasPerms('system:config:add')}
               onClick={async () => {
                 setCurrentRow(undefined);
                 setModalVisible(true);
@@ -266,7 +259,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:config:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:config:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -281,7 +274,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('system:config:export')}
+              hidden={!access.hasPerms('system:config:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -320,7 +313,7 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:config:remove')}
+            hidden={!access.hasPerms('system:config:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -369,7 +362,4 @@ const ConfigTableList: React.FC<ConfigTableProps> = (props) => {
   );
 };
 
-// export default ConfigTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(ConfigTableList);
+export default ConfigTableList;

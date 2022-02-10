@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -125,11 +122,7 @@ const handleExport = async () => {
   }
 };
 
-export type RoleTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
-
-const RoleTableList: React.FC<RoleTableProps> = (props) => {
+const RoleTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -143,8 +136,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
   const [menuTree, setMenuTree] = useState<DataNode[]>();
   const [menuIds, setMenuIds] = useState<string[]>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -220,7 +212,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('system:role:edit')}
+          hidden={!access.hasPerms('system:role:edit')}
           onClick={() => {
             getRoleMenuList(record.roleId).then((res: any) => {
               if (res.code === 200) {
@@ -246,7 +238,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:role:remove')}
+          hidden={!access.hasPerms('system:role:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -289,7 +281,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('system:role:add')}
+              hidden={!access.hasPerms('system:role:add')}
               onClick={async () => {
                 getMenuTree().then((res: any) => {
                   if (res.code === 200) {
@@ -309,7 +301,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:role:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:role:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -324,7 +316,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('system:role:export')}
+              hidden={!access.hasPerms('system:role:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -363,7 +355,7 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:role:remove')}
+            hidden={!access.hasPerms('system:role:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -414,7 +406,4 @@ const RoleTableList: React.FC<RoleTableProps> = (props) => {
   );
 };
 
-// export default RoleTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(RoleTableList);
+export default RoleTableList;

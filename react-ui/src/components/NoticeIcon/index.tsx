@@ -3,10 +3,10 @@ import { Tag, message } from 'antd';
 import { groupBy } from 'lodash';
 import moment from 'moment';
 import { useModel, useRequest } from 'umi';
-import { getNotices } from '@/services/ant-design-pro/api';
 
 import NoticeIcon from './NoticeIcon';
 import styles from './index.less';
+import { getNotices } from '@/services/api';
 
 export type GlobalHeaderRightProps = {
   fetchingNotices?: boolean;

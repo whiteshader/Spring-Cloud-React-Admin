@@ -8,7 +8,7 @@ import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Applications from './components/Applications';
 import type { CurrentUser, TagType, tabKeyType } from './data.d';
-import { queryCurrent } from './service';
+import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
 
 const operationTabList = [
@@ -98,7 +98,7 @@ const Center: React.FC<RouteChildrenProps> = () => {
 
   //  获取用户信息
   const { data: currentUser, loading } = useRequest(() => {
-    return queryCurrent();
+    return queryCurrentUserInfo();
   });
 
   //  渲染用户信息

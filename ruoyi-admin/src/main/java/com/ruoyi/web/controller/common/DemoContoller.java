@@ -50,7 +50,7 @@ public class DemoContoller {
         return ajax;
     }
 
-    @GetMapping("/fake_chart_data")
+    @GetMapping("/fake_analysis_chart_data")
     public AjaxResult getChartData()
     {
         JSONArray visitData = new JSONArray();

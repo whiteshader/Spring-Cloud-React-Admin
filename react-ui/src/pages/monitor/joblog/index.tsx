@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-de
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect, history } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, history, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -92,11 +89,8 @@ const handleExport = async () => {
   }
 };
 
-export type JobLogTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
 
-const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
+const JobLogTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -108,8 +102,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
   const [statusOptions, setStatusOptions] = useState<any>([]);
   const [jobGroupOptions, setJobGroupOptions] = useState<any>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -181,7 +174,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
           type="link"
           size="small"
           key="detail"
-          hidden={!hasPerms('monitor:log:list')}
+          hidden={!access.hasPerms('monitor:log:list')}
           onClick={() => {
             setModalVisible(true);
             setCurrentRow(record);
@@ -194,7 +187,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('monitor:log:remove')}
+          hidden={!access.hasPerms('monitor:log:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -237,7 +230,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:log:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('monitor:log:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认删除所选数据项?',
@@ -260,7 +253,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:operlog:remove')}
+              hidden={!access.hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -280,7 +273,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('monitor:log:export')}
+              hidden={!access.hasPerms('monitor:log:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -329,7 +322,7 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:log:remove')}
+            hidden={!access.hasPerms('monitor:log:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -364,7 +357,4 @@ const JobLogTableList: React.FC<JobLogTableProps> = (props) => {
   );
 };
 
-// export default JobLogTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(JobLogTableList);
+export default JobLogTableList;
