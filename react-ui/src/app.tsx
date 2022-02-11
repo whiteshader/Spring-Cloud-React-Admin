@@ -29,7 +29,6 @@ export async function getInitialState(): Promise<{
     try {
       const resp = await getUserInfo();
       const user = { ...resp.user, permissions: resp.permissions};
-      console.log(user)
       return user;
     } catch (error) {
       history.push(loginPath);

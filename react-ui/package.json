@@ -37,9 +37,15 @@
   "lint-staged": {
     "**/*.less": "stylelint --syntax less",
     "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
-    "**/*.{js,jsx,tsx,ts,less,md,json}": ["prettier --write"]
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
   },
-  "browserslist": ["> 1%", "last 2 versions", "not ie <= 10"],
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
+  ],
   "dependencies": {
     "@ant-design/charts": "^0.9.4",
     "@ant-design/icons": "^4.5.0",
@@ -56,6 +62,7 @@
     "antd": "^4.14.0",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
+    "captchapng3": "^1.0.7",
     "classnames": "^2.2.6",
     "gg-editor": "^2.0.2",
     "lodash": "^4.17.11",
@@ -69,6 +76,7 @@
     "react-dom": "^17.0.0",
     "react-fittext": "^1.0.0",
     "react-helmet-async": "^1.0.4",
+    "react-intl": "^5.24.6",
     "react-router": "^4.3.1",
     "umi": "^3.5.0",
     "umi-serve": "^1.9.10"
@@ -107,6 +115,10 @@
     "stylelint": "^13.0.0",
     "typescript": "^4.2.2"
   },
-  "engines": { "node": ">=10.0.0" },
-  "gitHooks": { "commit-msg": "fabric verify-commit" }
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "gitHooks": {
+    "commit-msg": "fabric verify-commit"
+  }
 }

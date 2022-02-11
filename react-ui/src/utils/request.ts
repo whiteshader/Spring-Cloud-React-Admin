@@ -5,7 +5,7 @@ import { message, notification } from 'antd';
 import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from '../access';
 
 const codeMessage: Record<number, string> = {
-  0: '系统未知错误，请反馈给管理员',
+  10000: '系统未知错误，请反馈给管理员',
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -56,7 +56,7 @@ const request = createClient();
 // 更换令牌的时间区间
 const checkRegion = 5 * 60 * 1000;
 
-request.interceptors.request.use((url, options) => {
+request.interceptors.request.use((url: string, options: any) => {
   // console.log('-------------------------')
   console.log('request:', url);
   const headers = options.headers ? options.headers : [];
@@ -94,7 +94,7 @@ request.interceptors.request.use((url, options) => {
 request.interceptors.response.use(async (response: Response) => {
   const { status } = response;
   if (status === 401 || status === 403) {
-    const msg = codeMessage[status] || codeMessage[0]
+    const msg = codeMessage[status] || codeMessage[10000]
     message.warn(`${status} ${msg}`)
   } else if (status === 200) {
     const contentType = response.headers.get('content-type');
@@ -104,8 +104,8 @@ request.interceptors.response.use(async (response: Response) => {
       const data = await resp.json();
       if (data) {
         const { code } = data;
-        if (code !== 200) {
-          const msg = codeMessage[code] || data.msg || codeMessage[0]
+        if (code && code !== 200) {
+          const msg = codeMessage[code] || data.msg || codeMessage[10000]
           message.warn(`${code} ${msg}`)
         }
       }

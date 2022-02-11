@@ -225,7 +225,6 @@ const UserTableList: React.FC = () => {
           onClick={() => {
             const fetchUserInfo = async (userId: number) => {
               const res = await getUser(userId);
-              // const data = res.data;
               setPostIds(res.postIds);
               setPostList(
                 res.posts.map((item: any) => {
@@ -302,8 +301,6 @@ const UserTableList: React.FC = () => {
         <DeptTree
           onSelect={async (value: any) => {
             setSelectDept(value);
-            // setDeptName(value.name);
-            // 查询列表数据
             if (actionRef.current) {
               formTableRef?.current?.submit();
             }
@@ -342,7 +339,7 @@ const UserTableList: React.FC = () => {
                       setPostList(res.rows.map((item: any) => {
                         return {
                           value: item.postId,
-                          label: item.postName,
+                          label: item.postName
                         };
                       }));
                     }
@@ -352,7 +349,7 @@ const UserTableList: React.FC = () => {
                       setRoleList(res.rows.map((item: any) => {
                         return {
                           value: item.roleId,
-                          label: item.roleName,
+                          label: item.roleName
                         };
                       }));
                     }
@@ -391,12 +388,11 @@ const UserTableList: React.FC = () => {
           ]}
           request={(params) =>
             getUserList({ ...params, deptId: selectDept.id } as UserListParams).then((res) => {
-              const result = {
+              return {
                 data: res.rows,
                 total: res.total,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}
