@@ -20,7 +20,7 @@ declare namespace API {
       city?: { label?: string; key?: string };
     };
     address?: string;
-    phone?: string;
+    phonenumber?: string;
     roles?: string[];
     permissions: string[];
   };
