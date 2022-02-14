@@ -1,3 +1,5 @@
+import { matchPermission } from "./utils/permission";
+
 /**
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */
@@ -6,11 +8,13 @@ export default function access (initialState: { currentUser: API.CurrentUser | u
   return {
     canAdmin: currentUser && currentUser.access === 'admin',
     hasPerms: (perm: string) => {
-      console.log('check perm', perm);
-      return true;
+      return matchPermission(currentUser?.permissions, perm);
+    },
+    hasNoPerms: (perm: string) => {
+      return !matchPermission(currentUser?.permissions, perm);
     },
     permFilter: (route: any) => {
-      console.log(route);
+      // console.log(route);
       return true;
     }, // initialState 中包含了的路由才有权限访问
   };

@@ -1,4 +1,6 @@
-export function matchPermission (permissions: string[], value: any) {
+export function matchPermission (permissions: string[]|undefined, value: any): boolean {
+  if(permissions === undefined) 
+    return false;
   const type = typeof value;
   if (type === 'string') {
     return matchPerm(permissions, value);
