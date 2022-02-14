@@ -154,7 +154,6 @@ class IconSelector extends React.PureComponent<IconSelectorProps, IconSelectorSt
         <Row>
           <Tabs defaultActiveKey="1">{this.renderTabs()}</Tabs>
         </Row>
-        {/* {this.renderCategories()} */}
       </Fragment>
     );
   }
