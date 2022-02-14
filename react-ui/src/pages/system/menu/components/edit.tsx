@@ -11,6 +11,8 @@ import type { DataNode } from 'antd/lib/tree';
 import type { MenuType } from '../data.d';
 import IconSelector from '@/components/IconSelector';
 import { createIcon } from '@/utils/IconUtil';
+import { IntlProvider } from 'react-intl';
+import zhCN from '@/locales/zh-CN';
 
 /* *
  *
@@ -99,13 +101,15 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         }}
         footer={null}
       >
-        <IconSelector
-          onSelect={(name: string) => {
-            form.setFieldsValue({ icon: name });
-            setMenuIconName(name);
-            setPreviewModalVisible(false);
-          }}
-        />
+        <IntlProvider locale={zhCN}>
+          <IconSelector
+            onSelect={(name: string) => {
+              form.setFieldsValue({ icon: name });
+              setMenuIconName(name);
+              setPreviewModalVisible(false);
+            }}
+          />
+        </IntlProvider>
       </Modal>
 
       <Form form={form} onFinish={handleFinish} initialValues={props.values}>

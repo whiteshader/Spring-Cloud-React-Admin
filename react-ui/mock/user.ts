@@ -9,6 +9,12 @@ const waitTime = (time: number = 100) => {
   });
 };
 
+async function getFakeCaptcha(req: Request, res: Response) {
+  await waitTime(2000);
+  return res.json('captcha-xxx');
+}
+
+
 function guid () {
   return 'xxxxxxxxxxxx4xxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -29,56 +35,60 @@ async function getCaptchaImage(req: Request, res: Response) {
   });
 }
 
+const { ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION } = process.env;
+
+/**
+ * 当前用户的权限，如果为空代表没登录
+ * current user access， if is '', user need login
+ * 如果是 pro 的预览，默认是有权限的
+ */
+let access = ANT_DESIGN_PRO_ONLY_DO_NOT_USE_IN_YOUR_PRODUCTION === 'site' ? 'admin' : '';
+
+const getAccess = () => {
+  return access;
+};
+
 // 代码中会兼容本地 service mock 以及部署站点的静态数据
 export default {
   // 支持值为 Object 和 Array
-  'GET /api/getInfo': {
-    msg: "操作成功", code: 200,
-    permissions: ["*:*:*"],
-    roles: ["admin"],
-    user: {
-      searchValue: null, 
-      createBy: "admin", 
-      createTime: "2021-09-09 17:25:28", 
-      updateBy: null, 
-      updateTime: null, 
-      remark: "管理员", 
-      params: {}, 
-      userId: 1, 
-      deptId: 103, 
-      userName: "admin", 
-      nickName: "若依", 
-      email: "ry@163.com", 
-      phonenumber: "15888888888", 
-      sex: "1", 
-      avatar: "/static/img/profile.473f5971.jpg", 
-      status: "0", 
-      delFlag: "0", 
-      loginIp: "61.140.198.155", 
-      loginDate: "2021-11-11T14:03:07.723+0800", 
-      dept: { 
+  'GET /api/getInfo': (req: Request, res: Response) => {
+    if (!getAccess()) {
+      res.status(401).send({
+        data: {
+          isLogin: false,
+        },
+        errorCode: '401',
+        errorMessage: '请先登录！',
+        success: true,
+      });
+      return;
+    }
+    res.send({
+      msg: "操作成功", 
+      code: 200,
+      permissions: ["*:*:*"],
+      roles: ["admin"],
+      user: {
         searchValue: null, 
-        createBy: null, 
-        createTime: null, 
+        createBy: "admin", 
+        createTime: "2021-09-09 17:25:28", 
         updateBy: null, 
         updateTime: null, 
-        remark: null, 
+        remark: "管理员", 
         params: {}, 
+        userId: 1, 
         deptId: 103, 
-        parentId: 101, 
-        ancestors: null, 
-        deptName: "研发部门", 
-        orderNum: "1", 
-        leader: "若依", 
-        phone: null, 
-        email: null, 
+        userName: "admin", 
+        nickName: "若依", 
+        email: "ry@163.com", 
+        phonenumber: "15888888888", 
+        sex: "1", 
+        avatar: "/static/img/profile.473f5971.jpg", 
         status: "0", 
-        delFlag: null, 
-        parentName: null, 
-        children: []
-      }, 
-      roles: [
-        { 
+        delFlag: "0", 
+        loginIp: "61.140.198.155", 
+        loginDate: "2021-11-11T14:03:07.723+0800", 
+        dept: { 
           searchValue: null, 
           createBy: null, 
           createTime: null, 
@@ -86,26 +96,49 @@ export default {
           updateTime: null, 
           remark: null, 
           params: {}, 
-          roleId: 1, 
-          roleName: "超级管理员", 
-          roleKey: "admin", 
-          roleSort: "1", 
-          dataScope: "1", 
-          menuCheckStrictly: false, 
-          deptCheckStrictly: false, 
+          deptId: 103, 
+          parentId: 101, 
+          ancestors: null, 
+          deptName: "研发部门", 
+          orderNum: "1", 
+          leader: "若依", 
+          phone: null, 
+          email: null, 
           status: "0", 
           delFlag: null, 
-          flag: false, 
-          menuIds: null, 
-          deptIds: null, 
-          admin: true 
-        }
-      ], 
-      roleIds: null, 
-      postIds: null, 
-      roleId: null, 
-      admin: true
-    }
+          parentName: null, 
+          children: []
+        }, 
+        roles: [
+          { 
+            searchValue: null, 
+            createBy: null, 
+            createTime: null, 
+            updateBy: null, 
+            updateTime: null, 
+            remark: null, 
+            params: {}, 
+            roleId: 1, 
+            roleName: "超级管理员", 
+            roleKey: "admin", 
+            roleSort: "1", 
+            dataScope: "1", 
+            menuCheckStrictly: false, 
+            deptCheckStrictly: false, 
+            status: "0", 
+            delFlag: null, 
+            flag: false, 
+            menuIds: null, 
+            deptIds: null, 
+            admin: true 
+          }
+        ], 
+        roleIds: null, 
+        postIds: null, 
+        roleId: null, 
+        admin: true
+      }
+    });
   },
   // GET POST 可省略
   'GET /api/users': [
@@ -130,7 +163,7 @@ export default {
   ],
   'POST /api/login': async (req: Request, res: Response) => {
     const { password, username, type } = req.body;
-    await waitTime(500);
+    await waitTime(2000);
     if (password === 'admin123' && username === 'admin') {
       res.send({
         code: 200,
@@ -138,15 +171,17 @@ export default {
         currentAuthority: 'admin',
         token: guid()
       });
+      access = 'admin';
       return;
     }
-    if (password === 'ant' && username === 'user') {
+    if (password === '123456' && username === 'user') {
       res.send({
         code: 200,
         type,
         currentAuthority: 'user',
         token: guid()
       });
+      access = 'user';
       return;
     }
     if (type === 'mobile') {
@@ -156,14 +191,22 @@ export default {
         currentAuthority: 'admin',
         token: guid()
       });
+      access = 'admin';
       return;
     }
 
     res.send({
-      code: 403,
-      msg: 'forbiden',
+      status: 'error',
+      type,
+      currentAuthority: 'guest',
     });
+    access = 'guest';
   },
+  'POST /api/logout': (req: Request, res: Response) => {
+    access = '';
+    res.send({ data: {}, success: true });
+  },
+  
   'GET /api/getRouters': {    
     msg: "操作成功",
     code: 200,
@@ -451,7 +494,7 @@ export default {
       ]
   },
   'POST /api/register': (req: Request, res: Response) => {
-    res.send({ status: 'ok', currentAuthority: 'user' });
+    res.send({ status: 'ok', currentAuthority: 'user', success: true });
   },
   'GET /api/500': (req: Request, res: Response) => {
     res.status(500).send({
@@ -475,8 +518,8 @@ export default {
     res.status(403).send({
       timestamp: 1513932555104,
       status: 403,
-      error: 'Unauthorized',
-      message: 'Unauthorized',
+      error: 'Forbidden',
+      message: 'Forbidden',
       path: '/base/category/list',
     });
   },
@@ -488,6 +531,9 @@ export default {
       message: 'Unauthorized',
       path: '/base/category/list',
     });
-  },  
+  },
+
+  'GET  /api/login/captcha': getFakeCaptcha,
+  
   'GET  /api/captchaImage': getCaptchaImage,  
 };

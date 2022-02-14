@@ -2,10 +2,8 @@ import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
+
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -104,12 +102,7 @@ const handleRemoveOne = async (selectedRow: DeptType) => {
   }
 };
 
-
-export type DeptTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
-
-const DeptTableList: React.FC<DeptTableProps> = (props) => {
+const DeptTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -120,12 +113,12 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
 
   const [deptTree, setDeptTree] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
-
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+ 
 
   /** 国际化配置 */
   const intl = useIntl();
+
+  const access = useAccess();
 
   useEffect(() => {
     getDict('sys_normal_disable').then((res) => {
@@ -181,7 +174,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('system:dept:edit')}
+          hidden={!access.hasPerms('system:dept:edit')}
           onClick={() => {
             getDeptListExcludeChild(record.deptId).then((res) => {
               if (res.code === 200) {
@@ -201,7 +194,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:dept:remove')}
+          hidden={!access.hasPerms('system:dept:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -244,7 +237,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('system:dept:add')}
+              hidden={!access.hasPerms('system:dept:add')}
               onClick={async () => {
                 getDeptList().then((res) => {
                   if (res.code === 200) {
@@ -262,7 +255,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:dept:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:dept:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -277,12 +270,11 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
           ]}
           request={(params) =>
             getDeptList({ ...params } as DeptListParams).then((res) => {
-              const result = {
+              return {
                 data: buildTreeData(res.data, 'deptId', '', '', '', ''),
                 total: res.data.length,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}
@@ -305,7 +297,7 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:dept:remove')}
+            hidden={!access.hasPerms('system:dept:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -355,7 +347,4 @@ const DeptTableList: React.FC<DeptTableProps> = (props) => {
   );
 };
 
-// export default DeptTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(DeptTableList);
+export default DeptTableList;

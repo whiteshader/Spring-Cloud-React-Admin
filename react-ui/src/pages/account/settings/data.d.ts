@@ -1,19 +1,19 @@
-export interface TagType {
+export type TagType = {
   key: string;
   label: string;
-}
+};
 
-export interface GeographicItemType {
+export type GeographicItemType = {
   name: string;
   id: string;
-}
+};
 
-export interface GeographicType {
+export type GeographicType = {
   province: GeographicItemType;
   city: GeographicItemType;
-}
+};
 
-export interface NoticeType {
+export type NoticeType = {
   id: string;
   title: string;
   logo: string;
@@ -22,22 +22,5 @@ export interface NoticeType {
   member: string;
   href: string;
   memberLink: string;
-}
+};
 
-export interface CurrentUser {
-  name: string;
-  avatar: string;
-  userId: string;
-  notice: NoticeType[];
-  email: string;
-  signature: string;
-  title: string;
-  group: string;
-  tags: TagType[];
-  notifyCount: number;
-  unreadCount: number;
-  country: string;
-  geographic: GeographicType;
-  address: string;
-  phone: string;
-}

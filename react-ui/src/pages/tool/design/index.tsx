@@ -1,9 +1,5 @@
 import { Card } from 'antd';
-import React, { useEffect } from 'react';
-import { connect } from 'umi';
-import type { ConnectProps } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import React from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 
 /**
@@ -12,27 +8,14 @@ import { PageContainer } from '@ant-design/pro-layout';
  *
  * */
 
-export type FormBuilderProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
+export type FormBuilderProps = {};
 
-const FormBuilder: React.FC<FormBuilderProps> = (props) => {
-
-  /** 国际化配置 */
-  // const intl = useIntl();
-  console.log(props);
-  // const { currentUser } = props;
-  useEffect(() => {}, []);
-
+const FormBuilder: React.FC<FormBuilderProps> = () => {
   return (
     <PageContainer>
-      <Card title="FormBuilder">        
-      </Card>
+      <Card title="FormBuilder" />
     </PageContainer>
   );
 };
 
-// export default FormBuilder;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(FormBuilder);
+export default FormBuilder;

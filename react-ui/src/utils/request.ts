@@ -2,10 +2,10 @@
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
 import { message, notification } from 'antd';
-import errorCode from './errorCode';
-import { getAccessToken, getRefreshToken, getTokenExpireTime, clearToken } from '@/utils/authority';
+import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from '../access';
 
 const codeMessage: Record<number, string> = {
+  10000: '系统未知错误，请反馈给管理员',
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
   202: '一个请求已经进入后台排队（异步任务）。',
@@ -43,65 +43,72 @@ const errorHandler = (error: { response: Response }): Response => {
   return response;
 };
 
-/** 配置request请求时的默认参数 */
-const request = extend({
-  errorHandler, // 默认错误处理
-  credentials: 'include', // 默认请求是否带上cookie
-});
+function createClient () {
+  /** 配置request请求时的默认参数 */
+  return extend({
+    errorHandler, // 默认错误处理
+    credentials: 'include', // 默认请求是否带上cookie
+  });
+}
+
+const request = createClient();
 
 // 更换令牌的时间区间
 const checkRegion = 5 * 60 * 1000;
 
-request.interceptors.request.use((url, options) => {
+request.interceptors.request.use((url: string, options: any) => {
   // console.log('-------------------------')
   console.log('request:', url);
-  // console.log(options);
   const headers = options.headers ? options.headers : [];
-  if (headers['Authorization'] === '' || headers['Authorization'] == null) {
-    const expireTime = getTokenExpireTime();
-    if (expireTime) {
-      const left = Number(expireTime) - new Date().getTime();
-      const refreshToken = getRefreshToken();
-      if (left < checkRegion && refreshToken) {
-        if (left < 0) {
-          clearToken();
-        }
-      } else {
-        const accessToken = getAccessToken();
-        if (accessToken) {
-          headers['Authorization'] = `Bearer ${accessToken}`;
+  if (headers['isToken'] !== 'false') {
+    if (headers['Authorization'] === '' || headers['Authorization'] == null) {
+      const expireTime = getTokenExpireTime();
+      if (expireTime) {
+        const left = Number(expireTime) - new Date().getTime();
+        const refreshToken = getRefreshToken();
+        if (left < checkRegion && refreshToken) {
+          if (left < 0) {
+            clearSessionToken();
+          }
+        } else {
+          const accessToken = getAccessToken();
+          if (accessToken) {
+            headers['Authorization'] = `Bearer ${accessToken}`;
+          }
         }
       }
     }
+    // console.log(headers)
+    return {
+      url,
+      options: { ...options, headers },
+    };
   }
-  // console.log(headers)
   return {
     url,
-    options: { ...options, headers },
+    options: { ...options },
   };
 });
 
 // 响应拦截器
 request.interceptors.response.use(async (response: Response) => {
-  const {status} = response;
+  const { status } = response;
   if (status === 401 || status === 403) {
-    // localStorage.removeItem('access_token');
-    // window.location.href = '/user/login';
-    const msg =  errorCode[status] || errorCode['default']
+    const msg = codeMessage[status] || codeMessage[10000]
     message.warn(`${status} ${msg}`)
   } else if (status === 200) {
-    const contentType = response.headers.get('content-type');    
+    const contentType = response.headers.get('content-type');
     const isJson = contentType?.includes('application/json');
-    if(isJson === true) {
+    if (isJson === true) {
       const resp = response.clone();
       const data = await resp.json();
-      if(data) {
-        const {code} = data;
-        if (code !== 200) {
-          const msg =  errorCode[code] || data.msg || errorCode['default']
+      if (data) {
+        const { code } = data;
+        if (code && code !== 200) {
+          const msg = codeMessage[code] || data.msg || codeMessage[10000]
           message.warn(`${code} ${msg}`)
-        }  
-      } 
+        }
+      }
     }
   }
   return response;

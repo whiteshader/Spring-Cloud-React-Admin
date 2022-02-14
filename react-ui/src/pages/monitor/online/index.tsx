@@ -1,10 +1,7 @@
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -34,19 +31,10 @@ const handleRemoveOne = async (selectedRow: OnlineUserType) => {
   }
 };
 
-export type OnlineUserTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
-
-const OnlineUserTableList: React.FC<OnlineUserTableProps> = (props) => {
+const OnlineUserTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
-
   const actionRef = useRef<ActionType>();
-
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
-
-  /** 国际化配置 */
+  const access = useAccess();
   const intl = useIntl();
 
   useEffect(() => {}, []);
@@ -115,7 +103,7 @@ const OnlineUserTableList: React.FC<OnlineUserTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:user:remove')}
+          hidden={!access.hasPerms('system:user:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '强踢',
@@ -171,7 +159,4 @@ const OnlineUserTableList: React.FC<OnlineUserTableProps> = (props) => {
   );
 };
 
-// export default OnlineUserTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(OnlineUserTableList);
+export default OnlineUserTableList;

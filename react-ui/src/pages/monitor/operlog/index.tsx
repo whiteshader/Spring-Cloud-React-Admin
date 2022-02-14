@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-de
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -122,11 +119,8 @@ const handleExport = async () => {
   }
 };
 
-export type OperlogTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
 
-const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
+const OperlogTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -139,8 +133,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
   const [operatorTypeOptions, setOperatorTypeOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -291,7 +284,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('monitor:operlog:list')}
+          hidden={!access.hasPerms('monitor:operlog:list')}
           onClick={() => {
             setModalVisible(true);
             setCurrentRow(record);
@@ -322,7 +315,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:operlog:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -345,7 +338,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:operlog:remove')}
+              hidden={!access.hasPerms('monitor:operlog:remove')}
               onClick={async () => {
                 confirm({
                   title: '是否确认清空所有登录日志数据项?',
@@ -365,7 +358,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('monitor:operlog:export')}
+              hidden={!access.hasPerms('monitor:operlog:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -404,7 +397,7 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:operlog:remove')}
+            hidden={!access.hasPerms('monitor:operlog:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -455,7 +448,4 @@ const OperlogTableList: React.FC<OperlogTableProps> = (props) => {
   );
 };
 
-// export default OperlogTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(OperlogTableList);
+export default OperlogTableList;

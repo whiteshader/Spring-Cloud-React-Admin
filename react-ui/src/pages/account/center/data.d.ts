@@ -1,9 +1,10 @@
+export type tabKeyType = 'articles' | 'applications' | 'projects';
 export interface TagType {
   key: string;
   label: string;
 }
 
-export interface GeographicType {
+export type GeographicType = {
   province: {
     label: string;
     key: string;
@@ -12,9 +13,9 @@ export interface GeographicType {
     label: string;
     key: string;
   };
-}
+};
 
-export interface NoticeType {
+export type NoticeType = {
   id: string;
   title: string;
   logo: string;
@@ -23,46 +24,15 @@ export interface NoticeType {
   member: string;
   href: string;
   memberLink: string;
-}
-export interface RoleType {
-  roleId: string;
-  roleKey: string;
-  roleName: string;
-}
+};
 
-export interface DeptType {
-  deptId: string;
-  deptName: string;
-}
-export interface CurrentUser {
-  nickName: string;
-  userName: string;
-  avatar: string;
-  userid: string;
-  notice: NoticeType[];
-  email: string;
-  remark: string;
-  title: string;
-  sex: string;
-  group: string;
-  tags: TagType[];
-  roles: RoleType[];
-  dept: DeptType;
-  notifyCount: number;
-  unreadCount: number;
-  country: string;
-  geographic: GeographicType;
-  address: string;
-  phone: string;
-}
-
-export interface Member {
+export type Member = {
   avatar: string;
   name: string;
   id: string;
-}
+};
 
-export interface ListItemDataType {
+export type ListItemDataType = {
   id: string;
   owner: string;
   title: string;
@@ -84,4 +54,4 @@ export interface ListItemDataType {
   message: number;
   content: string;
   members: Member[];
-}
+};

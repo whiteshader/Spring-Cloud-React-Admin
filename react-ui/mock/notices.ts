@@ -2,8 +2,6 @@ import { Request, Response } from 'express';
 
 const getNotices = (req: Request, res: Response) => {
   res.json({
-    code: 200,
-    msg: 'success',
     data: [
       {
         id: '000000001',
@@ -100,8 +98,8 @@ const getNotices = (req: Request, res: Response) => {
         status: 'processing',
         type: 'event',
       },
-    ]}
-  );
+    ],
+  });
 };
 
 export default {

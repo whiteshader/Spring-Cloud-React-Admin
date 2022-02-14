@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-de
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -88,11 +85,8 @@ const handleExport = async () => {
   }
 };
 
-export type LogininforTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
 
-const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
+const LogininforTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const actionRef = useRef<ActionType>();
@@ -100,8 +94,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
 
   const [statusOptions, setStatusOptions] = useState<any>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -201,7 +194,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:logininfor:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('monitor:logininfor:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -216,7 +209,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
             <Button
               type="primary"
               key="clear"
-              hidden={!hasPerms('monitor:logininfor:remove')}
+              hidden={!access.hasPerms('monitor:logininfor:remove')}
               onClick={async () => {
                 handleRemoveAll();
                 actionRef.current?.reloadAndRest?.();
@@ -228,7 +221,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('monitor:logininfor:export')}
+              hidden={!access.hasPerms('monitor:logininfor:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -267,7 +260,7 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:logininfor:remove')}
+            hidden={!access.hasPerms('monitor:logininfor:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -292,7 +285,4 @@ const LogininforTableList: React.FC<LogininforTableProps> = (props) => {
   );
 };
 
-// export default LogininforTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(LogininforTableList);
+export default LogininforTableList;

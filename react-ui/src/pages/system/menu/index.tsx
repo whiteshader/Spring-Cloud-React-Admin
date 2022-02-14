@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -99,11 +96,9 @@ const handleRemoveOne = async (selectedRow: MenuType) => {
   }
 };
 
-export type MenuTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
+export type MenuTableProps = {};
 
-const MenuTableList: React.FC<MenuTableProps> = (props) => {
+const MenuTableList: React.FC<MenuTableProps> = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -115,9 +110,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
   const [menuTree, setMenuTree] = useState<DataNode[]>([]);
   const [visibleOptions, setVisibleOptions] = useState<any>([]);
   const [statusOptions, setStatusOptions] = useState<any>([]);
-
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -206,7 +199,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('system:menu:edit')}
+          hidden={!access.hasPerms('system:menu:edit')}
           onClick={() => {
             setModalVisible(true);
             setCurrentRow(record);
@@ -219,7 +212,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:menu:remove')}
+          hidden={!access.hasPerms('system:menu:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -262,7 +255,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('system:menu:add')}
+              hidden={!access.hasPerms('system:menu:add')}
               onClick={async () => {
                 setCurrentRow(undefined);
                 setModalVisible(true);
@@ -273,7 +266,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:menu:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:menu:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -322,7 +315,7 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:menu:remove')}
+            hidden={!access.hasPerms('system:menu:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -373,7 +366,4 @@ const MenuTableList: React.FC<MenuTableProps> = (props) => {
   );
 };
 
-// export default MenuTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(MenuTableList);
+export default MenuTableList;

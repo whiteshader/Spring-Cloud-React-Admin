@@ -2,10 +2,7 @@ import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -128,11 +125,7 @@ const handleExport = async () => {
   }
 };
 
-export type UserTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
-
-const UserTableList: React.FC<UserTableProps> = (props) => {
+const UserTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -153,8 +146,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
   const [roleList, setRoleList] = useState<string[]>();
   const [deptTree, setDeptTree] = useState<DataNode[]>();
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -229,11 +221,10 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('system:user:edit')}
+          hidden={!access.hasPerms('system:user:edit')}
           onClick={() => {
             const fetchUserInfo = async (userId: number) => {
               const res = await getUser(userId);
-              // const data = res.data;
               setPostIds(res.postIds);
               setPostList(
                 res.posts.map((item: any) => {
@@ -268,7 +259,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('system:user:remove')}
+          hidden={!access.hasPerms('system:user:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -292,7 +283,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
           type="link"
           size="small"
           key="resetpwd"
-          hidden={!hasPerms('system:user:edit')}
+          hidden={!access.hasPerms('system:user:edit')}
           onClick={() => {
             setResetPwdModalVisible(true);
             setCurrentRow(record);
@@ -310,8 +301,6 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
         <DeptTree
           onSelect={async (value: any) => {
             setSelectDept(value);
-            // setDeptName(value.name);
-            // 查询列表数据
             if (actionRef.current) {
               formTableRef?.current?.submit();
             }
@@ -335,7 +324,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('system:user:add')}
+              hidden={!access.hasPerms('system:user:add')}
               onClick={async () => {
                 if (selectDept.id === '' || selectDept.id == null) {
                   message.warning('请选择左侧父级节点');
@@ -350,7 +339,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
                       setPostList(res.rows.map((item: any) => {
                         return {
                           value: item.postId,
-                          label: item.postName,
+                          label: item.postName
                         };
                       }));
                     }
@@ -360,7 +349,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
                       setRoleList(res.rows.map((item: any) => {
                         return {
                           value: item.roleId,
-                          label: item.roleName,
+                          label: item.roleName
                         };
                       }));
                     }
@@ -373,7 +362,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('system:user:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:user:remove')}
               onClick={async () => {
                 const success = await handleRemove(selectedRowsState);
                 if (success) {
@@ -388,7 +377,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('system:user:export')}
+              hidden={!access.hasPerms('system:user:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -399,12 +388,11 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
           ]}
           request={(params) =>
             getUserList({ ...params, deptId: selectDept.id } as UserListParams).then((res) => {
-              const result = {
+              return {
                 data: res.rows,
                 total: res.total,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}
@@ -427,7 +415,7 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('system:user:remove')}
+            hidden={!access.hasPerms('system:user:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -502,7 +490,4 @@ const UserTableList: React.FC<UserTableProps> = (props) => {
   );
 };
 
-// export default UserTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(UserTableList);
+export default UserTableList;

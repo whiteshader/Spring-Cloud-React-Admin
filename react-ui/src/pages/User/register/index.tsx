@@ -1,10 +1,11 @@
-import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
 import type { FC } from 'react';
-import React, { useState, useEffect } from 'react';
-import type { Dispatch } from 'umi';
-import { Link, connect, history, FormattedMessage, formatMessage } from 'umi';
+import { useState, useEffect } from 'react';
+import { Form, Button, Col, Input, Popover, Progress, Row, Select, message } from 'antd';
+import type { Store } from 'antd/es/form/interface';
+import { Link, useRequest, history } from 'umi';
+import type { StateType } from './service';
+import { fakeRegister } from './service';
 
-import type { StateType } from './model';
 import styles from './style.less';
 
 const FormItem = Form.Item;
@@ -14,17 +15,17 @@ const InputGroup = Input.Group;
 const passwordStatusMap = {
   ok: (
     <div className={styles.success}>
-      <FormattedMessage id="userandregister.strength.strong" />
+      <span>强度：强</span>
     </div>
   ),
   pass: (
     <div className={styles.warning}>
-      <FormattedMessage id="userandregister.strength.medium" />
+      <span>强度：中</span>
     </div>
   ),
   poor: (
     <div className={styles.error}>
-      <FormattedMessage id="userandregister.strength.short" />
+      <span>强度：太短</span>
     </div>
   ),
 };
@@ -39,61 +40,34 @@ const passwordProgressMap: {
   poor: 'exception',
 };
 
-interface RegisterProps {
-  dispatch: Dispatch;
-  userAndregister: StateType;
-  submitting: boolean;
-}
-
-export interface UserRegisterParams {
-  mail: string;
-  password: string;
-  confirm: string;
-  mobile: string;
-  captcha: string;
-  prefix: string;
-}
-
-const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) => {
-  const [count, setcount]: [number, any] = useState(0);
-  const [visible, setvisible]: [boolean, any] = useState(false);
-  const [prefix, setprefix]: [string, any] = useState('86');
-  const [popover, setpopover]: [boolean, any] = useState(false);
+const Register: FC = () => {
+  const [count, setCount]: [number, any] = useState(0);
+  const [visible, setVisible]: [boolean, any] = useState(false);
+  const [prefix, setPrefix]: [string, any] = useState('86');
+  const [popover, setPopover]: [boolean, any] = useState(false);
   const confirmDirty = false;
   let interval: number | undefined;
   const [form] = Form.useForm();
-  useEffect(() => {
-    if (!userAndregister) {
-      return;
-    }
-    const account = form.getFieldValue('mail');
-    if (userAndregister.status === 'ok') {
-      message.success('注册成功！');
-      history.push({
-        pathname: '/user/register-result',
-        state: {
-          account,
-        },
-      });
-    }
-  }, [userAndregister]);
+
   useEffect(
     () => () => {
       clearInterval(interval);
     },
-    [],
+    [interval],
   );
+
   const onGetCaptcha = () => {
     let counts = 59;
-    setcount(counts);
+    setCount(counts);
     interval = window.setInterval(() => {
       counts -= 1;
-      setcount(counts);
+      setCount(counts);
       if (counts === 0) {
         clearInterval(interval);
       }
     }, 1000);
   };
+
   const getPasswordStatus = () => {
     const value = form.getFieldValue('password');
     if (value && value.length > 9) {
@@ -104,34 +78,45 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     }
     return 'poor';
   };
-  const onFinish = (values: Record<string, any>) => {
-    dispatch({
-      type: 'userAndregister/submit',
-      payload: {
-        ...values,
-        prefix,
-      },
-    });
+
+  const { loading: submitting, run: register } = useRequest<{ data: StateType }>(fakeRegister, {
+    manual: true,
+    onSuccess: (data, params) => {
+      if (data.status === 'ok') {
+        message.success('注册成功！');
+        history.push({
+          pathname: '/user/register-result',
+          state: {
+            account: params.email,
+          },
+        });
+      }
+    },
+  });
+  const onFinish = (values: Store) => {
+    register(values);
   };
+
   const checkConfirm = (_: any, value: string) => {
     const promise = Promise;
     if (value && value !== form.getFieldValue('password')) {
-      return promise.reject(formatMessage({ id: 'userandregister.password.twice' }));
+      return promise.reject('两次输入的密码不匹配!');
     }
     return promise.resolve();
   };
+
   const checkPassword = (_: any, value: string) => {
     const promise = Promise;
     // 没有值的情况
     if (!value) {
-      setvisible(!!value);
-      return promise.reject(formatMessage({ id: 'userandregister.password.required' }));
+      setVisible(!!value);
+      return promise.reject('请输入密码!');
     }
     // 有值的情况
     if (!visible) {
-      setvisible(!!value);
+      setVisible(!!value);
     }
-    setpopover(!popover);
+    setPopover(!popover);
     if (value.length < 6) {
       return promise.reject('');
     }
@@ -140,9 +125,11 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
     }
     return promise.resolve();
   };
+
   const changePrefix = (value: string) => {
-    setprefix(value);
+    setPrefix(value);
   };
+
   const renderPasswordProgress = () => {
     const value = form.getFieldValue('password');
     const passwordStatus = getPasswordStatus();
@@ -161,27 +148,22 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
 
   return (
     <div className={styles.main}>
-      <h3>
-        <FormattedMessage id="userandregister.register.register" />
-      </h3>
+      <h3>注册</h3>
       <Form form={form} name="UserRegister" onFinish={onFinish}>
         <FormItem
           name="mail"
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.email.required' }),
+              message: '请输入邮箱地址!',
             },
             {
               type: 'email',
-              message: formatMessage({ id: 'userandregister.email.wrong-format' }),
+              message: '邮箱地址格式错误!',
             },
           ]}
         >
-          <Input
-            size="large"
-            placeholder={formatMessage({ id: 'userandregister.email.placeholder' })}
-          />
+          <Input size="large" placeholder="邮箱" />
         </FormItem>
         <Popover
           getPopupContainer={(node) => {
@@ -196,7 +178,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
                 {passwordStatusMap[getPasswordStatus()]}
                 {renderPasswordProgress()}
                 <div style={{ marginTop: 10 }}>
-                  <FormattedMessage id="userandregister.strength.msg" />
+                  <span>请至少输入 6 个字符。请不要使用容易被猜到的密码。</span>
                 </div>
               </div>
             )
@@ -218,11 +200,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               },
             ]}
           >
-            <Input
-              size="large"
-              type="password"
-              placeholder={formatMessage({ id: 'userandregister.password.placeholder' })}
-            />
+            <Input size="large" type="password" placeholder="至少6位密码，区分大小写" />
           </FormItem>
         </Popover>
         <FormItem
@@ -230,18 +208,14 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
           rules={[
             {
               required: true,
-              message: formatMessage({ id: 'userandregister.confirm-password.required' }),
+              message: '确认密码',
             },
             {
               validator: checkConfirm,
             },
           ]}
         >
-          <Input
-            size="large"
-            type="password"
-            placeholder={formatMessage({ id: 'userandregister.confirm-password.placeholder' })}
-          />
+          <Input size="large" type="password" placeholder="确认密码" />
         </FormItem>
         <InputGroup compact>
           <Select size="large" value={prefix} onChange={changePrefix} style={{ width: '20%' }}>
@@ -254,18 +228,15 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'userandregister.phone-number.required' }),
+                message: '请输入手机号!',
               },
               {
                 pattern: /^\d{11}$/,
-                message: formatMessage({ id: 'userandregister.phone-number.wrong-format' }),
+                message: '手机号格式错误!',
               },
             ]}
           >
-            <Input
-              size="large"
-              placeholder={formatMessage({ id: 'userandregister.phone-number.placeholder' })}
-            />
+            <Input size="large" placeholder="手机号" />
           </FormItem>
         </InputGroup>
         <Row gutter={8}>
@@ -275,14 +246,11 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               rules={[
                 {
                   required: true,
-                  message: formatMessage({ id: 'userandregister.verification-code.required' }),
+                  message: '请输入验证码!',
                 },
               ]}
             >
-              <Input
-                size="large"
-                placeholder={formatMessage({ id: 'userandregister.verification-code.placeholder' })}
-              />
+              <Input size="large" placeholder="验证码" />
             </FormItem>
           </Col>
           <Col span={8}>
@@ -292,9 +260,7 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
               className={styles.getCaptcha}
               onClick={onGetCaptcha}
             >
-              {count
-                ? `${count} s`
-                : formatMessage({ id: 'userandregister.register.get-verification-code' })}
+              {count ? `${count} s` : '获取验证码'}
             </Button>
           </Col>
         </Row>
@@ -306,27 +272,14 @@ const Register: FC<RegisterProps> = ({ submitting, dispatch, userAndregister }) 
             type="primary"
             htmlType="submit"
           >
-            <FormattedMessage id="userandregister.register.register" />
+            <span>注册</span>
           </Button>
           <Link className={styles.login} to="/user/login">
-            <FormattedMessage id="userandregister.register.sign-in" />
+            <span>使用已有账户登录</span>
           </Link>
         </FormItem>
       </Form>
     </div>
   );
 };
-export default connect(
-  ({
-    userAndregister,
-    loading,
-  }: {
-    userAndregister: StateType;
-    loading: {
-      effects: Record<string, boolean>;
-    };
-  }) => ({
-    userAndregister,
-    submitting: loading.effects['userAndregister/submit'],
-  }),
-)(Register);
+export default Register;

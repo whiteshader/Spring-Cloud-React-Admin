@@ -8,10 +8,7 @@ import type { FormInstance } from 'antd';
 import { Dropdown, Menu } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import type { ConnectProps } from 'umi';
-import { useIntl, FormattedMessage, connect, history } from 'umi';
-import type { ConnectState } from '@/models/connect';
-import type { CurrentUser } from '@/models/user';
+import { useIntl, FormattedMessage, history, useAccess } from 'umi';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -121,11 +118,7 @@ const handleExport = async () => {
   }
 };
 
-export type JobTableProps = {
-  currentUser?: CurrentUser;
-} & Partial<ConnectProps>;
-
-const JobTableList: React.FC<JobTableProps> = (props) => {
+const JobTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -138,8 +131,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
   const [statusOptions, setStatusOptions] = useState<any>([]);
   const [jobGroupOptions, setJobGroupOptions] = useState<any>([]);
 
-  const { currentUser } = props;
-  const { hasPerms } = currentUser || {};
+  const access = useAccess();
 
   /** 国际化配置 */
   const intl = useIntl();
@@ -223,7 +215,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
           type="link"
           size="small"
           key="edit"
-          hidden={!hasPerms('monitor:job:edit')}
+          hidden={!access.hasPerms('monitor:job:edit')}
           onClick={() => {
             setModalVisible(true);
             setCurrentRow(record);
@@ -236,7 +228,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
           size="small"
           danger
           key="batchRemove"
-          hidden={!hasPerms('monitor:job:remove')}
+          hidden={!access.hasPerms('monitor:job:remove')}
           onClick={async () => {
             Modal.confirm({
               title: '删除',
@@ -341,7 +333,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
             <Button
               type="primary"
               key="add"
-              hidden={!hasPerms('monitor:job:add')}
+              hidden={!access.hasPerms('monitor:job:add')}
               onClick={async () => {
                 setCurrentRow(undefined);
                 setModalVisible(true);
@@ -352,7 +344,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
             <Button
               type="primary"
               key="remove"
-              hidden={selectedRowsState?.length === 0 || !hasPerms('monitor:job:remove')}
+              hidden={selectedRowsState?.length === 0 || !access.hasPerms('monitor:job:remove')}
               onClick={async () => {
                 Modal.confirm({
                   title: '是否确认删除所选数据项?',
@@ -374,7 +366,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
             <Button
               type="primary"
               key="export"
-              hidden={!hasPerms('monitor:job:export')}
+              hidden={!access.hasPerms('monitor:job:export')}
               onClick={async () => {
                 handleExport();
               }}
@@ -413,7 +405,7 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
         >
           <Button
             key="remove"
-            hidden={!hasPerms('monitor:job:remove')}
+            hidden={!access.hasPerms('monitor:job:remove')}
             onClick={async () => {
               Modal.confirm({
                 title: '删除',
@@ -471,7 +463,4 @@ const JobTableList: React.FC<JobTableProps> = (props) => {
   );
 };
 
-// export default JobTableList;
-export default connect(({ user }: ConnectState) => ({
-  currentUser: user.currentUser,
-}))(JobTableList);
+export default JobTableList;
