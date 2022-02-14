@@ -3,7 +3,6 @@ import ProForm, {
   ProFormDigit,
   ProFormText,
   ProFormSelect,
-  ProFormRadio,
   ProFormTextArea,
 } from '@ant-design/pro-form';
 import { Form, Modal, Row, Col, TreeSelect } from 'antd';
@@ -253,7 +252,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
             />
           </Col>
           <Col span={12} order={2}>
-            <ProFormRadio.Group
+            <ProFormSelect
               valueEnum={statusOptions}
               name="status"
               label={intl.formatMessage({

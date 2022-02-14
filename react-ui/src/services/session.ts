@@ -25,7 +25,6 @@ export async function getRouters(): Promise<API.GetRoutersResult> {
 
 export function convertCompatRouters(childrens: API.RoutersMenuItem[]): MenuDataItem[] {
   return childrens.map((item: API.RoutersMenuItem) => {
-    // console.log(item.component);
     return {
       path: item.path,
       icon: createIcon(item.meta.icon),
@@ -48,7 +47,6 @@ export async function getRoutersInfo(): Promise<MenuDataItem[]> {
 export function getMatchMenuItem(path: string, menuData: MenuDataItem[]|undefined): MenuDataItem[] {
   if(!menuData)
     return [];
-  console.log(path)
   let items: MenuDataItem[] = [];
   menuData.forEach((item) => {
     if (item.path) {

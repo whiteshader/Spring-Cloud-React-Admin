@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getUserInfo, getRoutersInfo } from './services/session';
-import menu from './locales/bn-BD/menu';
+
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -29,8 +29,7 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const resp = await getUserInfo();
-      const user = { ...resp.user, permissions: resp.permissions};
-      return user;
+      return { ...resp.user, permissions: resp.permissions};
     } catch (error) {
       history.push(loginPath);
     }

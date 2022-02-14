@@ -21,7 +21,6 @@ export default function access (initialState: { currentUser: API.CurrentUser | u
     authorize: (route: any) => {
       if(menus) {
         const items = getMatchMenuItem(route.path, menus);
-        console.log(items);
         if(!items || items.length === 0){
           return false;
         } else {
