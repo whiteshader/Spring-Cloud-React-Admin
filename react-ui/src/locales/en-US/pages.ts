@@ -61,6 +61,8 @@ export default {
   'pages.searchTable.subscribeAlert': 'Subscribe to alerts',
   'pages.searchTable.title': 'Enquiry Form',
   'pages.searchTable.new': 'New',
+  'pages.searchTable.delete': 'Delete',
+  'pages.searchTable.export': 'Export',
   'pages.searchTable.chosen': 'chosen',
   'pages.searchTable.item': 'item',
   'pages.searchTable.totalServiceCalls': 'Total Number of Service Calls',

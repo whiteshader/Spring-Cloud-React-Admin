@@ -5,6 +5,20 @@ import pwa from './zh-CN/pwa';
 import settingDrawer from './zh-CN/settingDrawer';
 import settings from './zh-CN/settings';
 import pages from './zh-CN/pages';
+import user from './zh-CN/user';
+import role from './zh-CN/role';
+import dept from './zh-CN/dept';
+import post from './zh-CN/post';
+import config from './zh-CN/config';
+import sysmenu from './zh-CN/sysmenu';
+import notice from './zh-CN/notice';
+import dict from './zh-CN/dict';
+import job from './zh-CN/job';
+import jobLog from './zh-CN/jobLog';
+import loginInfo from './zh-CN/loginInfo';
+import operLog from './zh-CN/operLog';
+import server from './zh-CN/server';
+import onlineUser from './zh-CN/onlineUser';
 
 export default {
   'navBar.lang': '语言',
@@ -22,4 +36,18 @@ export default {
   ...settings,
   ...pwa,
   ...component,
+  ...user,
+  ...post,
+  ...dept,
+  ...role,
+  ...config,
+  ...sysmenu,
+  ...notice,
+  ...dict,
+  ...job,
+  ...jobLog,
+  ...loginInfo,
+  ...operLog,
+  ...server,
+  ...onlineUser,
 };
