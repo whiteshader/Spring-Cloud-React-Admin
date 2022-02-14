@@ -97,6 +97,7 @@
         icon: 'PartitionOutlined',
         path: '/system/user',
         component: 'system/user/index',
+        access: 'authorize'
       },
       {
         name: 'menu',
@@ -104,6 +105,7 @@
         icon: 'PartitionOutlined',
         path: '/system/menu',
         component: 'system/menu/index',
+        access: 'authorize'
       },
       {
         name: 'role',
@@ -111,6 +113,7 @@
         icon: 'PartitionOutlined',
         path: '/system/role',
         component: 'system/role/index',
+        access: 'authorize'
       },
       {
         name: 'dept',
@@ -118,6 +121,7 @@
         icon: 'PartitionOutlined',
         path: '/system/dept',
         component: 'system/dept/index',
+        access: 'authorize'
       },
       {
         name: 'post',
@@ -125,6 +129,7 @@
         icon: 'PartitionOutlined',
         path: '/system/post',
         component: 'system/post/index',
+        access: 'authorize'
       },
       {
         name: 'dict',
@@ -132,6 +137,7 @@
         icon: 'PartitionOutlined',
         path: '/system/dict',
         component: 'system/dict/index',
+        access: 'authorize'
       },
       {
         name: 'dictData',
@@ -139,6 +145,7 @@
         icon: 'PartitionOutlined',
         path: '/system/dict-data/index/:id?',
         component: 'system/dictData/index',
+        access: 'authorize'
       },
       {
         name: 'config',
@@ -146,6 +153,7 @@
         icon: 'PartitionOutlined',
         path: '/system/config',
         component: 'system/config/index',
+        access: 'authorize'
       },
       {
         name: 'notice',
@@ -153,6 +161,7 @@
         icon: 'PartitionOutlined',
         path: '/system/notice',
         component: 'system/notice/index',
+        access: 'authorize'
       },
       {
         name: 'log',
@@ -169,6 +178,7 @@
             icon: 'PartitionOutlined',
             path: '/system/log/operlog',
             component: 'monitor/operlog',
+            access: 'authorize'
           },
           {
             name: 'loginInfo',
@@ -176,6 +186,7 @@
             icon: 'PartitionOutlined',
             path: '/system/log/logininfor',
             component: 'monitor/logininfor',
+            access: 'authorize'
           },
         ],
       },
@@ -196,6 +207,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/online',
         component: 'monitor/online',
+        access: 'authorize'
       },
       {
         name: 'job',
@@ -203,6 +215,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/job',
         component: 'monitor/job',
+        access: 'authorize'
       },
       {
         name: 'joblog',
@@ -210,6 +223,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/job-log/index/:jobId?',
         component: 'monitor/joblog',
+        access: 'authorize'
       },
       {
         name: 'druid',
@@ -217,6 +231,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/druid',
         component: 'monitor/druid',
+        access: 'authorize'
       },
       {
         name: 'serverInfo',
@@ -224,6 +239,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/server',
         component: 'monitor/server',
+        access: 'authorize'
       },
       {
         name: 'cacheInfo',
@@ -231,6 +247,7 @@
         icon: 'PartitionOutlined',
         path: '/monitor/cache',
         component: 'monitor/cache',
+        access: 'authorize'
       },
     ],
   },
@@ -248,7 +265,8 @@
         title: 'menu.title.gen',
         icon: 'PartitionOutlined',
         path: '/tool/gen',
-        component: 'tool/gen/index',
+        component: 'tool/gen/index', 
+        access: 'authorize'
       },
       {
         name: 'design',
@@ -256,6 +274,7 @@
         icon: 'PartitionOutlined',
         path: '/tool/design',
         component: 'tool/design',
+        access: 'authorize',
       },
       {
         name: 'swagger',
@@ -263,32 +282,9 @@
         icon: 'PartitionOutlined',
         path: '/tool/swagger',
         component: 'tool/swagger',
+        access: 'authorize',
       },
     ],
-  },
-  {
-    path: '/admin',
-    name: 'admin',
-    icon: 'crown',
-    access: 'canAdmin',
-    component: './Admin',
-    routes: [
-      {
-        path: '/admin/sub-page',
-        name: 'sub-page',
-        icon: 'smile',
-        component: './Welcome',
-      },
-      {
-        component: './404',
-      },
-    ],
-  },
-  {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
   },
   {
     path: '/',

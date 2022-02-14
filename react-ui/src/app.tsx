@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getUserInfo, getRoutersInfo } from './services/session';
+import menu from './locales/bn-BD/menu';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -88,7 +89,12 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       },
       request: async () => {
         // initialState.currentUser 中包含了所有用户信息
-        return getRoutersInfo();
+        const menus = await getRoutersInfo();
+        setInitialState((preInitialState) => ({
+          ...preInitialState,
+          menus,
+        }));
+        return menus;
       },
     },
     // 自定义 403 页面

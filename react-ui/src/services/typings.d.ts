@@ -2,6 +2,29 @@
 /* eslint-disable */
 
 declare namespace API {
+  type Role = {
+    admin: boolean;
+    createBy: string;
+    createTime: string;
+    dataScope: string;
+    delFlag: string;
+    deptCheckStrictly: boolean;
+    deptIds: string;
+    flag: boolean;
+    menuCheckStrictly: boolean;
+    menuIds: string;
+    params: any;
+    remark: string;
+    roleId: number;
+    roleKey: string;
+    roleName: string;
+    roleSort: string;
+    searchValue: string;
+    status: string;
+    updateBy: string;
+    updateTime: string;
+  };
+
   type CurrentUser = {
     avatar?: string;
     userName?: string;
@@ -24,7 +47,7 @@ declare namespace API {
     address?: string;
     phonenumber?: string;
     dept?: any;
-    roles?: string[];
+    roles?: Role[];
     permissions: string[];
   };
 

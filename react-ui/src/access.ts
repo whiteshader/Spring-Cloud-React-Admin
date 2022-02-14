@@ -1,10 +1,12 @@
-import { matchPermission } from "./utils/permission";
+import type { MenuDataItem } from "@umijs/route-utils";
+import { getMatchMenuItem } from "./services/session";
+import { checkRole, matchPermission } from "./utils/permission";
 
 /**
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */
-export default function access (initialState: { currentUser: API.CurrentUser | undefined }) {
-  const { currentUser } = initialState || {};
+export default function access (initialState: { currentUser: API.CurrentUser | undefined, menus: MenuDataItem[] | undefined }) {
+  const { currentUser, menus } = initialState || {};
   return {
     canAdmin: currentUser && currentUser.access === 'admin',
     hasPerms: (perm: string) => {
@@ -13,8 +15,19 @@ export default function access (initialState: { currentUser: API.CurrentUser | u
     hasNoPerms: (perm: string) => {
       return !matchPermission(currentUser?.permissions, perm);
     },
-    permFilter: (route: any) => {
-      // console.log(route);
+    roleFiler: (route: {authority: string[]}) => {
+      return checkRole(currentUser?.roles, route.authority);
+    },
+    authorize: (route: any) => {
+      if(menus) {
+        const items = getMatchMenuItem(route.path, menus);
+        console.log(items);
+        if(!items || items.length === 0){
+          return false;
+        } else {
+          return true;
+        }
+      }
       return true;
     }, // initialState 中包含了的路由才有权限访问
   };
