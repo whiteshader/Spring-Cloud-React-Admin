@@ -6,8 +6,10 @@ declare namespace API {
     avatar?: string;
     userName?: string;
     userId?: string;
+    sex?: string;
     email?: string;
     signature?: string;
+    remark?: string;
     title?: string;
     group?: string;
     tags?: { key?: string; label?: string }[];
@@ -21,6 +23,7 @@ declare namespace API {
     };
     address?: string;
     phonenumber?: string;
+    dept?: any;
     roles?: string[];
     permissions: string[];
   };
@@ -36,7 +39,7 @@ declare namespace API {
     msg?: string;
     permissions?: string[];
     roles?: string[];
-    user?: any;
+    user?: CurrentUser;
   };
 
   type PageParams = {

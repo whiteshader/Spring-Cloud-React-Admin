@@ -7,7 +7,7 @@ import type { RouteChildrenProps } from 'react-router';
 import Projects from './components/Projects';
 import Articles from './components/Articles';
 import Applications from './components/Applications';
-import type { CurrentUser, TagType, tabKeyType } from './data.d';
+import type { TagType, tabKeyType } from './data.d';
 import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
 
@@ -38,7 +38,7 @@ const operationTabList = [
   },
 ];
 
-const TagList: React.FC<{ tags: CurrentUser['tags'] }> = ({ tags }) => {
+const TagList: React.FC<{ tags: API.CurrentUser['tags'] }> = ({ tags }) => {
   const ref = useRef<Input | null>(null);
   const [newTags, setNewTags] = useState<TagType[]>([]);
   const [inputVisible, setInputVisible] = useState<boolean>(false);
@@ -97,12 +97,13 @@ const Center: React.FC<RouteChildrenProps> = () => {
   const [tabKey, setTabKey] = useState<tabKeyType>('articles');
 
   //  获取用户信息
-  const { data: currentUser, loading } = useRequest(() => {
+  const { data: userInfo, loading } = useRequest(() => {
     return queryCurrentUserInfo();
   });
 
+  const currentUser = userInfo?.user;
   //  渲染用户信息
-  const renderUserInfo = ({ title, group, geographic }: Partial<CurrentUser>) => {
+  const renderUserInfo = ({ email, sex, dept }: Partial<API.CurrentUser>) => {
     return (
       <div className={styles.detail}>
         <p>
@@ -111,7 +112,7 @@ const Center: React.FC<RouteChildrenProps> = () => {
               marginRight: 8,
             }}
           />
-          {title}
+          {sex === '1'?'女':'男'}
         </p>
         <p>
           <ClusterOutlined
@@ -119,7 +120,7 @@ const Center: React.FC<RouteChildrenProps> = () => {
               marginRight: 8,
             }}
           />
-          {group}
+          {dept.deptName}
         </p>
         <p>
           <HomeOutlined
@@ -127,16 +128,7 @@ const Center: React.FC<RouteChildrenProps> = () => {
               marginRight: 8,
             }}
           />
-          {(geographic || { province: { label: '' } }).province.label}
-          {
-            (
-              geographic || {
-                city: {
-                  label: '',
-                },
-              }
-            ).city.label
-          }
+          {email}
         </p>
       </div>
     );
@@ -156,31 +148,35 @@ const Center: React.FC<RouteChildrenProps> = () => {
     return null;
   };
 
+  if (!currentUser) {
+    return loading;
+  }
+    
   return (
     <GridContent>
       <Row gutter={24}>
         <Col lg={7} md={24}>
           <Card bordered={false} style={{ marginBottom: 24 }} loading={loading}>
-            {!loading && currentUser && (
+            {!loading && (
               <div>
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatar} />
-                  <div className={styles.name}>{currentUser.name}</div>
-                  <div>{currentUser?.signature}</div>
+                  <div className={styles.name}>{currentUser.nickName}</div>
+                  <div>{currentUser.remark}</div>
                 </div>
                 {renderUserInfo(currentUser)}
                 <Divider dashed />
                 <TagList tags={currentUser.tags || []} />
                 <Divider style={{ marginTop: 16 }} dashed />
                 <div className={styles.team}>
-                  <div className={styles.teamTitle}>团队</div>
+                  <div className={styles.teamTitle}>角色</div>
                   <Row gutter={36}>
-                    {currentUser.notice &&
-                      currentUser.notice.map((item) => (
-                        <Col key={item.id} lg={24} xl={12}>
-                          <Link to={item.href}>
-                            <Avatar size="small" src={item.logo} />
-                            {item.member}
+                    {currentUser.roles &&
+                      currentUser.roles.map((item: any) => (
+                        <Col key={item.roleId} lg={24} xl={12}>
+                          <Link to={""}>
+                            <Avatar size="small" src={""} />
+                            {item.roleName}
                           </Link>
                         </Col>
                       ))}

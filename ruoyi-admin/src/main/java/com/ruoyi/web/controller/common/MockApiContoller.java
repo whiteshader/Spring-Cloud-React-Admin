@@ -101,6 +101,7 @@ public class MockApiContoller {
         JSONArray info = new JSONArray();
         JSONObject item = new JSONObject();
         item.put("id", "000000012");
+        item.put("avatar", avatars[0]);
         item.put("title", "ABCD 版本发布");
         item.put("description", "提交于 2017-01-06，需在 2017-01-07 前完成代码变更任务");
         item.put("extra", "进行中");
@@ -110,7 +111,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "000000006");
-        item.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/GvqBnKhFgObvnSGkDsje.png");
+        item.put("avatar", avatars[1]);
         item.put("title", "左侧图标用于区分不同的类型");
         item.put("datetime", "2022-01-07");
         item.put("type", "notification");
@@ -118,7 +119,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "000000006");
-        item.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/fcHMVNCjPOsbUGdEduuv.jpeg");
+        item.put("avatar", avatars[2]);
         item.put("title", "曲丽丽 评论了你");
         item.put("description", "描述信息描述信息描述信息");
         item.put("datetime", "2022-01-01");
@@ -164,7 +165,7 @@ public class MockApiContoller {
         JSONArray info = new JSONArray();
         JSONObject item = new JSONObject();
         item.put("id", "xxx1");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png");
+        item.put("logo", avatars[0]);
         item.put("title", "Alipay");
         item.put("description", "那是一种内在的东西，他们到达不了，也无法触及的");
         item.put("updatedAt", DateUtils.getTime());
@@ -175,7 +176,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "xxx2");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/jZUIxmJycoymBprLOUbT.png");
+        item.put("logo", avatars[1]);
         item.put("title", "Angular");
         item.put("description", "希望是一个好东西，也许是最好的，好东西是不会消亡的");
         item.put("updatedAt", DateUtils.getTime());
@@ -186,7 +187,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "xxx3");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/WhxKECPNujWoWEFNdnJE.png");
+        item.put("logo", avatars[2]);
         item.put("title", "Ant Design");
         item.put("description", "城镇中有那么多的酒馆，她却偏偏走进了我的酒馆");
         item.put("updatedAt", DateUtils.getTime());
@@ -197,7 +198,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "xxx4");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/ubnKSIfAJTxIgXOKlciN.png");
+        item.put("logo", avatars[3]);
         item.put("title", "Bootstrap");
         item.put("description", "那时候我只会想自己想要什么，从不想自己拥有什么");
         item.put("updatedAt", DateUtils.getTime());
@@ -208,7 +209,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "xxx5");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/gaOngJwsRYRaVAuXXcmB.png");
+        item.put("logo", avatars[4]);
         item.put("title", "React");
         item.put("description", "凛冬将至");
         item.put("updatedAt", DateUtils.getTime());
@@ -219,7 +220,7 @@ public class MockApiContoller {
 
         item = new JSONObject();
         item.put("id", "xxx6");
-        item.put("logo", "https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png");
+        item.put("logo", avatars[5]);
         item.put("title", "Webpack");
         item.put("description", "生命就像一盒巧克力，结果往往出人意料");
         item.put("updatedAt", DateUtils.getTime());
@@ -241,7 +242,7 @@ public class MockApiContoller {
         item.put("updatedAt", DateUtils.getTime());
         JSONObject user = new JSONObject();
         user.put("name", "曲丽丽");
-        user.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png");
+        user.put("avatar", avatars[2]);
         item.put("user", user);
         JSONObject group = new JSONObject();
         user.put("name", "高逼格设计天团");
@@ -259,7 +260,7 @@ public class MockApiContoller {
         item.put("updatedAt", DateUtils.getTime());
         user = new JSONObject();
         user.put("name", "付小小");
-        user.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png");
+        user.put("avatar", avatars[1]);
         item.put("user", user);
         group = new JSONObject();
         user.put("name", "高逼格设计天团");
@@ -277,7 +278,7 @@ public class MockApiContoller {
         item.put("updatedAt", DateUtils.getTime());
         user = new JSONObject();
         user.put("name", "林东东");
-        user.put("avatar", "https://gw.alipayobjects.com/zos/rmsportal/cnrhVkzwxjPwAaCfPbdc.png");
+        user.put("avatar", avatars[3]);
         item.put("user", user);
         group = new JSONObject();
         user.put("name", "中二少女团");

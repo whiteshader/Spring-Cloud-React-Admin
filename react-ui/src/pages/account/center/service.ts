@@ -1,7 +1,7 @@
 import { request } from 'umi';
-import type { CurrentUser, ListItemDataType } from './data.d';
+import type { ListItemDataType } from './data.d';
 
-export async function queryCurrentUserInfo(): Promise<{ data: CurrentUser }> {
+export async function queryCurrentUserInfo(): Promise<{ data: API.GetUserInfoResult }> {
   return { data: await request('/api/getInfo') }
 }
 

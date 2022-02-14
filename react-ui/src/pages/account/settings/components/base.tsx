@@ -1,28 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { UploadOutlined } from '@ant-design/icons';
-import { Button, Input, Upload, message } from 'antd';
+import { Button, Upload, message, Form } from 'antd';
 import ProForm, {
-  ProFormFieldSet,
   ProFormSelect,
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-form';
-import { useRequest } from 'umi';
 import { queryCurrentUserInfo } from '../service';
 
 import styles from './BaseView.less';
-import { useModel } from 'umi';
-import { Form } from 'antd';
+import { useRequest } from 'umi';
 
-const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
-  if (!value[0]) {
-    callback('Please input your area code!');
-  }
-  if (!value[1]) {
-    callback('Please input your phone number!');
-  }
-  callback();
-};
+// const validatorPhone = (rule: any, value: string[], callback: (message?: string) => void) => {
+//   if (!value[0]) {
+//     callback('Please input your area code!');
+//   }
+//   if (!value[1]) {
+//     callback('Please input your phone number!');
+//   }
+//   callback();
+// };
 // 头像组件 方便以后独立，增加裁剪之类的功能
 const AvatarView = ({ avatar }: { avatar: string }) => (
   <>
@@ -42,34 +39,33 @@ const AvatarView = ({ avatar }: { avatar: string }) => (
 );
 
 const BaseView: React.FC = () => {
-  const [currentUser, setCurrentUser] = useState<API.CurrentUser>();
+
   const [form] = Form.useForm();
-  
+  //  获取用户信息
+  const { data: userInfo, loading } = useRequest(() => {
+    return queryCurrentUserInfo();
+  });
+
+  const currentUser = userInfo?.user;
+
+  if (!currentUser) {
+    return loading;
+  }
+
   const getAvatarURL = () => {
     if (currentUser) {
       if (currentUser.avatar) {
         return currentUser.avatar;
       }
-      const url = 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
-      return url;
+      return 'https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png';
     }
     return '';
   };
 
   const handleFinish = async () => {
     message.success('更新基本信息成功');
-  };
+  }; 
 
-  useEffect(() => {
-    queryCurrentUserInfo().then((res) => {
-      console.log(res)
-      setCurrentUser(res.user);
-      form.resetFields();
-      form.setFieldsValue(
-        res.user
-      );
-    });
-  }, []);
   return (
     <div className={styles.baseView}>
       <div className={styles.left}>

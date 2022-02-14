@@ -1,8 +1,8 @@
 import { request } from 'umi';
 import type { GeographicItemType } from './data';
 
-export async function queryCurrentUserInfo(): Promise<{ user: API.CurrentUser }> {
-  return request('/api/getInfo');
+export async function queryCurrentUserInfo(): Promise<{ data: API.GetUserInfoResult }> {
+  return { data: await request('/api/getInfo') }
 }
 
 export async function queryProvince(): Promise<{ data: GeographicItemType[] }> {
