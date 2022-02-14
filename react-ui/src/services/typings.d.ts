@@ -111,4 +111,31 @@ declare namespace API {
     description?: string;
     type?: NoticeIconItemType;
   };
+
+
+  type MenuItemMeta = {
+    title: string;
+    icon: string;
+    noCache: boolean;
+    link: string;
+  };
+
+  type RoutersMenuItem = {
+    alwaysShow?: boolean;
+    children?: RoutersMenuItem[];
+    component?: string;
+    hidden?: boolean;
+    meta: MenuItemMeta;
+    name: string;
+    path: string;
+    redirect?: string;
+    [key: string]: any;
+  };
+
+  type GetRoutersResult = {
+    code: number;
+    msg: string;
+    data: RoutersMenuItem[];
+  };
 }
+
