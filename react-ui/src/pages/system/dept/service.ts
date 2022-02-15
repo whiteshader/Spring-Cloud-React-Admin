@@ -80,8 +80,12 @@ export function getTreeList(params: any): Promise<DataNode[]> {
         'Content-Type': 'application/json;charset=UTF-8',
       },
     }).then((res) => {
-      const treeData = formatTreeSelectData(res.data);
-      resolve(treeData);
+      if(res && res.code === 200) {
+        const treeData = formatTreeSelectData(res.data);
+        resolve(treeData);
+      } else {
+        resolve([]);
+      }
     });
   });
 }
