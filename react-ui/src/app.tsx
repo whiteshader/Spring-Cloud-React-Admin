@@ -60,9 +60,8 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    headerRender: () => <HeaderRender />,
+    headerContentRender: () => <HeaderRender />,
     rightContentRender: () => <RightContent />,
-    disableContentMargin: false,
     waterMarkProps: {
       content: initialState?.currentUser?.userName,
     },
@@ -107,7 +106,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 增加一个 loading 的状态
     childrenRender: (children, props) => {
       return (
-        <>
+        <div style={{marginTop: "16px" }}>
           {children}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer
@@ -121,7 +120,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
               }}
             />
           )}
-        </>
+        </div>
       );
     },
     ...initialState?.settings,

@@ -18,7 +18,7 @@ export default function KeepAlivePage(props: any) {
         const isExit = localTablist.findIndex((item: any) => item.pathname === props.location.pathname);
         // 需要计算translateX
         if (isExit < 0) {
-            const obj = { ...props.location, title: intl.formatMessage({ id: props.route.keepAliveName }), keepAliveName: props.route.keepAliveName }
+            const obj = { ...props.location, title: intl.formatMessage({ id: props.route.title }), keepAliveName: props.route.title }
             localTablist.push(obj);
             let x = 0;
             if (localTablist.length >= showTabs) {
@@ -49,7 +49,7 @@ export default function KeepAlivePage(props: any) {
 
     if (props.route.keppAlive) {
         return (
-            <KeepAlive saveScrollPosition={props.route.saveScrollPosition ?? "screen"} name={props.route.keepAliveName}>
+            <KeepAlive saveScrollPosition={props.route.saveScrollPosition ?? "screen"} name={props.route.title}>
                 {props.children}
             </KeepAlive>
         )
