@@ -97,7 +97,10 @@
         icon: 'PartitionOutlined',
         path: '/system/user',
         component: 'system/user/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.user'
       },
       {
         name: 'menu',
@@ -105,7 +108,10 @@
         icon: 'PartitionOutlined',
         path: '/system/menu',
         component: 'system/menu/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.menu'
       },
       {
         name: 'role',
@@ -113,7 +119,10 @@
         icon: 'PartitionOutlined',
         path: '/system/role',
         component: 'system/role/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.role'
       },
       {
         name: 'dept',
@@ -121,7 +130,10 @@
         icon: 'PartitionOutlined',
         path: '/system/dept',
         component: 'system/dept/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.dept'
       },
       {
         name: 'post',
@@ -129,7 +141,10 @@
         icon: 'PartitionOutlined',
         path: '/system/post',
         component: 'system/post/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.post'
       },
       {
         name: 'dict',
@@ -137,7 +152,10 @@
         icon: 'PartitionOutlined',
         path: '/system/dict',
         component: 'system/dict/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.dict'
       },
       {
         name: 'dictData',
@@ -145,7 +163,10 @@
         icon: 'PartitionOutlined',
         path: '/system/dict-data/index/:id?',
         component: 'system/dictData/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.dictData'
       },
       {
         name: 'config',
@@ -153,7 +174,10 @@
         icon: 'PartitionOutlined',
         path: '/system/config',
         component: 'system/config/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.config'
       },
       {
         name: 'notice',
@@ -161,7 +185,10 @@
         icon: 'PartitionOutlined',
         path: '/system/notice',
         component: 'system/notice/index',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.notice'
       },
       {
         name: 'log',
@@ -178,7 +205,10 @@
             icon: 'PartitionOutlined',
             path: '/system/log/operlog',
             component: 'monitor/operlog',
-            access: 'authorize'
+            access: 'authorize',
+            wrappers: ['@/components/KeepAlive'],
+            keppAlive: true,
+            keepAliveName: 'menu.title.operlog'
           },
           {
             name: 'loginInfo',
@@ -186,7 +216,10 @@
             icon: 'PartitionOutlined',
             path: '/system/log/logininfor',
             component: 'monitor/logininfor',
-            access: 'authorize'
+            access: 'authorize',
+            wrappers: ['@/components/KeepAlive'],
+            keppAlive: true,
+            keepAliveName: 'menu.title.loginInfo'
           },
         ],
       },
@@ -207,7 +240,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/online',
         component: 'monitor/online',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.onlineUser'
       },
       {
         name: 'job',
@@ -215,7 +251,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/job',
         component: 'monitor/job',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.job'
       },
       {
         name: 'joblog',
@@ -223,7 +262,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/job-log/index/:jobId?',
         component: 'monitor/joblog',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.joblog'
       },
       {
         name: 'druid',
@@ -231,7 +273,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/druid',
         component: 'monitor/druid',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.druid'
       },
       {
         name: 'serverInfo',
@@ -239,7 +284,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/server',
         component: 'monitor/server',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.serverInfo'
       },
       {
         name: 'cacheInfo',
@@ -247,7 +295,10 @@
         icon: 'PartitionOutlined',
         path: '/monitor/cache',
         component: 'monitor/cache',
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.cacheInfo'
       },
     ],
   },
@@ -266,7 +317,10 @@
         icon: 'PartitionOutlined',
         path: '/tool/gen',
         component: 'tool/gen/index', 
-        access: 'authorize'
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.gen'
       },
       {
         name: 'design',
@@ -275,6 +329,9 @@
         path: '/tool/design',
         component: 'tool/design',
         access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.design'
       },
       {
         name: 'swagger',
@@ -283,6 +340,9 @@
         path: '/tool/swagger',
         component: 'tool/swagger',
         access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        keepAliveName: 'menu.title.swagger'
       },
     ],
   },

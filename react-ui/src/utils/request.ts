@@ -1,8 +1,10 @@
 /* eslint-disable @typescript-eslint/dot-notation */
 /** Request 网络请求工具 更详细的 api 文档: https://github.com/umijs/umi-request */
 import { extend } from 'umi-request';
+import { history } from 'umi';
 import { message, notification } from 'antd';
 import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from '../access';
+import { LoginPageUrl } from './utils';
 
 const codeMessage: Record<number, string> = {
   10000: '系统未知错误，请反馈给管理员',
@@ -60,34 +62,38 @@ request.interceptors.request.use((url: string, options: any) => {
   // console.log('-------------------------')
   console.log('request:', url);
   const headers = options.headers ? options.headers : [];
-  if (headers['isToken'] !== 'false') {
-    if (headers['Authorization'] === '' || headers['Authorization'] == null) {
-      const expireTime = getTokenExpireTime();
-      if (expireTime) {
-        const left = Number(expireTime) - new Date().getTime();
-        const refreshToken = getRefreshToken();
-        if (left < checkRegion && refreshToken) {
-          if (left < 0) {
-            clearSessionToken();
-          }
-        } else {
-          const accessToken = getAccessToken();
-          if (accessToken) {
-            headers['Authorization'] = `Bearer ${accessToken}`;
-          }
+  if (headers['Authorization'] === '' || headers['Authorization'] == null) {
+    const expireTime = getTokenExpireTime();
+    if (expireTime) {
+      const left = Number(expireTime) - new Date().getTime();
+      const refreshToken = getRefreshToken();
+      if (left < checkRegion && refreshToken) {
+        if (left < 0) {
+          clearSessionToken();
+          history.push(LoginPageUrl);
+        }
+      } else {
+        const accessToken = getAccessToken();
+        if (accessToken) {
+          headers['Authorization'] = `Bearer ${accessToken}`;
         }
       }
+    } else {
+      clearSessionToken();
+      history.push(LoginPageUrl);
+      return undefined;
     }
     // console.log(headers)
     return {
       url,
       options: { ...options, headers },
     };
+  } else {
+    return {
+      url,
+      options,
+    };
   }
-  return {
-    url,
-    options: { ...options },
-  };
 });
 
 // 响应拦截器

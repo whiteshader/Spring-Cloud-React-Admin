@@ -7,7 +7,7 @@ import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getUserInfo, getRoutersInfo } from './services/session';
-
+import HeaderRender from './components/HeaderRender';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -29,7 +29,7 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const resp = await getUserInfo();
-      return { ...resp.user, permissions: resp.permissions};
+      return { ...resp.user, permissions: resp.permissions } as API.CurrentUser;
     } catch (error) {
       history.push(loginPath);
     }
@@ -37,11 +37,11 @@ export async function getInitialState(): Promise<{
   };
   // 如果是登录页面，不执行
   if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();    
+    const currentUser = await fetchUserInfo();
     return {
-      fetchUserInfo,
-      currentUser,
       settings: defaultSettings,
+      currentUser,      
+      fetchUserInfo,
     };
   }
   return {
@@ -50,11 +50,10 @@ export async function getInitialState(): Promise<{
   };
 }
 
-
-
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
+    headerRender: () => <HeaderRender />,
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {
@@ -70,11 +69,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     links: isDev
       ? [
-          <Link key = "openapi" to="/umi/plugin/openapi" target="_blank">
+          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
             <LinkOutlined />
             <span>OpenAPI 文档</span>
           </Link>,
-          <Link key = "docs"  to="/~docs">
+          <Link key="docs" to="/~docs">
             <BookOutlined />
             <span>业务组件文档</span>
           </Link>,
@@ -120,4 +119,5 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     ...initialState?.settings,
   };
+
 };
