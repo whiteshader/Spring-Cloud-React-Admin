@@ -44,18 +44,27 @@
         icon: 'smile',
         path: '/dashboard/analysis',
         component: './dashboard/analysis',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.dashboard.analysis'
       },
       {
         name: 'monitor',
         icon: 'smile',
         path: '/dashboard/monitor',
         component: './dashboard/monitor',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.dashboard.monitor'
       },
       {
         name: 'workplace',
         icon: 'smile',
         path: '/dashboard/workplace',
         component: './dashboard/workplace',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.dashboard.workplace'
       },
     ],
   },
@@ -73,12 +82,18 @@
         icon: 'smile',
         path: '/account/center',
         component: './account/center',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.account.center'
       },
       {
         name: 'settings',
         icon: 'smile',
         path: '/account/settings',
         component: './account/settings',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.account.settings'
       },
     ],
   },
@@ -275,7 +290,6 @@
       },
       {
         name: 'cacheInfo',
-        title: 'menu.title.cacheInfo',
         icon: 'PartitionOutlined',
         path: '/monitor/cache',
         component: 'monitor/cache',
