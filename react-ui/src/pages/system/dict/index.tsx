@@ -202,7 +202,7 @@ const DictTypeTableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          编辑
+          <FormattedMessage id="pages.searchTable.edit" defaultMessage="编辑" />
         </Button>,
         <Button
           type="link"
@@ -227,7 +227,7 @@ const DictTypeTableList: React.FC = () => {
             });
           }}
         >
-          删除
+          <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
         </Button>,
       ],
     },

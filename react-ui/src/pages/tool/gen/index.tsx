@@ -1,5 +1,5 @@
-import { PageContainer } from '@ant-design/pro-layout';
 import { Card } from 'antd';
+import { Content } from 'antd/lib/layout/layout';
 import React from 'react';
 
 /**

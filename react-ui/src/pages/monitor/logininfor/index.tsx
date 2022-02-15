@@ -3,7 +3,7 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { LogininforType, LogininforListParams } from './data.d';
@@ -14,6 +14,7 @@ import {
   cleanLogininfor,
 } from './service';
 import { getDict } from '@/pages/system/dict/service';
+import { Content } from 'antd/lib/layout/layout';
 
 /* *
  *

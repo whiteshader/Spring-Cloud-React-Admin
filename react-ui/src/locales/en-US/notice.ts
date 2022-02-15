@@ -1,0 +1,16 @@
+export default {
+  'system.Notice.notice_id': 'ID',
+  'system.Notice.notice_title': 'Tile',
+  'system.Notice.notice_type': 'Type',
+  'system.Notice.notice_content': 'Content',
+  'system.Notice.status': 'Status',
+  'system.Notice.del_flag': 'Flag',
+  'system.Notice.login_ip': 'IP',
+  'system.Notice.login_date': 'Login Date',
+  'system.Notice.create_by': 'Creator',
+  'system.Notice.create_time': 'Create Time',
+  'system.Notice.update_by': 'Updater',
+  'system.Notice.update_time': 'Update Time',
+  'system.Notice.remark': 'Remark',
+	'system.Notice.modify': 'Edit',
+};

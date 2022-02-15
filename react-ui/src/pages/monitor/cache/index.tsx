@@ -3,7 +3,7 @@ import { getCacheInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
 import styles from './index.less';
 import type { CacheInfoResponseType } from './data';
-import { PageContainer } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { VisitDataType } from '@/pages/dashboard/analysis/data';
 import Gauge from '@/pages/dashboard/monitor/components/Charts/Gauge';
 import Pie from '@/pages/dashboard/analysis/components/Charts/Pie';

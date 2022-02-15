@@ -61,6 +61,7 @@ export default {
   'pages.searchTable.subscribeAlert': 'Subscribe to alerts',
   'pages.searchTable.title': 'Enquiry Form',
   'pages.searchTable.new': 'New',
+  'pages.searchTable.edit': 'Edit',
   'pages.searchTable.delete': 'Delete',
   'pages.searchTable.export': 'Export',
   'pages.searchTable.chosen': 'chosen',

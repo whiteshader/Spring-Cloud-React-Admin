@@ -2,11 +2,11 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { OnlineUserType, OnlineUserListParams } from './data.d';
 import { getOnlineUserList, forceLogout } from './service';
+import { Content } from 'antd/lib/layout/layout';
 
 
 /* *

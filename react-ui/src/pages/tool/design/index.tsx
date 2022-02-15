@@ -1,6 +1,6 @@
 import { Card } from 'antd';
+import { Content } from 'antd/lib/layout/layout';
 import React from 'react';
-import { PageContainer } from '@ant-design/pro-layout';
 
 /**
  *

@@ -175,7 +175,7 @@ const UserTableList: React.FC = () => {
 
   const columns: ProColumns<UserType>[] = [
     {
-      title: <FormattedMessage id="编号" defaultMessage="编号" />,
+      title: <FormattedMessage id="system.User.user_id" defaultMessage="编号" />,
       dataIndex: 'userId',
       valueType: 'textarea',
       hideInSearch: true,
@@ -253,7 +253,7 @@ const UserTableList: React.FC = () => {
             setCurrentRow(record);
           }}
         >
-          编辑
+          <FormattedMessage id="pages.searchTable.edit" defaultMessage="编辑" />
         </Button>,
         <Button
           type="link"
@@ -278,7 +278,7 @@ const UserTableList: React.FC = () => {
             });
           }}
         >
-          删除
+          <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
         </Button>,
         <Button
           type="link"
@@ -289,8 +289,8 @@ const UserTableList: React.FC = () => {
             setResetPwdModalVisible(true);
             setCurrentRow(record);
           }}
-        >
-          密码重置
+        >          
+          <FormattedMessage id="system.User.reset.password" defaultMessage="密码重置" />
         </Button>,
       ],
     },
