@@ -3,6 +3,7 @@ import { Badge } from 'antd';
 import classNames from 'classnames';
 import * as AntdIcons from '@ant-design/icons';
 import type { ThemeType } from './index';
+import styles from './style.less';
 
 const allIcons: Record<string, any> = AntdIcons;
 
@@ -34,8 +35,8 @@ const CopyableIcon: React.FC<CopyableIconProps> = ({
         }
       }}
     >
-      {React.createElement(allIcons[name])}
-      <span className="anticon-class">
+      { React.createElement(allIcons[name], { className: styles.anticon }) }
+      <span className={styles.anticonTitle}>
         <Badge dot={isNew}>{name}</Badge>
       </span>
     </li>

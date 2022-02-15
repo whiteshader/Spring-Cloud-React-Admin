@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import CopyableIcon from './CopyableIcon';
 import type { ThemeType } from './index';
 import type { CategoriesKeys } from './fields';
+import styles from './style.less';
 
 interface CategoryProps {
   title: CategoriesKeys;
@@ -68,7 +69,7 @@ class Category extends React.Component<CategoryProps, CategoryState> {
     return (
       <div>
         <h3>{messages[`app.docs.components.icon.category.${title}`]}</h3>
-        <ul className="anticons-list">{items}</ul>
+        <ul className={styles.anticonsList}>{items}</ul>
       </div>
     );
   }
