@@ -14,9 +14,7 @@ export default function KeepAlivePage(props: any) {
     const { dispatch, tabList, showTabs, tarnslateX, tabsWidth, tabWidth } = useModel("system")
     useEffect(() => {
         // 去重
-        console.log('keep alive page')
         const localTablist = JSON.parse(JSON.stringify(tabList));
-        console.log(localTablist)
         const isExit = localTablist.findIndex((item: any) => item.pathname === props.location.pathname);
         // 需要计算translateX
         if (isExit < 0) {
