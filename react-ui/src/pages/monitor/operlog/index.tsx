@@ -297,7 +297,7 @@ const OperlogTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<OperlogType>
           headerTitle={intl.formatMessage({
@@ -444,7 +444,7 @@ const OperlogTableList: React.FC = () => {
         operatorTypeOptions={operatorTypeOptions}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

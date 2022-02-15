@@ -128,7 +128,7 @@ const OnlineUserTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<OnlineUserType>
           headerTitle={intl.formatMessage({
@@ -155,7 +155,7 @@ const OnlineUserTableList: React.FC = () => {
           columns={columns}
         />
       </div>
-    </PageContainer>
+    </Content>
   );
 };
 

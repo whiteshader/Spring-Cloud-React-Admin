@@ -1,3 +1,10 @@
+/* *
+ *
+ * @author whiteshader@163.com
+ * @datetime  2022/02/15
+ * 
+ * */
+
 import type { Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { PageLoading, SettingDrawer } from '@ant-design/pro-layout';
 import type { RunTimeLayoutConfig } from 'umi';

@@ -3,7 +3,8 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { MenuType, MenuListParams } from './data.d';
@@ -96,9 +97,8 @@ const handleRemoveOne = async (selectedRow: MenuType) => {
   }
 };
 
-export type MenuTableProps = {};
 
-const MenuTableList: React.FC<MenuTableProps> = () => {
+const MenuTableList: React.FC = () => {
   const formTableRef = useRef<FormInstance>();
 
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -237,7 +237,7 @@ const MenuTableList: React.FC<MenuTableProps> = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<MenuType>
           headerTitle={intl.formatMessage({
@@ -362,7 +362,7 @@ const MenuTableList: React.FC<MenuTableProps> = () => {
         statusOptions={statusOptions}
         menuTree={menuTree}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

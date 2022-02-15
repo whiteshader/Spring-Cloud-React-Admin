@@ -4,7 +4,8 @@ import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useAccess } from 'umi';
 import { useIntl, FormattedMessage } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { NoticeType, NoticeListParams } from './data.d';
@@ -216,7 +217,7 @@ const NoticeTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<NoticeType>
           headerTitle={intl.formatMessage({
@@ -334,7 +335,7 @@ const NoticeTableList: React.FC = () => {
         noticeTypeOptions={noticeTypeOptions}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

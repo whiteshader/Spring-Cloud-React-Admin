@@ -137,7 +137,7 @@ const CacheInfo: React.FC = () => {
   }, []);
 
   return (
-    <PageContainer>
+    <Content>
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card title="基本信息" className={styles.card}>
@@ -167,7 +167,7 @@ const CacheInfo: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </PageContainer>
+    </Content>
   );
 };
 

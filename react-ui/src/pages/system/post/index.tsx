@@ -3,7 +3,8 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { PostType, PostListParams } from './data.d';
@@ -216,7 +217,7 @@ const PostTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<PostType>
           headerTitle={intl.formatMessage({
@@ -271,12 +272,11 @@ const PostTableList: React.FC = () => {
           ]}
           request={(params) =>
             getPostList({ ...params } as PostListParams).then((res) => {
-              const result = {
+              return {
                 data: res.rows,
                 total: res.total,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}
@@ -344,7 +344,7 @@ const PostTableList: React.FC = () => {
         values={currentRow || {}}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

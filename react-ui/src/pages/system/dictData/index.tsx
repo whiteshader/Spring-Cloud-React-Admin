@@ -3,7 +3,8 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, history, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { DictDataType, DictDataListParams } from './data.d';
@@ -285,7 +286,7 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<DictDataType>
           headerTitle={intl.formatMessage({
@@ -429,7 +430,7 @@ const DictDataTableList: React.FC<DictDataProps> = (props) => {
         dictType={dictType}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

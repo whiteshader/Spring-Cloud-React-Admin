@@ -3,8 +3,8 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
+import { Content } from 'antd/lib/layout/layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { DeptType, DeptListParams } from './data.d';
@@ -219,7 +219,7 @@ const DeptTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<DeptType>
           headerTitle={intl.formatMessage({
@@ -343,7 +343,7 @@ const DeptTableList: React.FC = () => {
         deptTree={deptTree}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

@@ -212,7 +212,7 @@ const JobLogTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<JobLogType>
           headerTitle={intl.formatMessage({
@@ -353,7 +353,7 @@ const JobLogTableList: React.FC = () => {
         statusOptions={statusOptions}
         jobGroupOptions={jobGroupOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

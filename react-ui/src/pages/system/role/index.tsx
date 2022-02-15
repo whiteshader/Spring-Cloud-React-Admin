@@ -3,7 +3,7 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { RoleType, RoleListParams } from './data.d';
@@ -20,6 +20,7 @@ import { getDict } from '../dict/service';
 import type { DataNode } from 'antd/lib/tree';
 import { getMenuTree } from '../menu/service';
 import { formatTreeSelectData } from '@/utils/utils';
+import { Content } from 'antd/lib/layout/layout';
 
 /* *
  *
@@ -263,7 +264,7 @@ const RoleTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<RoleType>
           headerTitle={intl.formatMessage({
@@ -327,12 +328,11 @@ const RoleTableList: React.FC = () => {
           ]}
           request={(params) =>
             getRoleList({ ...params } as RoleListParams).then((res) => {
-              const result = {
+              return {
                 data: res.rows,
                 total: res.total,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}
@@ -402,7 +402,7 @@ const RoleTableList: React.FC = () => {
         menuCheckedKeys={menuIds || []}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

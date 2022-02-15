@@ -27,7 +27,7 @@ const DruidInfo: React.FC = () => {
       src={'/api/druid/login.html'}
       id="bdIframe"
     ></iframe>
-    // </PageContainer>
+    // </Content>
   );
 };
 

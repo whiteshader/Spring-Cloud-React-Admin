@@ -315,7 +315,7 @@ const JobTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<JobType>
           headerTitle={intl.formatMessage({
@@ -459,7 +459,7 @@ const JobTableList: React.FC = () => {
         values={currentRow || {}}
         statusOptions={statusOptions}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

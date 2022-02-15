@@ -1,3 +1,10 @@
+/* *
+ *
+ * @author whiteshader@163.com
+ * @datetime  2022/02/15
+ * 
+ * */
+
 import type { MenuDataItem } from "@umijs/route-utils";
 import { getMatchMenuItem } from "./services/session";
 import { checkRole, matchPermission } from "./utils/permission";

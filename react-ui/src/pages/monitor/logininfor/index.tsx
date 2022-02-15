@@ -176,7 +176,7 @@ const LogininforTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<LogininforType>
           headerTitle={intl.formatMessage({
@@ -281,7 +281,7 @@ const LogininforTableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
-    </PageContainer>
+    </Content>
   );
 };
 

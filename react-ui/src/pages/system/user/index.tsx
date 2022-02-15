@@ -3,7 +3,7 @@ import type { FormInstance } from 'antd';
 import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
-import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
+import { FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { UserType, UserListParams } from './data.d';
@@ -24,6 +24,7 @@ import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
 import { getPostList } from '../post/service';
 import { getRoleList } from '../role/service';
+import { Content } from 'antd/lib/layout/layout';
 
 /* *
  *
@@ -296,7 +297,7 @@ const UserTableList: React.FC = () => {
   ];
 
   return (
-    <PageContainer>
+    <Content>
       <div style={{ width: '20%', height: '100%', float: 'left' }}>
         <DeptTree
           onSelect={async (value: any) => {
@@ -486,7 +487,7 @@ const UserTableList: React.FC = () => {
         resetPwdModalVisible={resetPwdModalVisible}
         values={currentRow || {}}
       />
-    </PageContainer>
+    </Content>
   );
 };
 

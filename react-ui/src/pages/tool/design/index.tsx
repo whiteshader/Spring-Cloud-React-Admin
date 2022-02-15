@@ -12,9 +12,9 @@ export type FormBuilderProps = {};
 
 const FormBuilder: React.FC<FormBuilderProps> = () => {
   return (
-    <PageContainer>
+    <Content>
       <Card title="FormBuilder" />
-    </PageContainer>
+    </Content>
   );
 };
 

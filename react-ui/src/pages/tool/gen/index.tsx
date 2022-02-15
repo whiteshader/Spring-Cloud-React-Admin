@@ -12,9 +12,9 @@ export type GlobalTableProps = {};
 
 const TableList: React.FC<GlobalTableProps> = () => {
   return (
-    <PageContainer>
+    <Content>
       <Card title="Gen Code" />
-    </PageContainer>
+    </Content>
   );
 };
 
