@@ -106,7 +106,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 增加一个 loading 的状态
     childrenRender: (children, props) => {
       return (
-        <div style={{marginTop: "8px" }}>
+        <div style={{marginTop: "1px" }}>
           {children}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer
