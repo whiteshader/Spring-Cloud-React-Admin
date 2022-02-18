@@ -96,6 +96,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         userId: initialState?.currentUser?.userId,
       },
       request: async () => {
+        if (!initialState?.currentUser?.userId) {
+          return [];
+        }
         // initialState.currentUser 中包含了所有用户信息
         const menus = await getRoutersInfo();
         setInitialState((preInitialState) => ({
