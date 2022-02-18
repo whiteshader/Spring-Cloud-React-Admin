@@ -29,7 +29,7 @@ export function convertCompatRouters(childrens: API.RoutersMenuItem[]): MenuData
       path: item.path,
       icon: createIcon(item.meta.icon),
       name: item.meta.title,
-      children: item.children ? convertCompatRouters(item.children) : undefined,
+      routes: item.children ? convertCompatRouters(item.children) : undefined,
       hideChildrenInMenu: item.hidden,
       hideInMenu: item.hidden,
       component: item.component,
@@ -52,13 +52,14 @@ export function getMatchMenuItem(path: string, menuData: MenuDataItem[]|undefine
     if (item.path) {
       if (item.path === path) {
         items.push(item);
+        return;
       }
       if (path.length >= item.path?.length) {
         const exp = `${item.path}/*`;
         if (path.match(exp)) {
-          if(item.children) {
+          if(item.routes) {
             const subpath = path.substr(item.path.length+1);
-            const subItem: MenuDataItem[] = getMatchMenuItem(subpath, item.children);
+            const subItem: MenuDataItem[] = getMatchMenuItem(subpath, item.routes);
             items = items.concat(subItem);
           } else {
             const paths = path.split('/');
