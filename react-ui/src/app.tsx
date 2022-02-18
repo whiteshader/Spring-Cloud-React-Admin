@@ -36,7 +36,11 @@ export async function getInitialState(): Promise<{
   const fetchUserInfo = async () => {
     try {
       const resp = await getUserInfo();
-      return { ...resp.user, permissions: resp.permissions } as API.CurrentUser;
+      if(resp === undefined || resp.code !== 200) {        
+        history.push(loginPath);     
+      } else {
+        return { ...resp.user, permissions: resp.permissions } as API.CurrentUser;
+      }
     } catch (error) {
       history.push(loginPath);
     }

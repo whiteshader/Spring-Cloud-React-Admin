@@ -32,12 +32,14 @@ const loginOut = async () => {
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   const { initialState, setInitialState } = useModel('@@initialState');
+  const { dispatch } = useModel("system");
 
   const onMenuClick = useCallback(
     (event: MenuInfo) => {
       const { key } = event;
       if (key === 'logout') {
-        setInitialState((s) => ({ ...s, currentUser: undefined }));
+        setInitialState((s) => ({ ...s, currentUser: undefined, menus: undefined }));
+        dispatch({ type: 'CHANGESTATE', payload: { tabList: []} });
         loginOut();
         return;
       }
