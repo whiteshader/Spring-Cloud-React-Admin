@@ -170,6 +170,7 @@ const NoticeForm: React.FC<NoticeFormProps> = (props) => {
                 defaultMessage: '公告状态',
               })}
               width="xl"
+              labelCol={{ span: 24 }}
               placeholder="请输入公告状态"
               rules={[
                 {

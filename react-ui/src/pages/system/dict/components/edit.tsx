@@ -122,6 +122,7 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
             defaultMessage: '状态',
           })}
           width="xl"
+          labelCol={{ span: 24 }}
           placeholder="请输入状态"
           rules={[
             {

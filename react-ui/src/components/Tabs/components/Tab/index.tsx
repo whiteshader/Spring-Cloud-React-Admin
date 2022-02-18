@@ -17,7 +17,7 @@ interface ITab {
         key: string
         title: string
         pathname: string
-        query: { [key: string]: any }
+        query: Record<string, any>
         search: string
         state: any
         keepAliveName: string

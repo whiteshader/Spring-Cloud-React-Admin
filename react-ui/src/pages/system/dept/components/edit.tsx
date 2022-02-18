@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import ProForm, { ProFormDigit, ProFormText, ProFormRadio } from '@ant-design/pro-form';
-import { Form, Modal, Row, Col, TreeSelect } from 'antd';
+import ProForm, { ProFormDigit, ProFormText, ProFormRadio, ProFormTreeSelect } from '@ant-design/pro-form';
+import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { DeptType } from '../data.d';
 
@@ -55,7 +55,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
     props.onCancel();
     form.resetFields();
   };
-  const handleFinish = (values: Record<string, any>) => {
+  const handleFinish = async (values: Record<string, any>) => {
     props.onSubmit(values as DeptFormValueType);
   };
 
@@ -71,7 +71,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
+      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
             <ProFormDigit
@@ -95,23 +95,26 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
         </Row>
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
-            <ProForm.Item
-              // width="xl"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 22 }}
-              name="parentId"
-              style={{ width: '100%' }}
-              label={intl.formatMessage({
-                id: 'system.Dept.parent_dept',
-                defaultMessage: '上级部门:',
-              })}
-            >
-              <TreeSelect
-                dropdownStyle={{ maxHeight: 400, overflow: 'auto' }}
-                treeData={deptTree}
+            <ProFormTreeSelect
+                name="parentId"
+                label={intl.formatMessage({
+                  id: 'system.Dept.parent_dept',
+                  defaultMessage: '上级部门:',
+                })}
+                request={async () => {
+                  return deptTree;
+                }}
+                width="xl"
                 placeholder="请选择上级部门"
+                rules={[
+                  {
+                    required: true,
+                    message: (
+                      <FormattedMessage id="请输入用户昵称！" defaultMessage="请选择上级部门!" />
+                    ),
+                  },
+                ]}
               />
-            </ProForm.Item>
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
@@ -259,7 +262,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </Form>
+      </ProForm>
     </Modal>
   );
 };

@@ -6,13 +6,13 @@ import ProForm, {
   ProFormSelect,
 } from '@ant-design/pro-form';
 import { Form, Modal, Row, Col, TreeSelect } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
+import { useIntl, FormattedMessage, getLocale } from 'umi';
 import type { DataNode } from 'antd/lib/tree';
 import type { MenuType } from '../data.d';
 import IconSelector from '@/components/IconSelector';
 import { createIcon } from '@/utils/IconUtil';
 import { IntlProvider } from 'react-intl';
-import zhCN from '@/locales/zh-CN';
+
 
 /* *
  *
@@ -101,7 +101,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         }}
         footer={null}
       >
-        <IntlProvider locale={zhCN}>
+        <IntlProvider locale={getLocale()}>
           <IconSelector
             onSelect={(name: string) => {
               form.setFieldsValue({ icon: name });
@@ -173,7 +173,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 },
               }}
               initialValue="C"
-              width="xl"
+              width="xl"              
+              labelCol={{ span: 24 }}
               placeholder="请输入菜单类型"
               rules={[
                 {
@@ -266,7 +267,8 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 id: 'system.Menu.is_frame',
                 defaultMessage: '是否为外链',
               })}
-              width="xl"
+              width="xl"              
+              labelCol={{ span: 24 }}
               hidden={menuTypeId === 'F'}
               placeholder="请输入是否为外链"
               rules={[
@@ -287,6 +289,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 defaultMessage: '路由地址',
               })}
               width="xl"
+              labelCol={{ span: 24 }}
               placeholder="请输入路由地址"
               hidden={menuTypeId === 'F'}
               rules={[
@@ -376,6 +379,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 defaultMessage: '是否缓存',
               })}
               width="xl"
+              labelCol={{ span: 24 }}
               hidden={menuTypeId !== 'C'}
               placeholder="请输入是否缓存"
               rules={[
@@ -400,6 +404,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               })}
               initialValue="0"
               width="xl"
+              labelCol={{ span: 24 }}
               hidden={menuTypeId === 'F'}
               placeholder="请输入可见状态"
               rules={[
@@ -422,6 +427,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
               })}
               initialValue="0"
               width="xl"
+              labelCol={{ span: 24 }}
               hidden={menuTypeId === 'F'}
               placeholder="请输入菜单状态"
               rules={[

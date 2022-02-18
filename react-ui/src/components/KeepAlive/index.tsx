@@ -18,7 +18,7 @@ export default function KeepAlivePage(props: any) {
         const isExit = localTablist.findIndex((item: any) => item.pathname === props.location.pathname);
         // 需要计算translateX
         if (isExit < 0) {
-            const obj = { ...props.location, title: intl.formatMessage({ id: props.route.title }), keepAliveName: props.route.title }
+            const obj = { ...props.location, title: intl.formatMessage({ id: props.route.title }), keepAliveName: props.route.name }
             localTablist.push(obj);
             let x = 0;
             if (localTablist.length >= showTabs) {
@@ -45,7 +45,7 @@ export default function KeepAlivePage(props: any) {
                 }
             }
         }
-    }, [dispatch, intl, props.location, props.route.keepAliveName, showTabs, tabList, tabWidth, tabsWidth, tarnslateX])
+    }, [dispatch, intl, props.location, props.route.name, props.route.title, showTabs, tabList])
 
     if (props.route.keppAlive) {
         return (

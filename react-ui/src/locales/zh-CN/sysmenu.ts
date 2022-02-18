@@ -15,7 +15,7 @@ export default {
   'system.Menu.is_frame': '是否为外链',
   'system.Menu.is_cache': '是否缓存',
   'system.Menu.menu_type': '菜单类型',
-  'system.Menu.visible': '菜单状态',
+  'system.Menu.visible': '可见状态',
   'system.Menu.status': '菜单状态',
   'system.Menu.perms': '权限标识',
   'system.Menu.icon': '菜单图标',

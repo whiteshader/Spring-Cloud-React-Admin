@@ -179,6 +179,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
                 id: 'system.Role.status',
                 defaultMessage: '角色状态',
               })}
+              labelCol={{ span: 24 }}
               width="xl"
               placeholder="请输入角色状态"
               rules={[

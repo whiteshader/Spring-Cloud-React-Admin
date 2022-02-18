@@ -4,8 +4,9 @@ import ProForm, {
   ProFormText,
   ProFormSelect,
   ProFormTextArea,
+  ProFormTreeSelect,
 } from '@ant-design/pro-form';
-import { Form, Modal, Row, Col, TreeSelect } from 'antd';
+import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { UserType } from '../data.d';
 import type { DataNode } from 'antd/lib/tree';
@@ -78,8 +79,9 @@ const UserForm: React.FC<UserFormProps> = (props) => {
     props.onCancel();
     form.resetFields();
   };
-  const handleFinish = (values: Record<string, any>) => {
+  const handleFinish = async (values: Record<string, any>) => {
     props.onSubmit(values as UserFormValueType);
+    return true;
   };
 
   return (
@@ -94,7 +96,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
+      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
             <ProFormDigit
@@ -137,17 +139,26 @@ const UserForm: React.FC<UserFormProps> = (props) => {
             />
           </Col>
           <Col span={12} order={2}>
-            <ProForm.Item
-              // width="xl"
-              labelCol={{ span: 24 }}
+            <ProFormTreeSelect
               name="deptId"
               label={intl.formatMessage({
                 id: 'system.User.dept_id',
-                defaultMessage: '部门:',
+                defaultMessage: '部门',
               })}
-            >
-              <TreeSelect style={{ width: '100%' }} treeData={depts} placeholder="请选择部门" />
-            </ProForm.Item>
+              request={async () => {
+                return depts;
+              }}
+              width="xl"
+              placeholder="请输入用户昵称"
+              rules={[
+                {
+                  required: true,
+                  message: (
+                    <FormattedMessage id="请输入用户昵称！" defaultMessage="请输入用户昵称！" />
+                  ),
+                },
+              ]}
+            />
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
@@ -342,7 +353,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </Form>
+      </ProForm>
     </Modal>
   );
 };

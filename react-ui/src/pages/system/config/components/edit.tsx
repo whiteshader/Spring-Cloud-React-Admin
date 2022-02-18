@@ -163,6 +163,7 @@ const ConfigForm: React.FC<ConfigFormProps> = (props) => {
                 defaultMessage: '系统内置',
               })}
               width="xl"
+              labelCol={{ span: 24 }}
               placeholder="请输入系统内置"
               rules={[
                 {
