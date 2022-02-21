@@ -5,11 +5,10 @@
  * @Last Modified time: 2020-11-07 15:03:48
  */
 
-import React from 'react';
 import { SortableElement } from 'react-sortable-hoc';
 import { CloseOutlined } from '@ant-design/icons';
 import { useModel, useHistory, useAliveController } from 'umi'
-import styles from './tab.less';
+import styles from './index.less';
 
 interface ITab {
     value: {
@@ -26,7 +25,7 @@ interface ITab {
     tabIndex: number
 }
 
-const Tab = (props: ITab) => {
+const SortableTab = (props: ITab) => {
     const history = useHistory()
     const { value, tabIndex } = props;
     const { active, dispatch, tabWidth, tarnslateX, showTabs, tabsWidth, tabList } = useModel("system");
@@ -113,4 +112,4 @@ const Tab = (props: ITab) => {
     );
 }
 
-export default SortableElement(Tab);
+export default SortableElement(SortableTab);

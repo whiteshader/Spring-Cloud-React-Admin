@@ -4,13 +4,14 @@
  * @Last Modified by: wangYe
  * @Last Modified time: 2020-12-18 16:44:21
  */
-import React, { useRef, useEffect } from 'react';
+
+import { useEffect, useRef } from 'react';
 import { SortableContainer } from 'react-sortable-hoc';
 import { Dropdown, Menu, Divider } from 'antd';
 import { DownOutlined, MoreOutlined } from '@ant-design/icons';
 import { useModel, history, useAliveController } from 'umi'
-import Tab from './components/Tab'
-import styles from './tabs.less';
+import SortableTab from './components/SortableTab'
+import styles from './index.less';
 
 
 const SortableList = SortableContainer(() => {
@@ -22,7 +23,7 @@ const SortableList = SortableContainer(() => {
             <div className={styles.linkTabs} style={{ transform: `translateX(-${tarnslateX}px)` }}>
                 {
                     tabList.map((value, index: number) => (
-                        <Tab key={`item-${index}`} index={index} value={value} tabIndex={index} />
+                        <SortableTab key={`item-${index}`} index={index} value={value} tabIndex={index} />
                     ))
                 }
             </div>
@@ -30,7 +31,7 @@ const SortableList = SortableContainer(() => {
     );
 });
 
-const Tabs = () => {
+const KeepAliveTabs = () => {
     const { initialState } = useModel<any>("@@initialState");
     const { collapsed } = initialState;
     const { tabList, dispatch, active, showTabs, tabsWidth, tabWidth, tarnslateX } = useModel("system");
@@ -191,11 +192,11 @@ const Tabs = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             // 需要重新计算拿到当前tab的宽度
-            const tabWidth = document.getElementsByClassName("link-tab")[0] ? document.getElementsByClassName("link-tab")[0]!.getBoundingClientRect().width : 120;
+            const itemWidth = document.getElementsByClassName("link-tab")[0] ? document.getElementsByClassName("link-tab")[0]!.getBoundingClientRect().width : 120;
             //计算一排能展示多少个tab 需要减去操作占用的空间100
-            const showTabs = Math.ceil((tabsWidth as number - 100) / tabWidth);
-            if (tabsWidth > 0 && tabWidth > 0) {
-                dispatch({ type: "CHANGESTATE", payload: { showTabs, tabWidth } })
+            const isShowTabs = Math.ceil((tabsWidth as number - 100) / itemWidth);
+            if (itemWidth > 0 && tabWidth > 0) {
+                dispatch({ type: "CHANGESTATE", payload: { showTabs: isShowTabs, tabWidth: itemWidth } })
             }
         }, 100);
         return () => {
@@ -238,4 +239,4 @@ const Tabs = () => {
     );
 }
 
-export default Tabs;
+export default KeepAliveTabs;

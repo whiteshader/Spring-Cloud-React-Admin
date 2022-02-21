@@ -45,11 +45,11 @@ export default function KeepAlivePage(props: any) {
                 }
             }
         }
-    }, [dispatch, intl, props.location, props.route.name, props.route.title, showTabs, tabList])
+    }, [])
 
     if (props.route.keppAlive) {
         return (
-            <KeepAlive saveScrollPosition={props.route.saveScrollPosition ?? "screen"} name={props.route.title}>
+            <KeepAlive saveScrollPosition={props.route.saveScrollPosition ?? "screen"} name={props.route.name}>
                 {props.children}
             </KeepAlive>
         )

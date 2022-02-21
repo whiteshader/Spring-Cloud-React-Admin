@@ -14,7 +14,7 @@ import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getUserInfo, getRoutersInfo } from './services/session';
-import HeaderRender from './components/HeaderRender';
+import KeepAliveTabs from './components/KeepAliveTabs';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -64,7 +64,6 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    headerContentRender: () => <HeaderRender />,
     rightContentRender: () => <RightContent />,
     waterMarkProps: {
       content: initialState?.currentUser?.userName,
@@ -114,6 +113,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     childrenRender: (children, props) => {
       return (
         <div>
+          <KeepAliveTabs />
           {children}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer
