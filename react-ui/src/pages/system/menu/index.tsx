@@ -281,18 +281,17 @@ const MenuTableList: React.FC = () => {
           ]}
           request={(params) =>
             getMenuList({ ...params } as MenuListParams).then((res) => {
-              const menu: DataNode = { key: 0, title: '主类目', children: [] };
+              const menu = { id: 0, label: '主类目', children: [] as DataNode[], value: 0 };
               const memuData = buildTreeData(res.data, 'menuId', 'menuName', '', '', '');
               menu.children = memuData;
               const treeData: any = [];
               treeData.push(menu);
               setMenuTree(treeData);
-              const result = {
+              return {
                 data: memuData,
                 total: res.data.length,
                 success: true,
               };
-              return result;
             })
           }
           columns={columns}

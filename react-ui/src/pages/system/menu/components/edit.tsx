@@ -4,8 +4,9 @@ import ProForm, {
   ProFormText,
   ProFormRadio,
   ProFormSelect,
+  ProFormTreeSelect,
 } from '@ant-design/pro-form';
-import { Form, Modal, Row, Col, TreeSelect } from 'antd';
+import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage, getLocale } from 'umi';
 import type { DataNode } from 'antd/lib/tree';
 import type { MenuType } from '../data.d';
@@ -13,14 +14,12 @@ import IconSelector from '@/components/IconSelector';
 import { createIcon } from '@/utils/IconUtil';
 import { IntlProvider } from 'react-intl';
 
-
 /* *
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
-
 
 export type MenuFormValueType = Record<string, unknown> & Partial<MenuType>;
 
@@ -77,7 +76,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
     props.onCancel();
     form.resetFields();
   };
-  const handleFinish = (values: Record<string, any>) => {
+  const handleFinish = async (values: Record<string, any>) => {
     props.onSubmit(values as MenuFormValueType);
   };
 
@@ -112,7 +111,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         </IntlProvider>
       </Modal>
 
-      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
+      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={16} order={1}>
             <ProFormDigit
@@ -136,22 +135,24 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         </Row>
         <Row>
           <Col span={24} order={1}>
-            <ProForm.Item
-              // width="xl"
-              // labelCol={{ span: 8 }}
-              // wrapperCol={{ span: 24 }}
+            <ProFormTreeSelect
               name="parentId"
               label={intl.formatMessage({
                 id: 'system.Menu.parent_id',
                 defaultMessage: '父菜单:',
               })}
-            >
-              <TreeSelect
-                treeDefaultExpandedKeys={[0]}
-                treeData={menuTree}
-                placeholder="请选择父菜单"
-              />
-            </ProForm.Item>
+              request={async () => {
+                return menuTree;
+              }}
+              width="xl"
+              placeholder="请选择父菜单"
+              rules={[
+                {
+                  required: true,
+                  message: <FormattedMessage id="请选择父菜单！" defaultMessage="请选择父菜单！" />,
+                },
+              ]}
+            />
           </Col>
         </Row>
         <Row gutter={[16, 16]}>
@@ -173,7 +174,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 },
               }}
               initialValue="C"
-              width="xl"              
+              width="xl"
               labelCol={{ span: 24 }}
               placeholder="请输入菜单类型"
               rules={[
@@ -267,7 +268,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
                 id: 'system.Menu.is_frame',
                 defaultMessage: '是否为外链',
               })}
-              width="xl"              
+              width="xl"
               labelCol={{ span: 24 }}
               hidden={menuTypeId === 'F'}
               placeholder="请输入是否为外链"
@@ -441,7 +442,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </Form>
+      </ProForm>
     </Modal>
   );
 };
