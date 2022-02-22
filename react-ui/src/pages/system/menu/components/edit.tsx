@@ -44,7 +44,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
   const { menuTree, visibleOptions, statusOptions } = props;
   useEffect(() => {
     form.resetFields();
-    setMenuTypeId(props.values.menuType);
+    setMenuTypeId(props.values.menuType?props.values.menuType:'C');
     setMenuIconName(props.values.icon);
     form.setFieldsValue({
       menuId: props.values.menuId,

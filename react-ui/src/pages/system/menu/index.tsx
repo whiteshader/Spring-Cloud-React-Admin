@@ -116,7 +116,7 @@ const MenuTableList: React.FC = () => {
   const intl = useIntl();
 
   useEffect(() => {
-    getDict('sys_visible_status').then((res) => {
+    getDict('sys_show_hide').then((res) => {
       if (res.code === 200) {
         const opts = {};
         res.data.forEach((item: any) => {
