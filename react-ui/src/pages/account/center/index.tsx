@@ -8,13 +8,13 @@ import {
 } from '@ant-design/icons';
 import { Card, Col, Divider, List, Row } from 'antd';
 import React, { useState } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
 import { useRequest } from 'umi';
 import type { tabKeyType } from './data.d';
 import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
 import BaseInfo from './components/BaseInfo';
 import ResetPassword from './components/ResetPassword';
+import { Content } from 'antd/lib/layout/layout';
 
 const operationTabList = [
   {
@@ -131,14 +131,14 @@ const Center: React.FC = () => {
   }
 
   return (
-    <GridContent>
-      <Row gutter={24}>
+    <Content>
+      <Row>
         <Col lg={6} md={24}>
           <Card
             title="个人信息"
             bordered={false}
-            style={{ marginTop: 24, marginLeft: 24 }}
             loading={loading}
+            className={styles.infoCard}
           >
             {!loading && (
               <div>
@@ -171,7 +171,6 @@ const Center: React.FC = () => {
           <Card
             className={styles.tabsCard}
             bordered={false}
-            style={{ marginTop: 24, marginRight: 24 }}
             tabList={operationTabList}
             activeTabKey={tabKey}
             onTabChange={(_tabKey: string) => {
@@ -182,7 +181,7 @@ const Center: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </GridContent>
+    </Content>
   );
 };
 
