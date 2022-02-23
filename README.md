@@ -52,8 +52,8 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
         <td><img src="https://gitee.com/whiteshader/images/raw/master/dashboard.png"/></td>
     </tr>    
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/monitor.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/workplace.png"/></td>
+        <td><img src="https://gitee.com/whiteshader/images/raw/master/setting.png"/></td>
+        <td><img src="https://gitee.com/whiteshader/images/raw/master/icon-selector.png"/></td>
     </tr>
     <tr>
         <td><img src="https://gitee.com/whiteshader/images/raw/master/user.png"/></td>
