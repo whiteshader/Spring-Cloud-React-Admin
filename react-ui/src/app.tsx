@@ -14,7 +14,6 @@ import Footer from '@/components/Footer';
 import { BookOutlined, LinkOutlined } from '@ant-design/icons';
 import defaultSettings from '../config/defaultSettings';
 import { getUserInfo, getRoutersInfo } from './services/session';
-import KeepAliveTabs from './components/KeepAliveTabs';
 
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
@@ -113,7 +112,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     childrenRender: (children, props) => {
       return (
         <div>
-          <KeepAliveTabs />
           {children}
           {!props.location?.pathname?.includes('/login') && (
             <SettingDrawer

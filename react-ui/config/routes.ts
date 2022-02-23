@@ -1,4 +1,11 @@
-﻿export default [
+﻿/* *
+ *
+ * @author whiteshader@163.com
+ * @datetime  2022/02/22
+ * 
+ * */
+
+export default [
   {
     path: '/user',
     layout: false,
@@ -34,6 +41,7 @@
     path: '/dashboard',
     name: 'dashboard',
     icon: 'dashboard',
+    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/dashboard',
@@ -72,6 +80,7 @@
     name: 'account',
     icon: 'user',
     path: '/account',
+    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/account',
@@ -101,6 +110,7 @@
     name: 'system',
     icon: 'BugOutlined',
     path: '/system',
+    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/',
@@ -233,6 +243,7 @@
     name: 'monitor',
     icon: 'BugOutlined',
     path: '/monitor',
+    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/',
@@ -304,6 +315,7 @@
     name: 'tool',
     icon: 'BugOutlined',
     path: '/tool',
+    component: '@/layouts/TabsLayout',
     routes: [
       {
         path: '/',

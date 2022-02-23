@@ -13,7 +13,7 @@ export type FormBuilderProps = {};
 const FormBuilder: React.FC<FormBuilderProps> = () => {
   return (
     <Content>
-      <Card title="FormBuilder" />
+      <Card title="Developing" />
     </Content>
   );
 };

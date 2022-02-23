@@ -13,7 +13,7 @@ export type GlobalTableProps = {};
 const TableList: React.FC<GlobalTableProps> = () => {
   return (
     <Content>
-      <Card title="Gen Code" />
+      <Card title="Developing 开发中，请给个星星支持支持！" />
     </Content>
   );
 };
