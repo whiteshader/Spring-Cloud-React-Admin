@@ -177,9 +177,12 @@ const DeptTableList: React.FC = () => {
           hidden={!access.hasPerms('system:dept:edit')}
           onClick={() => {
             getDeptListExcludeChild(record.deptId).then((res) => {
-              if (res.code === 200) {  
-                const deptsTree = [{ id: 0, title: '无', children: buildTreeData(res.data, 'deptId', 'deptName', '', '', ''), key: 0, value: 0 }];
-                setDeptTree(deptsTree);
+              if (res.code === 200) {
+                let depts = buildTreeData(res.data, 'deptId', 'deptName', '', '', '');
+                if(depts.length === 0) {
+                  depts = [{ id: 0, title: '无上级', children: undefined, key: 0, value: 0 }];
+                }
+                setDeptTree(depts);
                 setModalVisible(true);
                 setCurrentRow(record);
               } else {
