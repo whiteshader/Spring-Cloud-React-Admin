@@ -26,6 +26,13 @@ export type UserType = {
   updateBy: string;
   updateTime: Date;
   remark: string;
+  admin: boolean; 
+  params: any;
+  postIds: any;
+  roleId: number
+  roleIds: [];
+  roles: [];
+  searchValue: string;
 };
 
 export type UserListPagination = {

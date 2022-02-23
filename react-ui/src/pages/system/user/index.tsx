@@ -14,7 +14,7 @@ import {
   addUser,
   updateUser,
   exportUser,
-  resetPwd,
+  updateUserPwd,
 } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
@@ -470,8 +470,7 @@ const UserTableList: React.FC = () => {
 
       <ResetPwd
         onSubmit={async (value: any) => {
-          const data = { ...value, userId: currentRow?.userId };
-          const success = await resetPwd(data);
+          const success = await updateUserPwd(value.oldPassword, value.newPassword);
           if (success) {
             setResetPwdModalVisible(false);
             setSelectedRows([]);

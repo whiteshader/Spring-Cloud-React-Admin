@@ -25,9 +25,32 @@ declare namespace API {
     updateTime: string;
   };
 
+  type Dept = {
+    ancestors?: string;
+    children: Array;
+    delFlag?: string;
+    deptId?: number;
+    deptName?: string;
+    email?: string;
+    leader?: string;
+    orderNum?: string;
+    params: any;
+    parentId?: number;
+    parentName?: string;
+    phone?: string;
+    remark?: string;
+    searchValue?: string;
+    status?: string;
+    createBy?: string;
+    createTime?: Date;
+    updateBy?: string;
+    updateTime?: Date;
+  };
+
   type CurrentUser = {
     avatar?: string;
     userName?: string;
+    nickName?: string;
     userId?: string;
     sex?: string;
     email?: string;
@@ -46,7 +69,7 @@ declare namespace API {
     };
     address?: string;
     phonenumber?: string;
-    dept?: any;
+    dept?: Dept;
     roles?: Role[];
     permissions: string[];
   };

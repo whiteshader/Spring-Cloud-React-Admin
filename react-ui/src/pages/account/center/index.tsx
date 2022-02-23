@@ -1,100 +1,43 @@
-import { PlusOutlined, HomeOutlined, ContactsOutlined, ClusterOutlined } from '@ant-design/icons';
-import { Avatar, Card, Col, Divider, Input, Row, Tag } from 'antd';
-import React, { useState, useRef } from 'react';
+import {
+  ClusterOutlined,
+  MailOutlined,
+  TeamOutlined,
+  UserOutlined,
+  MobileOutlined,
+  ManOutlined,
+} from '@ant-design/icons';
+import { Card, Col, Divider, List, Row } from 'antd';
+import React, { useState } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
-import { Link, useRequest } from 'umi';
-import type { RouteChildrenProps } from 'react-router';
-import Projects from './components/Projects';
-import Articles from './components/Articles';
-import Applications from './components/Applications';
-import type { TagType, tabKeyType } from './data.d';
+import { useRequest } from 'umi';
+import type { tabKeyType } from './data.d';
 import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
+import BaseInfo from './components/BaseInfo';
+import ResetPassword from './components/ResetPassword';
 
 const operationTabList = [
   {
-    key: 'articles',
+    key: 'base',
     tab: (
       <span>
-        文章 <span style={{ fontSize: 14 }}>(8)</span>
+        基本资料
       </span>
     ),
   },
   {
-    key: 'applications',
+    key: 'password',
     tab: (
       <span>
-        应用 <span style={{ fontSize: 14 }}>(8)</span>
-      </span>
-    ),
-  },
-  {
-    key: 'projects',
-    tab: (
-      <span>
-        项目 <span style={{ fontSize: 14 }}>(8)</span>
+        重置密码
       </span>
     ),
   },
 ];
 
-const TagList: React.FC<{ tags: API.CurrentUser['tags'] }> = ({ tags }) => {
-  const ref = useRef<Input | null>(null);
-  const [newTags, setNewTags] = useState<TagType[]>([]);
-  const [inputVisible, setInputVisible] = useState<boolean>(false);
-  const [inputValue, setInputValue] = useState<string>('');
-
-  const showInput = () => {
-    setInputVisible(true);
-    if (ref.current) {
-      // eslint-disable-next-line no-unused-expressions
-      ref.current?.focus();
-    }
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
-
-  const handleInputConfirm = () => {
-    let tempsTags = [...newTags];
-    if (inputValue && tempsTags.filter((tag) => tag.label === inputValue).length === 0) {
-      tempsTags = [...tempsTags, { key: `new-${tempsTags.length}`, label: inputValue }];
-    }
-    setNewTags(tempsTags);
-    setInputVisible(false);
-    setInputValue('');
-  };
-
-  return (
-    <div className={styles.tags}>
-      <div className={styles.tagsTitle}>标签</div>
-      {(tags || []).concat(newTags).map((item) => (
-        <Tag key={item.key}>{item.label}</Tag>
-      ))}
-      {inputVisible && (
-        <Input
-          ref={ref}
-          type="text"
-          size="small"
-          style={{ width: 78 }}
-          value={inputValue}
-          onChange={handleInputChange}
-          onBlur={handleInputConfirm}
-          onPressEnter={handleInputConfirm}
-        />
-      )}
-      {!inputVisible && (
-        <Tag onClick={showInput} style={{ borderStyle: 'dashed' }}>
-          <PlusOutlined />
-        </Tag>
-      )}
-    </div>
-  );
-};
-
-const Center: React.FC<RouteChildrenProps> = () => {
-  const [tabKey, setTabKey] = useState<tabKeyType>('articles');
+const Center: React.FC = () => {
+  
+  const [tabKey, setTabKey] = useState<tabKeyType>('base');
 
   //  获取用户信息
   const { data: userInfo, loading } = useRequest(() => {
@@ -102,48 +45,83 @@ const Center: React.FC<RouteChildrenProps> = () => {
   });
 
   const currentUser = userInfo?.user;
+
   //  渲染用户信息
-  const renderUserInfo = ({ email, sex, dept }: Partial<API.CurrentUser>) => {
+  const renderUserInfo = ({
+    userName,
+    phonenumber,
+    email,
+    sex,
+    dept,
+  }: Partial<API.CurrentUser>) => {
     return (
-      <div className={styles.detail}>
-        <p>
-          <ContactsOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {sex === '1'?'女':'男'}
-        </p>
-        <p>
-          <ClusterOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {dept.deptName}
-        </p>
-        <p>
-          <HomeOutlined
-            style={{
-              marginRight: 8,
-            }}
-          />
-          {email}
-        </p>
-      </div>
+      <List>
+        <List.Item>
+          <div>
+            <UserOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
+            用户名
+          </div>
+          <div>{userName}</div>
+        </List.Item>
+        <List.Item>
+          <div>
+            <ManOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
+            性别
+          </div>
+          <div>{sex === '1' ? '女' : '男'}</div>
+        </List.Item>
+        <List.Item>
+          <div>
+            <MobileOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
+            电话
+          </div>
+          <div>{phonenumber}</div>
+        </List.Item>
+        <List.Item>
+          <div>
+            <MailOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
+            邮箱
+          </div>
+          <div>{email}</div>
+        </List.Item>
+        <List.Item>
+          <div>
+            <ClusterOutlined
+              style={{
+                marginRight: 8,
+              }}
+            />
+            部门
+          </div>
+          <div>{dept?.deptName}</div>
+        </List.Item>
+      </List>
     );
   };
 
   // 渲染tab切换
   const renderChildrenByTabKey = (tabValue: tabKeyType) => {
-    if (tabValue === 'projects') {
-      return <Projects />;
+    if (tabValue === 'base') {
+      return <BaseInfo values={currentUser} />;
     }
-    if (tabValue === 'applications') {
-      return <Applications />;
-    }
-    if (tabValue === 'articles') {
-      return <Articles />;
+    if (tabValue === 'password') {
+      return <ResetPassword />;
     }
     return null;
   };
@@ -151,33 +129,36 @@ const Center: React.FC<RouteChildrenProps> = () => {
   if (!currentUser) {
     return loading;
   }
-    
+
   return (
     <GridContent>
       <Row gutter={24}>
-        <Col lg={7} md={24}>
-          <Card bordered={false} style={{ marginBottom: 24 }} loading={loading}>
+        <Col lg={6} md={24}>
+          <Card
+            title="个人信息"
+            bordered={false}
+            style={{ marginTop: 24, marginLeft: 24 }}
+            loading={loading}
+          >
             {!loading && (
               <div>
                 <div className={styles.avatarHolder}>
                   <img alt="" src={currentUser.avatar} />
-                  <div className={styles.name}>{currentUser.nickName}</div>
-                  <div>{currentUser.remark}</div>
                 </div>
                 {renderUserInfo(currentUser)}
                 <Divider dashed />
-                <TagList tags={currentUser.tags || []} />
-                <Divider style={{ marginTop: 16 }} dashed />
                 <div className={styles.team}>
                   <div className={styles.teamTitle}>角色</div>
                   <Row gutter={36}>
                     {currentUser.roles &&
                       currentUser.roles.map((item: any) => (
                         <Col key={item.roleId} lg={24} xl={12}>
-                          <Link to={""}>
-                            <Avatar size="small" src={""} />
-                            {item.roleName}
-                          </Link>
+                          <TeamOutlined
+                            style={{
+                              marginRight: 8,
+                            }}
+                          />
+                          {item.roleName}
                         </Col>
                       ))}
                   </Row>
@@ -186,10 +167,11 @@ const Center: React.FC<RouteChildrenProps> = () => {
             )}
           </Card>
         </Col>
-        <Col lg={17} md={24}>
+        <Col lg={18} md={24}>
           <Card
             className={styles.tabsCard}
             bordered={false}
+            style={{ marginTop: 24, marginRight: 24 }}
             tabList={operationTabList}
             activeTabKey={tabKey}
             onTabChange={(_tabKey: string) => {
@@ -203,4 +185,5 @@ const Center: React.FC<RouteChildrenProps> = () => {
     </GridContent>
   );
 };
+
 export default Center;

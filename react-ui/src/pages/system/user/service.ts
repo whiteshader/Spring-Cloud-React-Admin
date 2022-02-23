@@ -61,16 +61,22 @@ export function exportUser(params?: UserListParams) {
   return downLoadXlsx(`/api/system/user/export`, { params }, `user_${new Date().getTime()}.xlsx`);
 }
 
-// 更新密码
-export function resetPwd(params: any) {
-  return request('/api/system/user/resetPwd', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json;charset=UTF-8',
-    },
-    data: {
-      userId: params.userId,
-      password: params.password,
-    },
-  });
+export function updateUserProfile(data: API.CurrentUser) {
+  return request('/api/system/user/profile', {
+    method: 'put',
+    data: data
+  })
+}
+
+
+// 用户密码重置
+export function updateUserPwd(oldPassword: string, newPassword: string) {
+  const data = {
+    oldPassword,
+    newPassword
+  }
+  return request('/api/system/user/profile/updatePwd', {
+    method: 'put',
+    params: data
+  })
 }

@@ -28,4 +28,7 @@ export default {
   'system.User.remark': '备注',
   'system.User.reset.password': '密码重置',
   'system.User.modify_info': '编辑用户信息',
+  'system.User.old_password': '旧密码',
+  'system.User.new_password': '新密码',
+  'system.User.confirm_password': '确认密码',
 };

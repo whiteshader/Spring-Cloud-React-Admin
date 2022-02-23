@@ -80,17 +80,18 @@
     "omit.js": "^2.0.2",
     "qs": "^6.9.0",
     "react": "^17.0.0",
+    "react-cropper": "^2.1.8",
     "react-dev-inspector": "^1.1.1",
     "react-dom": "^17.0.0",
     "react-fittext": "^1.0.0",
     "react-helmet-async": "^1.0.4",
-    "react-sortable-hoc": "^2.0.0",
     "react-intl": "^5.24.6",
     "react-router": "^4.3.1",
+    "react-sortable-hoc": "^2.0.0",
     "umi": "^3.5.0",
-    "umi-serve": "^1.9.10",
     "umi-plugin-keep-alive": "^0.0.1-beta.18",
-    "umi-request": "^1.0.8"
+    "umi-request": "^1.0.8",
+    "umi-serve": "^1.9.10"
   },
   "devDependencies": {
     "@ant-design/pro-cli": "^2.0.2",
@@ -124,8 +125,8 @@
     "lint-staged": "^10.0.0",
     "mockjs": "^1.0.1-beta3",
     "prettier": "^2.3.2",
-    "puppeteer-core": "^8.0.0",
     "pro-download": "1.0.1",
+    "puppeteer-core": "^8.0.0",
     "stylelint": "^13.0.0",
     "typescript": "^4.2.2"
   },

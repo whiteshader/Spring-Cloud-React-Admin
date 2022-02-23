@@ -111,7 +111,7 @@ request.interceptors.response.use(async (response: Response) => {
       if (data) {
         const { code } = data;
         if (code && code !== 200) {
-          const msg = codeMessage[code] || data.msg || codeMessage[10000]
+          const msg = data.msg || codeMessage[code] || codeMessage[10000]
           message.warn(`${code} ${msg}`)
         }
       }
