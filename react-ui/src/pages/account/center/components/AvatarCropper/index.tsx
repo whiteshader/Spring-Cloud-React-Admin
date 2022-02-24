@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { ProFormText } from '@ant-design/pro-form';
-import { Form, Modal, Row, Col, Button, Space, Upload } from 'antd';
-import { useIntl, FormattedMessage } from 'umi';
-import type { ConfigType } from '@/pages/system/config/data';
+import React, { useEffect, useRef, useState } from 'react';
+import { Modal, Row, Col, Button, Space, Upload, message } from 'antd';
+import { useIntl } from 'umi';
 import 'cropperjs/dist/cropper.css';
 import { Cropper } from 'react-cropper';
+import { uploadAvatar } from '@/pages/system/user/service';
+import styles from './index.less';
 import {
   MinusOutlined,
   PlusOutlined,
@@ -20,35 +20,73 @@ import {
  *
  * */
 
-export type ConfigFormValueType = Record<string, unknown> & Partial<ConfigType>;
-
 export type AvatarCropperProps = {
-  onCancel: (flag?: boolean, formVals?: ConfigFormValueType) => void;
-  onSubmit: (values: ConfigFormValueType) => Promise<void>;
+  onCancel: () => void;
   visible: boolean;
-  values: Partial<API.CurrentUser>;
+  data: any;
 };
 
 const AvatarCropperForm: React.FC<AvatarCropperProps> = (props) => {
-  const [form] = Form.useForm();
-
-  const [previewUrl, setPreviewUrl] = useState<string>();
+  const cropperRef = useRef<HTMLImageElement>(null);
+  const [avatarData, setAvatarData] = useState<any>();
+  const [previewData, setPreviewData] = useState();
 
   useEffect(() => {
-    form.resetFields();
-    setPreviewUrl(props.values.avatar);
-  }, [form, props]);
+    setAvatarData(props.data);
+  }, [props]);
 
   const intl = useIntl();
   const handleOk = () => {
-    form.submit();
-  };
-  const handleFinish = (values: Record<string, any>) => {
-    props.onSubmit(values as ConfigFormValueType);
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    cropper.getCroppedCanvas().toBlob((blob: Blob) => {
+      console.log(blob);
+      const formData = new FormData();
+      formData.append('avatarfile', blob);
+      uploadAvatar(formData).then((res) => {
+        if (res.code === 200) {
+          message.success(res.msg);          
+          props.onCancel();
+        } else {
+          message.warn(res.msg);
+        }
+      });
+    }, 'image/png');
   };
   const handleCancel = () => {
     props.onCancel();
-    form.resetFields();
+  };
+  const onCrop = () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    setPreviewData(cropper.getCroppedCanvas().toDataURL());
+  };
+  const onRotateRight = () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    cropper.rotate(90);
+  };
+  const onRotateLeft = () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    cropper.rotate(-90);
+  };
+  const onZoomIn = () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    cropper.zoom(0.1);
+  };
+  const onZoomOut = () => {
+    const imageElement: any = cropperRef?.current;
+    const cropper: any = imageElement?.cropper;
+    cropper.zoom(-0.1);
+  };
+  const beforeUpload = (file: any) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setAvatarData(reader.result);
+    };
   };
   return (
     <Modal
@@ -62,39 +100,44 @@ const AvatarCropperForm: React.FC<AvatarCropperProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
-        <Row gutter={[16, 16]}>
-          <Col span={12} order={1}>
-            <Cropper
-              src={props.values.avatar}
-              style={{ height: 400, width: '100%', marginBottom: '16px' }}
-              aspectRatio={246 / 346}
-              guides={false}
-            />
-          </Col>
-          <Col span={12} order={2}>
-            <img src={previewUrl} />
-          </Col>
-        </Row>
-        <Row gutter={[16, 16]}>
-          <Col span={6} >
-            <Upload>
-              <Button>
-                <UploadOutlined />
-                上传
-              </Button>
-            </Upload>
-          </Col>
-          <Col>
-            <Space>
-              <Button icon={<RedoOutlined />} />
-              <Button icon={<UndoOutlined />} />
-              <Button icon={<PlusOutlined />} />
-              <Button icon={<MinusOutlined />} />
-            </Space>
-          </Col>
-        </Row>
-      </Form>
+      <Row gutter={[16, 16]}>
+        <Col span={12} order={1}>
+          <Cropper
+            ref={cropperRef}
+            src={avatarData}
+            style={{ height: 350, width: '100%', marginBottom: '16px' }}
+            initialAspectRatio={1}
+            guides={false}
+            crop={onCrop}
+            zoomable={true}
+            zoomOnWheel={true}
+            rotatable={true}
+          />
+        </Col>
+        <Col span={12} order={2}>
+          <div className={styles.avatarPreview}>
+            <img src={previewData} style={{ height: '100%', width: '100%' }} />
+          </div>
+        </Col>
+      </Row>
+      <Row gutter={[16, 16]}>
+        <Col span={6}>
+          <Upload beforeUpload={beforeUpload} maxCount={1}>
+            <Button>
+              <UploadOutlined />
+              上传
+            </Button>
+          </Upload>
+        </Col>
+        <Col>
+          <Space>
+            <Button icon={<RedoOutlined />} onClick={onRotateRight} />
+            <Button icon={<UndoOutlined />} onClick={onRotateLeft} />
+            <Button icon={<PlusOutlined />} onClick={onZoomIn} />
+            <Button icon={<MinusOutlined />} onClick={onZoomOut} />
+          </Space>
+        </Col>
+      </Row>
     </Modal>
   );
 };

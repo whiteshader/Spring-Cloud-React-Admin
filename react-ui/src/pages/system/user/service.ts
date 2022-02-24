@@ -68,7 +68,6 @@ export function updateUserProfile(data: API.CurrentUser) {
   })
 }
 
-
 // 用户密码重置
 export function updateUserPwd(oldPassword: string, newPassword: string) {
   const data = {
@@ -78,5 +77,13 @@ export function updateUserPwd(oldPassword: string, newPassword: string) {
   return request('/api/system/user/profile/updatePwd', {
     method: 'put',
     params: data
+  })
+}
+
+// 用户头像上传
+export function uploadAvatar(data: any) {
+  return request('/api/system/user/profile/avatar', {
+    method: 'post',
+    data: data
   })
 }

@@ -186,14 +186,11 @@ const Center: React.FC = () => {
         </Col>
       </Row>
       <AvatarCropper
-        onSubmit={async (values) => {
-          console.log(values);
-        }}        
         onCancel={() => {
           setCropperModalVisible(false);
         }}
         visible={cropperModalVisible}
-        values={currentUser}
+        data={currentUser.avatar}
       />
     </Content>
   );
