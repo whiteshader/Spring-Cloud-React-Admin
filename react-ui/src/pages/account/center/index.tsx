@@ -186,8 +186,8 @@ const Center: React.FC = () => {
         </Col>
       </Row>
       <AvatarCropper
-        onCancel={() => {
-          setCropperModalVisible(false);
+        onFinished={() => {
+          setCropperModalVisible(false);     
         }}
         visible={cropperModalVisible}
         data={currentUser.avatar}

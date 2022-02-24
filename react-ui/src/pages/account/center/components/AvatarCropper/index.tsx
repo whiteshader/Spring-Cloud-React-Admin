@@ -21,7 +21,7 @@ import {
  * */
 
 export type AvatarCropperProps = {
-  onCancel: () => void;
+  onFinished: (isSuccess: boolean) => void;
   visible: boolean;
   data: any;
 };
@@ -40,13 +40,12 @@ const AvatarCropperForm: React.FC<AvatarCropperProps> = (props) => {
     const imageElement: any = cropperRef?.current;
     const cropper: any = imageElement?.cropper;
     cropper.getCroppedCanvas().toBlob((blob: Blob) => {
-      console.log(blob);
       const formData = new FormData();
       formData.append('avatarfile', blob);
       uploadAvatar(formData).then((res) => {
         if (res.code === 200) {
           message.success(res.msg);          
-          props.onCancel();
+          props.onFinished(true);
         } else {
           message.warn(res.msg);
         }
@@ -54,7 +53,7 @@ const AvatarCropperForm: React.FC<AvatarCropperProps> = (props) => {
     }, 'image/png');
   };
   const handleCancel = () => {
-    props.onCancel();
+    props.onFinished(false);
   };
   const onCrop = () => {
     const imageElement: any = cropperRef?.current;
