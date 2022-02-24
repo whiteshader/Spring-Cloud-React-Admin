@@ -14,7 +14,9 @@ import { queryCurrentUserInfo } from './service';
 import styles from './Center.less';
 import BaseInfo from './components/BaseInfo';
 import ResetPassword from './components/ResetPassword';
+import AvatarCropper from './components/AvatarCropper';
 import { Content } from 'antd/lib/layout/layout';
+import PageLoading from '@/pages/dashboard/analysis/components/PageLoading';
 
 const operationTabList = [
   {
@@ -38,7 +40,9 @@ const operationTabList = [
 const Center: React.FC = () => {
   
   const [tabKey, setTabKey] = useState<tabKeyType>('base');
-
+  
+  const [cropperModalVisible, setCropperModalVisible] = useState<boolean>(false);
+  
   //  获取用户信息
   const { data: userInfo, loading } = useRequest(() => {
     return queryCurrentUserInfo();
@@ -127,7 +131,7 @@ const Center: React.FC = () => {
   };
 
   if (!currentUser) {
-    return loading;
+    return <PageLoading />;
   }
 
   return (
@@ -141,8 +145,8 @@ const Center: React.FC = () => {
             className={styles.infoCard}
           >
             {!loading && (
-              <div>
-                <div className={styles.avatarHolder}>
+              <div style={{ textAlign: "center"}}>
+                <div className={styles.avatarHolder} onClick={()=>{setCropperModalVisible(true)}}>
                   <img alt="" src={currentUser.avatar} />
                 </div>
                 {renderUserInfo(currentUser)}
@@ -181,6 +185,16 @@ const Center: React.FC = () => {
           </Card>
         </Col>
       </Row>
+      <AvatarCropper
+        onSubmit={async (values) => {
+          console.log(values);
+        }}        
+        onCancel={() => {
+          setCropperModalVisible(false);
+        }}
+        visible={cropperModalVisible}
+        values={currentUser}
+      />
     </Content>
   );
 };

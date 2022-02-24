@@ -31,4 +31,5 @@ export default {
   'system.User.old_password': '旧密码',
   'system.User.new_password': '新密码',
   'system.User.confirm_password': '确认密码',
+  'system.User.modify_avatar': '修改头像',
 };
