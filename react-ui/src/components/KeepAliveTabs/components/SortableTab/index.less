@@ -1,31 +1,26 @@
 @import '~antd/es/style/themes/default.less';
 .tabItem {
     z-index: 20;
-    padding: 0 10px;
+    padding: 0 20px;
     white-space: nowrap;
     text-overflow: ellipsis;
     background-color: #fff;
     border-style:solid; 
     border-width:1px; 
     border-color: @border-color-base;
+    border-top-left-radius: @border-radius-base;
+    border-top-right-radius: @border-radius-base;
     overflow: hidden;
     height: 30px;
     line-height: 30px;
     text-align: center;
     margin-left: 5px;
-    margin-top: 4px;
-    padding: 0 20px;
+    margin-top: 2px;
     width: 120px;
     position: relative;
     cursor: pointer;
     font-size: @font-size-sm;
     color: @text-color ;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    border-top-left-radius: @border-radius-base;
-    border-top-right-radius: @border-radius-base;
 
     &:hover {
         // background: @layout-body-background;
