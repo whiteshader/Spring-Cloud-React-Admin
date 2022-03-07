@@ -5,10 +5,15 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     background-color: #fff;
+    border-style:solid; 
+    border-width:1px; 
+    border-color: @border-color-base;
     overflow: hidden;
     height: 30px;
     line-height: 30px;
     text-align: center;
+    margin-left: 5px;
+    margin-top: 4px;
     padding: 0 20px;
     width: 120px;
     position: relative;
@@ -19,12 +24,13 @@
     overflow: hidden;
     text-overflow: ellipsis;
 
+    border-top-left-radius: @border-radius-base;
+    border-top-right-radius: @border-radius-base;
+
     &:hover {
         // background: @layout-body-background;
         color: @primary-color-hover;
         font-weight: bolder;
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
 
         &::before {
             display: none;
@@ -39,17 +45,17 @@
     }
 
 
-    &:before {
-        content: '';
-        display: block;
-        position: absolute;
-        top: 5px;
-        bottom: 5px;
-        left: 0;
-        width: 1px;
-        border-left: 1px solid #d9d9d9;
-        z-index: 10;
-    }
+    // &:before {
+    //     content: '';
+    //     display: block;
+    //     position: absolute;
+    //     top: 5px;
+    //     bottom: 5px;
+    //     left: 0;
+    //     width: 1px;
+    //     border-left: 1px solid #d9d9d9;
+    //     z-index: 10;
+    // }
 
     .closeIcon {
         // display: none;
@@ -76,8 +82,6 @@
 .active {
     color: @primary-color;
     font-weight: bolder;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
 
     &::before {
         display: none;
