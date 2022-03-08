@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { Key, useEffect, useState } from 'react';
 import ProForm, {
   ProFormDigit,
   ProFormText,
@@ -14,9 +14,8 @@ import type { DataNode } from 'antd/lib/tree';
  *
  * @author whiteshader@163.com
  * @datetime  2021/09/16
- * 
+ *
  * */
-
 
 export type RoleFormValueType = Record<string, unknown> & Partial<RoleType>;
 
@@ -206,11 +205,12 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
               <Tree
                 checkable={true}
                 multiple={true}
+                checkStrictly={true}
                 defaultExpandAll={false}
                 treeData={menuTree}
                 defaultCheckedKeys={menuCheckedKeys}
-                onCheck={(checkedKeys) => {
-                  setMenuIds(checkedKeys);
+                onCheck={( keys: any) => {
+                  setMenuIds(keys.checked);
                 }}
               />
             </ProForm.Item>
