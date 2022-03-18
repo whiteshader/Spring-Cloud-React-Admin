@@ -36,9 +36,13 @@ import { buildTreeData } from '@/utils/utils';
 const handleAdd = async (fields: DeptType) => {
   const hide = message.loading('正在添加');
   try {
-    await addDept({ ...fields });
+    const resp = await addDept({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -55,9 +59,13 @@ const handleAdd = async (fields: DeptType) => {
 const handleUpdate = async (fields: DeptType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateDept(fields);
+    const resp = await updateDept(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -75,9 +83,13 @@ const handleRemove = async (selectedRows: DeptType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeDept(selectedRows.map((row) => row.deptId).join(','));
+    const resp = await removeDept(selectedRows.map((row) => row.deptId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -91,9 +103,13 @@ const handleRemoveOne = async (selectedRow: DeptType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.deptId];
-    await removeDept(params.join(','));
+    const resp = await removeDept(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

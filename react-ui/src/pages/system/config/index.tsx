@@ -27,9 +27,13 @@ import { getDict } from '../dict/service';
 const handleAdd = async (fields: ConfigType) => {
   const hide = message.loading('正在添加');
   try {
-    await addConfig({ ...fields });
+    const resp = await addConfig({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -46,9 +50,13 @@ const handleAdd = async (fields: ConfigType) => {
 const handleUpdate = async (fields: ConfigType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateConfig(fields);
+    const resp = await updateConfig(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -66,9 +74,13 @@ const handleRemove = async (selectedRows: ConfigType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeConfig(selectedRows.map((row) => row.configId).join(','));
+    const resp = await removeConfig(selectedRows.map((row) => row.configId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -82,9 +94,13 @@ const handleRemoveOne = async (selectedRow: ConfigType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.configId];
-    await removeConfig(params.join(','));
+    const resp = await removeConfig(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

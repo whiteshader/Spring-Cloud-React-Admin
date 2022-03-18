@@ -33,9 +33,13 @@ import UpdateForm from './components/edit';
 const handleAdd = async (fields: DictTypeType) => {
   const hide = message.loading('正在添加');
   try {
-    await addDictType({ ...fields });
+    const resp = await addDictType({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -52,9 +56,13 @@ const handleAdd = async (fields: DictTypeType) => {
 const handleUpdate = async (fields: DictTypeType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateDictType(fields);
+    const resp = await updateDictType(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -72,9 +80,13 @@ const handleRemove = async (selectedRows: DictTypeType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeDictType(selectedRows.map((row) => row.dictId).join(','));
+    const resp = await removeDictType(selectedRows.map((row) => row.dictId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -88,9 +100,13 @@ const handleRemoveOne = async (selectedRow: DictTypeType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.dictId];
-    await removeDictType(params.join(','));
+    const resp = await removeDictType(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

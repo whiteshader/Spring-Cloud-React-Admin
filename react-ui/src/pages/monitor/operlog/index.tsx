@@ -37,9 +37,13 @@ const { confirm } = Modal;
 const handleAdd = async (fields: OperlogType) => {
   const hide = message.loading('正在添加');
   try {
-    await addOperlog({ ...fields });
+    const resp = await addOperlog({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -56,9 +60,13 @@ const handleAdd = async (fields: OperlogType) => {
 const handleUpdate = async (fields: OperlogType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateOperlog(fields);
+    const resp = await updateOperlog(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -76,9 +84,13 @@ const handleRemove = async (selectedRows: OperlogType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeOperlog(selectedRows.map((row) => row.operId).join(','));
+    const resp = await removeOperlog(selectedRows.map((row) => row.operId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -90,9 +102,13 @@ const handleRemove = async (selectedRows: OperlogType[]) => {
 const handleRemoveAll = async () => {
   const hide = message.loading('正在删除');
   try {
-    await cleanOperlog();
+    const resp = await cleanOperlog();
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

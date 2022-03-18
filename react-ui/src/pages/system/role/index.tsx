@@ -38,9 +38,13 @@ import { Content } from 'antd/lib/layout/layout';
 const handleAdd = async (fields: RoleType) => {
   const hide = message.loading('正在添加');
   try {
-    await addRole({ ...fields });
+    const resp = await addRole({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -57,9 +61,13 @@ const handleAdd = async (fields: RoleType) => {
 const handleUpdate = async (fields: RoleType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateRole(fields);
+    const resp = await updateRole(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -77,9 +85,13 @@ const handleRemove = async (selectedRows: RoleType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeRole(selectedRows.map((row) => row.roleId).join(','));
+    const resp = await removeRole(selectedRows.map((row) => row.roleId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -93,9 +105,13 @@ const handleRemoveOne = async (selectedRow: RoleType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.roleId];
-    await removeRole(params.join(','));
+    const resp = await removeRole(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

@@ -29,9 +29,13 @@ import { getDict } from '../dict/service';
 const handleAdd = async (fields: NoticeType) => {
   const hide = message.loading('正在添加');
   try {
-    await addNotice({ ...fields });
+    const resp = await addNotice({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -48,9 +52,13 @@ const handleAdd = async (fields: NoticeType) => {
 const handleUpdate = async (fields: NoticeType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateNotice(fields);
-    hide();
-    message.success('配置成功');
+    const resp = await updateNotice(fields);
+    hide();   
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -68,9 +76,13 @@ const handleRemove = async (selectedRows: NoticeType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeNotice(selectedRows.map((row) => row.noticeId).join(','));
+    const resp = await removeNotice(selectedRows.map((row) => row.noticeId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -84,9 +96,13 @@ const handleRemoveOne = async (selectedRow: NoticeType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.noticeId];
-    await removeNotice(params.join(','));
+    const resp = await removeNotice(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

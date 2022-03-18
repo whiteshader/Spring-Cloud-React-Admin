@@ -34,9 +34,13 @@ const handleRemove = async (selectedRows: LogininforType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeLogininfor(selectedRows.map((row) => row.infoId).join(','));
+    const resp = await removeLogininfor(selectedRows.map((row) => row.infoId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -53,9 +57,13 @@ const handleRemoveAll = async () => {
     async onOk() {
       const hide = message.loading('正在删除');
       try {
-        await cleanLogininfor();
+        const resp = await cleanLogininfor();
         hide();
-        message.success('删除成功，即将刷新');
+        if(resp.code === 200) {
+          message.success('删除成功，即将刷新');
+        } else {
+          message.error(resp.msg);
+        }
         return true;
       } catch (error) {
         hide();

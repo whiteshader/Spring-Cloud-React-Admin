@@ -30,9 +30,13 @@ const handleRemove = async (selectedRows: JobLogType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeJobLog(selectedRows.map((row) => row.jobLogId).join(','));
+    const resp = await removeJobLog(selectedRows.map((row) => row.jobLogId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -44,9 +48,13 @@ const handleRemove = async (selectedRows: JobLogType[]) => {
 const handleRemoveAll = async () => {
   const hide = message.loading('正在删除');
   try {
-    await cleanJobLog();
+    const resp = await cleanJobLog();
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -60,9 +68,13 @@ const handleRemoveOne = async (selectedRow: JobLogType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.jobLogId];
-    await removeJobLog(params.join(','));
+    const resp = await removeJobLog(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();

@@ -34,9 +34,13 @@ import { Content } from 'antd/lib/layout/layout';
 const handleAdd = async (fields: JobType) => {
   const hide = message.loading('正在添加');
   try {
-    await addJob({ ...fields });
+    const resp = await addJob({ ...fields });
     hide();
-    message.success('添加成功');
+    if(resp.code === 200) {
+      message.success('添加成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -53,9 +57,13 @@ const handleAdd = async (fields: JobType) => {
 const handleUpdate = async (fields: JobType) => {
   const hide = message.loading('正在配置');
   try {
-    await updateJob(fields);
+    const resp = await updateJob(fields);
     hide();
-    message.success('配置成功');
+    if(resp.code === 200) {
+      message.success('配置成功');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -73,9 +81,13 @@ const handleRemove = async (selectedRows: JobType[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await removeJob(selectedRows.map((row) => row.jobId).join(','));
+    const resp = await removeJob(selectedRows.map((row) => row.jobId).join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
@@ -89,9 +101,13 @@ const handleRemoveOne = async (selectedRow: JobType) => {
   if (!selectedRow) return true;
   try {
     const params = [selectedRow.jobId];
-    await removeJob(params.join(','));
+    const resp = await removeJob(params.join(','));
     hide();
-    message.success('删除成功，即将刷新');
+    if(resp.code === 200) {
+      message.success('删除成功，即将刷新');
+    } else {
+      message.error(resp.msg);
+    }
     return true;
   } catch (error) {
     hide();
