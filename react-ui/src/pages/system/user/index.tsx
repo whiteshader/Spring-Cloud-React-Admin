@@ -1,11 +1,13 @@
 import { PlusOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { FormInstance } from 'antd';
-import { Button, message, Modal } from 'antd';
+import { Button, message, Modal, Row, Col } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
+import { Content } from 'antd/lib/layout/layout';
+import Card from 'antd/es/card';
 import type { UserType, UserListParams } from './data.d';
 import {
   getUserList,
@@ -24,7 +26,6 @@ import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
 import { getPostList } from '../post/service';
 import { getRoleList } from '../role/service';
-import { Content } from 'antd/lib/layout/layout';
 
 /* *
  *
@@ -43,7 +44,7 @@ const handleAdd = async (fields: UserType) => {
   try {
     const resp = await addUser({ ...fields });
     hide();
-    if(resp.code === 200) {
+    if (resp.code === 200) {
       message.success('添加成功');
     } else {
       message.error(resp.msg);
@@ -66,7 +67,7 @@ const handleUpdate = async (fields: UserType) => {
   try {
     const resp = await updateUser(fields);
     hide();
-    if(resp.code === 200) {
+    if (resp.code === 200) {
       message.success('配置成功');
     } else {
       message.error(resp.msg);
@@ -90,7 +91,7 @@ const handleRemove = async (selectedRows: UserType[]) => {
   try {
     const resp = await removeUser(selectedRows.map((row) => row.userId).join(','));
     hide();
-    if(resp.code === 200) {
+    if (resp.code === 200) {
       message.success('删除成功，即将刷新');
     } else {
       message.error(resp.msg);
@@ -110,7 +111,7 @@ const handleRemoveOne = async (selectedRow: UserType) => {
     const params = [selectedRow.userId];
     const resp = await removeUser(params.join(','));
     hide();
-    if(resp.code === 200) {
+    if (resp.code === 200) {
       message.success('删除成功，即将刷新');
     } else {
       message.error(resp.msg);
@@ -133,7 +134,7 @@ const handleExport = async () => {
   try {
     await exportUser();
     hide();
-    message.success('导出成功');    
+    message.success('导出成功');
     return true;
   } catch (error) {
     hide();
@@ -305,7 +306,7 @@ const UserTableList: React.FC = () => {
             setResetPwdModalVisible(true);
             setCurrentRow(record);
           }}
-        >          
+        >
           <FormattedMessage id="system.User.reset.password" defaultMessage="密码重置" />
         </Button>,
       ],
@@ -314,112 +315,121 @@ const UserTableList: React.FC = () => {
 
   return (
     <Content>
-      <div style={{ width: '20%', height: '100%', float: 'left' }}>
-        <DeptTree
-          onSelect={async (value: any) => {
-            setSelectDept(value);
-            if (actionRef.current) {
-              formTableRef?.current?.submit();
+      <Row gutter={[16, 24]}>
+        <Col lg={6} md={24}>
+          <Card>
+            <DeptTree
+              onSelect={async (value: any) => {
+                setSelectDept(value);
+                if (actionRef.current) {
+                  formTableRef?.current?.submit();
+                }
+              }}
+            />
+          </Card>
+        </Col>
+        <Col lg={18} md={24}>
+          <ProTable<UserType>
+            headerTitle={intl.formatMessage({
+              id: 'pages.searchTable.title',
+              defaultMessage: '信息',
+            })}
+            actionRef={actionRef}
+            formRef={formTableRef}
+            rowKey="userId"
+            key="userList"
+            search={{
+              labelWidth: 120,
+            }}
+            toolBarRender={() => [
+              <Button
+                type="primary"
+                key="add"
+                hidden={!access.hasPerms('system:user:add')}
+                onClick={async () => {
+                  if (selectDept.id === '' || selectDept.id == null) {
+                    message.warning('请选择左侧父级节点');
+                  } else {
+                    getDeptTreeList({}).then((treeData) => {
+                      setDeptTree(treeData);
+                      setCurrentRow(undefined);
+                      setModalVisible(true);
+                    });
+                    getPostList().then((res) => {
+                      if (res.code === 200) {
+                        setPostList(
+                          res.rows.map((item: any) => {
+                            return {
+                              value: item.postId,
+                              label: item.postName,
+                            };
+                          }),
+                        );
+                      }
+                    });
+                    getRoleList().then((res) => {
+                      if (res.code === 200) {
+                        setRoleList(
+                          res.rows.map((item: any) => {
+                            return {
+                              value: item.roleId,
+                              label: item.roleName,
+                            };
+                          }),
+                        );
+                      }
+                    });
+                  }
+                }}
+              >
+                <PlusOutlined />{' '}
+                <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
+              </Button>,
+              <Button
+                type="primary"
+                key="remove"
+                hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:user:remove')}
+                onClick={async () => {
+                  const success = await handleRemove(selectedRowsState);
+                  if (success) {
+                    setSelectedRows([]);
+                    actionRef.current?.reloadAndRest?.();
+                  }
+                }}
+              >
+                <DeleteOutlined />
+                <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
+              </Button>,
+              <Button
+                type="primary"
+                key="export"
+                hidden={!access.hasPerms('system:user:export')}
+                onClick={async () => {
+                  handleExport();
+                }}
+              >
+                <PlusOutlined />
+                <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
+              </Button>,
+            ]}
+            request={(params) =>
+              getUserList({ ...params, deptId: selectDept.id } as UserListParams).then((res) => {
+                return {
+                  data: res.rows,
+                  total: res.total,
+                  success: true,
+                };
+              })
             }
-          }}
-        />
-      </div>
-      <div style={{ width: '79%', float: 'right' }}>
-        <ProTable<UserType>
-          headerTitle={intl.formatMessage({
-            id: 'pages.searchTable.title',
-            defaultMessage: '信息',
-          })}
-          actionRef={actionRef}
-          formRef={formTableRef}
-          rowKey="userId"
-          key="userList"
-          search={{
-            labelWidth: 120,
-          }}
-          toolBarRender={() => [
-            <Button
-              type="primary"
-              key="add"
-              hidden={!access.hasPerms('system:user:add')}
-              onClick={async () => {
-                if (selectDept.id === '' || selectDept.id == null) {
-                  message.warning('请选择左侧父级节点');
-                } else {
-                  getDeptTreeList({}).then((treeData) => {
-                    setDeptTree(treeData);
-                    setCurrentRow(undefined);
-                    setModalVisible(true);
-                  });
-                  getPostList().then((res) => {
-                    if(res.code === 200) {
-                      setPostList(res.rows.map((item: any) => {
-                        return {
-                          value: item.postId,
-                          label: item.postName
-                        };
-                      }));
-                    }
-                  });
-                  getRoleList().then((res) => {
-                    if(res.code === 200) {
-                      setRoleList(res.rows.map((item: any) => {
-                        return {
-                          value: item.roleId,
-                          label: item.roleName
-                        };
-                      }));
-                    }
-                  });
-                }
-              }}
-            >
-              <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="新建" />
-            </Button>,
-            <Button
-              type="primary"
-              key="remove"
-              hidden={selectedRowsState?.length === 0 || !access.hasPerms('system:user:remove')}
-              onClick={async () => {
-                const success = await handleRemove(selectedRowsState);
-                if (success) {
-                  setSelectedRows([]);
-                  actionRef.current?.reloadAndRest?.();
-                }
-              }}
-            >
-              <DeleteOutlined />
-              <FormattedMessage id="pages.searchTable.delete" defaultMessage="删除" />
-            </Button>,
-            <Button
-              type="primary"
-              key="export"
-              hidden={!access.hasPerms('system:user:export')}
-              onClick={async () => {
-                handleExport();
-              }}
-            >
-              <PlusOutlined />
-              <FormattedMessage id="pages.searchTable.export" defaultMessage="导出" />
-            </Button>,
-          ]}
-          request={(params) =>
-            getUserList({ ...params, deptId: selectDept.id } as UserListParams).then((res) => {
-              return {
-                data: res.rows,
-                total: res.total,
-                success: true,
-              };
-            })
-          }
-          columns={columns}
-          rowSelection={{
-            onChange: (_, selectedRows) => {
-              setSelectedRows(selectedRows);
-            },
-          }}
-        />
-      </div>
+            columns={columns}
+            rowSelection={{
+              onChange: (_, selectedRows) => {
+                setSelectedRows(selectedRows);
+              },
+            }}
+          />
+        </Col>
+      </Row>
       {selectedRowsState?.length > 0 && (
         <FooterToolbar
           extra={
