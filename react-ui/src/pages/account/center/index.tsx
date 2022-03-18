@@ -136,13 +136,12 @@ const Center: React.FC = () => {
 
   return (
     <Content>
-      <Row>
+      <Row gutter={[16, 24]}>
         <Col lg={6} md={24}>
           <Card
             title="个人信息"
             bordered={false}
             loading={loading}
-            className={styles.infoCard}
           >
             {!loading && (
               <div style={{ textAlign: "center"}}>
@@ -173,7 +172,6 @@ const Center: React.FC = () => {
         </Col>
         <Col lg={18} md={24}>
           <Card
-            className={styles.tabsCard}
             bordered={false}
             tabList={operationTabList}
             activeTabKey={tabKey}
