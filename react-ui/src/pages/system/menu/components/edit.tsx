@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ProForm, {
+import {
   ProFormDigit,
   ProFormText,
   ProFormRadio,
@@ -111,7 +111,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
         </IntlProvider>
       </Modal>
 
-      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
+      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={16} order={1}>
             <ProFormDigit
@@ -442,7 +442,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </ProForm>
+      </Form>
     </Modal>
   );
 };

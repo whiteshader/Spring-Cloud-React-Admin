@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import ProForm, {
+import {
   ProFormDigit,
   ProFormText,
   ProFormSelect,
@@ -96,7 +96,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
+      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
             <ProFormDigit
@@ -353,7 +353,7 @@ const UserForm: React.FC<UserFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </ProForm>
+      </Form>
     </Modal>
   );
 };

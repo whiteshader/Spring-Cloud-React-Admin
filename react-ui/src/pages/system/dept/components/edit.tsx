@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import ProForm, { ProFormDigit, ProFormText, ProFormRadio, ProFormTreeSelect } from '@ant-design/pro-form';
+import { ProFormDigit, ProFormText, ProFormRadio, ProFormTreeSelect } from '@ant-design/pro-form';
 import { Form, Modal, Row, Col } from 'antd';
 import { useIntl, FormattedMessage } from 'umi';
 import type { DeptType } from '../data.d';
@@ -71,7 +71,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-      <ProForm form={form} onFinish={handleFinish} initialValues={props.values}>
+      <Form form={form} onFinish={handleFinish} initialValues={props.values}>
         <Row gutter={[16, 16]}>
           <Col span={24} order={1}>
             <ProFormDigit
@@ -249,6 +249,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
                 id: 'system.Dept.status',
                 defaultMessage: '部门状态',
               })}
+              labelCol={{ span: 24 }}
               width="xl"
               placeholder="请输入部门状态"
               rules={[
@@ -262,7 +263,7 @@ const DeptForm: React.FC<DeptFormProps> = (props) => {
             />
           </Col>
         </Row>
-      </ProForm>
+      </Form>
     </Modal>
   );
 };
