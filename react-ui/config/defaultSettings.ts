@@ -7,7 +7,8 @@ const Settings: LayoutSettings & {
   navTheme: 'dark',
   // 拂晓蓝
   primaryColor: '#2F54EB',
-  layout: 'side',
+  layout: 'mix',
+  splitMenus: true,
   contentWidth: 'Fluid',
   fixedHeader: true,
   fixSiderbar: true,
