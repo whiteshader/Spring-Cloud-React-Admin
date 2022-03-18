@@ -1,4 +1,7 @@
 import KeepAliveTabs from '@/components/KeepAliveTabs';
+import defaultSettings from '../../config/defaultSettings';
+
+const { tabsLayout } = defaultSettings;
 
 /* *
  *
@@ -8,9 +11,15 @@ import KeepAliveTabs from '@/components/KeepAliveTabs';
  * */
 
 const TabsLayout: React.FC = (props) => {
+  const renderTabs = () => {
+    if(tabsLayout)
+      return <KeepAliveTabs />;
+    else
+      return null;
+  }
   return (
     <div>
-      <KeepAliveTabs />
+      {renderTabs()}
       <div style={{ margin: '24px' }}>{props.children}</div>
     </div>
   );
