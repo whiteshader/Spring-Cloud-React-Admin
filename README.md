@@ -43,6 +43,12 @@ https://gitee.com/whiteshader/ruoyi-react
 ## 演示视频
 https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
+## 前端开发注意事项
+正常启动请运行 npm start:dev
+
+Mock测试模式请运行 npm start
+
+
 ## 演示图
 
 
