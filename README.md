@@ -4,7 +4,7 @@ https://gitee.com/whiteshader/ruoyi-react
 
 若依(Ruoyi-React)是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
-* 前端采用React、Ant Design Pro、TypeScript。
+* 前端采用React 17、Ant Design Pro 5、TypeScript。
 * 后端采用Spring Boot、Spring Security、Redis & Jwt。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
@@ -31,7 +31,7 @@ https://gitee.com/whiteshader/ruoyi-react
 16. 缓存监控：对系统的缓存信息查询，命令统计等。
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
-
+19. 工作流模块：Activiti7集成在activiti分支，处于功能开发阶段。
 ## 在线体验
 
 - admin/admin123  
@@ -42,6 +42,12 @@ https://gitee.com/whiteshader/ruoyi-react
 
 ## 演示视频
 https://gitee.com/whiteshader/images/raw/master/demo.mp4
+
+## 前端开发注意事项
+正常启动请运行 npm start:dev
+
+Mock测试模式请运行 npm start
+
 
 ## 演示图
 

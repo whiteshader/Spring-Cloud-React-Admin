@@ -24,7 +24,10 @@ Scripts provided in `package.json`. It's safe to modify or add additional script
 
 ### Start project
 
-```bash
+正常启动请运行
+npm start:dev
+
+Mock测试模式请运行
 npm start
 ```
 
