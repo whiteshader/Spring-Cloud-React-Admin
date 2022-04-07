@@ -45,3 +45,4 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
+react-ui/public/avatar/

@@ -1,24 +1,21 @@
 @import '~antd/es/style/themes/default.less';
-/*
- * @Author: wangYe 
- * @Date: 2020-11-05 17:12:20 
- * @Last Modified by: WhiteShader
- * @Last Modified time: 2022-02-21 11:12:12
- */
 
 .tabs {
-    // position: fixed;
-    // top: 48px;
-    // z-index: 1;
+    position: fixed;
+    top: @layout-trigger-height;
+    width: 100%;
+    z-index: 2;
     background: #fff;
     height: 38px;
     // margin-left: -24px;
     // width: calc(100% - 256px);
     // width: 100%;
-    margin-top: 5px;
+    // margin-top: 5px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1px;
+    border-bottom:solid; 
+    border-width:1px; 
+    border-color: @border-color-base;
 
     .tabList {
         display: flex;
@@ -51,7 +48,7 @@
     }
 
     .boxShadow {
-        box-shadow: -7px 0px 7px -7px #5E5E5E; //@tab-left-menu;
+        box-shadow: -7px 0 7px -7px #5E5E5E; //@tab-left-menu;
 
     }
 

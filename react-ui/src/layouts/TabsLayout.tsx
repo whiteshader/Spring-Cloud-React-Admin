@@ -20,7 +20,7 @@ const TabsLayout: React.FC = (props) => {
   return (
     <div>
       {renderTabs()}
-      <div style={{ margin: '24px' }}>{props.children}</div>
+      <div style={{ margin: '64px 24px 24px 24px' }}>{props.children}</div>
     </div>
   );
 };
