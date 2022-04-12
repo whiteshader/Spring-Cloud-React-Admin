@@ -5,9 +5,9 @@ const Settings: LayoutSettings & {
   logo?: string;
   tabsLayout?: boolean;
 } = {
-  navTheme: 'dark',
-  // 拂晓蓝
-  primaryColor: '#2F54EB',
+  navTheme: 'light',
+  headerTheme: 'light',
+  primaryColor: '#722ED1',
   layout: 'mix',
   splitMenus: true,
   contentWidth: 'Fluid',

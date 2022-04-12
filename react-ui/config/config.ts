@@ -15,14 +15,14 @@ export default defineConfig({
   },
   layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
-    locale: true,
+    locale: false,
     siderWidth: 208,
     ...defaultSettings,
   },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
     default: 'zh-CN',
-    antd: true,
+    antd: false,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
   },
@@ -69,4 +69,7 @@ export default defineConfig({
   mfsu: {},
   webpack5: {},
   exportStatic: {},
+  externals: {
+  
+  }
 });
