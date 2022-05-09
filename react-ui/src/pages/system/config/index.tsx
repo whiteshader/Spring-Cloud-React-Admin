@@ -4,7 +4,7 @@ import { Button, message, Modal } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { FooterToolbar } from '@ant-design/pro-layout';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { ConfigType, ConfigListParams } from './data.d';
@@ -247,7 +247,7 @@ const ConfigTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<ConfigType>
           headerTitle={intl.formatMessage({
@@ -375,7 +375,7 @@ const ConfigTableList: React.FC = () => {
         values={currentRow || {}}
         configTypeOptions={configTypeOptions}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

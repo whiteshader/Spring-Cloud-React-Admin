@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getServerInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
 import styles from './style.less';
 import { FormattedMessage } from 'umi';
 import type { CpuRowType, MemRowType, ServerInfoResponseType, DiskInfoType } from './data';
+import WrapContent from '@/components/WrapContent';
 
 
 /* *
@@ -209,7 +210,7 @@ const ServerInfo: React.FC = () => {
   }, []);
 
   return (
-    <Fragment>
+    <WrapContent>
       <Row gutter={[24, 24]}>
         <Col span={12}>
           <Card title="CPU" className={styles.card}>
@@ -258,7 +259,7 @@ const ServerInfo: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </Fragment>
+    </WrapContent>
   );
 };
 

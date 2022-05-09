@@ -334,8 +334,8 @@ export default [
       {
         name: 'design',
         icon: 'PartitionOutlined',
-        path: '/tool/design',
-        component: 'tool/design',
+        path: '/tool/build',
+        component: 'tool/builder',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
         keppAlive: true,

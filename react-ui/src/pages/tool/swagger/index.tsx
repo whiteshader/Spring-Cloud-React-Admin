@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+
 /**
  *
  * @author whiteshader@163.com
@@ -18,13 +19,15 @@ const CacheInfo: React.FC = () => {
   });
 
   return (
-    <iframe
-      style={{ width: '100%', border: '0px', height: '100%' }}
-      // frameborder={'0'}
-      scrolling="yes"
-      src={'/api/swagger-ui/index.html'}
-      id="bdIframe"
-    ></iframe>
+    <div style={{marginTop:'38px'}}>
+      <iframe
+        style={{ width: '100%', border: '0px', height: '100%' }}
+        // frameborder={'0'}
+        scrolling="yes"
+        src={'/api/swagger-ui/index.html'}
+        id="bdIframe"
+      ></iframe>
+    </div>
   );
 };
 

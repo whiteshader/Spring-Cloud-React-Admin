@@ -10,7 +10,7 @@ import type { JobLogType, JobLogListParams } from './data.d';
 import { getJobLogList, removeJobLog, exportJobLog, cleanJobLog } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 
 /* *
@@ -225,7 +225,7 @@ const JobLogTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<JobLogType>
           headerTitle={intl.formatMessage({
@@ -366,7 +366,7 @@ const JobLogTableList: React.FC = () => {
         statusOptions={statusOptions}
         jobGroupOptions={jobGroupOptions}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

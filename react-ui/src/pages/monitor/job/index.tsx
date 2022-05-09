@@ -17,7 +17,7 @@ import { getJobList, removeJob, addJob, updateJob, exportJob, runJob } from './s
 import UpdateForm from './components/edit';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 /* *
  *
@@ -332,7 +332,7 @@ const JobTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<JobType>
           headerTitle={intl.formatMessage({
@@ -476,7 +476,7 @@ const JobTableList: React.FC = () => {
         values={currentRow || {}}
         statusOptions={statusOptions}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

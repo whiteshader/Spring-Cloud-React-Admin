@@ -17,7 +17,7 @@ import {
 } from './service';
 import DetailForm from './components/detail';
 import { getDict } from '@/pages/system/dict/service';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 /* *
  *
@@ -314,7 +314,7 @@ const OperlogTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<OperlogType>
           headerTitle={intl.formatMessage({
@@ -461,7 +461,7 @@ const OperlogTableList: React.FC = () => {
         operatorTypeOptions={operatorTypeOptions}
         statusOptions={statusOptions}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

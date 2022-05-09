@@ -6,7 +6,7 @@ import { useIntl, FormattedMessage, useAccess } from 'umi';
 import { FooterToolbar } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import Card from 'antd/es/card';
 import type { UserType, UserListParams } from './data.d';
 import {
@@ -314,7 +314,7 @@ const UserTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <Row gutter={[16, 24]}>
         <Col lg={6} md={24}>
           <Card>
@@ -512,7 +512,7 @@ const UserTableList: React.FC = () => {
         resetPwdModalVisible={resetPwdModalVisible}
         values={currentRow || {}}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import React from 'react';
 
 /**
@@ -12,9 +12,9 @@ export type GlobalTableProps = {};
 
 const TableList: React.FC<GlobalTableProps> = () => {
   return (
-    <Content>
+    <WrapContent>
       <Card title="Developing 开发中，请给个星星支持支持！" />
-    </Content>
+    </WrapContent>
   );
 };
 

@@ -14,7 +14,7 @@ import {
   cleanLogininfor,
 } from './service';
 import { getDict } from '@/pages/system/dict/service';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 /* *
  *
@@ -185,7 +185,7 @@ const LogininforTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<LogininforType>
           headerTitle={intl.formatMessage({
@@ -290,7 +290,7 @@ const LogininforTableList: React.FC = () => {
           </Button>
         </FooterToolbar>
       )}
-    </Content>
+    </WrapContent>
   );
 };
 

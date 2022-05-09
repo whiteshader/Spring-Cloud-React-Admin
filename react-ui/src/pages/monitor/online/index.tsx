@@ -6,7 +6,7 @@ import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import type { OnlineUserType, OnlineUserListParams } from './data.d';
 import { getOnlineUserList, forceLogout } from './service';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 
 /* *
@@ -128,7 +128,7 @@ const OnlineUserTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<OnlineUserType>
           headerTitle={intl.formatMessage({
@@ -155,7 +155,7 @@ const OnlineUserTableList: React.FC = () => {
           columns={columns}
         />
       </div>
-    </Content>
+    </WrapContent>
   );
 };
 

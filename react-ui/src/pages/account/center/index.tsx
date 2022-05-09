@@ -15,7 +15,7 @@ import styles from './Center.less';
 import BaseInfo from './components/BaseInfo';
 import ResetPassword from './components/ResetPassword';
 import AvatarCropper from './components/AvatarCropper';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import PageLoading from '@/pages/dashboard/analysis/components/PageLoading';
 
 const operationTabList = [
@@ -135,7 +135,7 @@ const Center: React.FC = () => {
   }
 
   return (
-    <Content>
+    <WrapContent>
       <Row gutter={[16, 24]}>
         <Col lg={6} md={24}>
           <Card
@@ -190,7 +190,7 @@ const Center: React.FC = () => {
         visible={cropperModalVisible}
         data={currentUser.avatar}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

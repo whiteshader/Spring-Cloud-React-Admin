@@ -3,7 +3,7 @@ import { getCacheInfo } from './service';
 import { Card, Col, Row, Table } from 'antd';
 import styles from './index.less';
 import type { CacheInfoResponseType } from './data';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import type { VisitDataType } from '@/pages/dashboard/analysis/data';
 import Gauge from '@/pages/dashboard/monitor/components/Charts/Gauge';
 import Pie from '@/pages/dashboard/analysis/components/Charts/Pie';
@@ -137,7 +137,7 @@ const CacheInfo: React.FC = () => {
   }, []);
 
   return (
-    <Content>
+    <WrapContent>
       <Row gutter={[24, 24]}>
         <Col span={24}>
           <Card title="基本信息" className={styles.card}>
@@ -167,7 +167,7 @@ const CacheInfo: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </Content>
+    </WrapContent>
   );
 };
 

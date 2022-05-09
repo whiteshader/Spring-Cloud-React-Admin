@@ -20,7 +20,7 @@ import { getDict } from '../dict/service';
 import type { DataNode } from 'antd/lib/tree';
 import { getMenuTree } from '../menu/service';
 import { formatTreeSelectData } from '@/utils/utils';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 
 /* *
  *
@@ -280,7 +280,7 @@ const RoleTableList: React.FC = () => {
   ];
 
   return (
-    <Content>
+    <WrapContent>
       <div style={{ width: '100%', float: 'right' }}>
         <ProTable<RoleType>
           headerTitle={intl.formatMessage({
@@ -418,7 +418,7 @@ const RoleTableList: React.FC = () => {
         menuCheckedKeys={menuIds || []}
         statusOptions={statusOptions}
       />
-    </Content>
+    </WrapContent>
   );
 };
 

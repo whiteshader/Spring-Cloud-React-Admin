@@ -69,6 +69,7 @@
     "antd": "^4.14.0",
     "bizcharts": "^3.5.3-beta.0",
     "bizcharts-plugin-slider": "^2.1.1-beta.1",
+    "btoa": "^1.2.1",
     "captchapng3": "^1.0.7",
     "classnames": "^2.2.6",
     "gg-editor": "^2.0.2",

@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import { Content } from 'antd/lib/layout/layout';
+import WrapContent from '@/components/WrapContent';
 import React from 'react';
 
 /**
@@ -12,9 +12,9 @@ export type FormBuilderProps = {};
 
 const FormBuilder: React.FC<FormBuilderProps> = () => {
   return (
-    <Content>
+    <WrapContent>
       <Card title="Developing" />
-    </Content>
+    </WrapContent>
   );
 };
 
