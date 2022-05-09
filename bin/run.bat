@@ -1,6 +1,6 @@
-@echo off
+๏ปฟ@echo off
 echo.
-echo [ะลฯข] สนำรJarรüม๎ิหะะWebนคณฬกฃ
+echo [ไฟกๆฏ] ไฝฟ็”จJarๅ‘ฝไปค่ฟ่กWebๅทฅ็จใ€
 echo.
 
 cd %~dp0
