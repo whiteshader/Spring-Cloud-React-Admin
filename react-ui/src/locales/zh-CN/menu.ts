@@ -66,6 +66,7 @@ export default {
   'menu.title.druid': 'Druid',
   'menu.title.serverInfo': '服务监控',
   'menu.title.cacheInfo': '缓存监控',
+  'menu.title.cacheList': '缓存列表',
   'menu.title.gen': '代码生成',
   'menu.title.design': '表单构建',
   'menu.title.swagger': 'swagger',

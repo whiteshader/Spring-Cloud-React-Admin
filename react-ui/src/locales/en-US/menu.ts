@@ -66,6 +66,7 @@ export default {
   'menu.title.druid': 'Druid',
   'menu.title.serverInfo': 'Server',
   'menu.title.cacheInfo': 'Cache',
+  'menu.title.cacheList': 'CacheList',
   'menu.title.gen': 'Gen',
   'menu.title.design': 'Form',
   'menu.title.swagger': 'Swagger',

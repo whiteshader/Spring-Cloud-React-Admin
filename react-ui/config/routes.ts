@@ -309,6 +309,16 @@ export default [
         keppAlive: true,
         title: 'menu.title.cacheInfo'
       },
+      {
+        name: 'cacheList',
+        icon: 'PartitionOutlined',
+        path: '/monitor/cacheList',
+        component: 'monitor/cacheList',
+        access: 'authorize',
+        wrappers: ['@/components/KeepAlive'],
+        keppAlive: true,
+        title: 'menu.title.cacheList'
+      },
     ],
   },
   {
