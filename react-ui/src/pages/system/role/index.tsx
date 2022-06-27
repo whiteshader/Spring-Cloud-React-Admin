@@ -151,7 +151,7 @@ const RoleTableList: React.FC = () => {
   const [statusOptions, setStatusOptions] = useState<any>([]);
 
   const [menuTree, setMenuTree] = useState<DataNode[]>();
-  const [menuIds, setMenuIds] = useState<string[]>([]);
+  const [menuIds, setMenuIds] = useState<number[]>([]);
 
   const access = useAccess();
 
@@ -235,11 +235,7 @@ const RoleTableList: React.FC = () => {
               if (res.code === 200) {
                 const treeData = formatTreeSelectData(res.menus);
                 setMenuTree(treeData);
-                setMenuIds(
-                  res.checkedKeys.map((key: number) => {
-                    return `${key}`;
-                  }),
-                );
+                setMenuIds(res.checkedKeys);
                 setModalVisible(true);
                 setCurrentRow(record);
               } else {

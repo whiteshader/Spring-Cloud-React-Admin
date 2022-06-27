@@ -25,7 +25,7 @@ export type RoleFormProps = {
   visible: boolean;
   values: Partial<RoleType>;
   menuTree: DataNode[];
-  menuCheckedKeys: string[];
+  menuCheckedKeys: number[];
   statusOptions: any;
 };
 
@@ -35,7 +35,7 @@ const RoleForm: React.FC<RoleFormProps> = (props) => {
   const { menuTree, menuCheckedKeys } = props;
   const [menuIds, setMenuIds] = useState<any>();
   const { statusOptions } = props;
-
+  
   useEffect(() => {
     form.resetFields();
     form.setFieldsValue({

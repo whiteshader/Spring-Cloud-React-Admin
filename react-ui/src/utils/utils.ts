@@ -103,7 +103,7 @@ export function formatTreeSelectData(arrayList: any): DataNode[] {
     const node: DataNode = {
       id: item.id,
       title: item.label,
-      key: `${item.id}`,
+      key: item.id,
       value: item.id
     } as DataNode;
     if (item.children) {
