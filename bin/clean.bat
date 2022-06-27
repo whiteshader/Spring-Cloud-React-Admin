@@ -1,6 +1,6 @@
 @echo off
 echo.
-echo [ä¿¡æ¯] æ¸…ç†å·¥ç¨‹targetç”Ÿæˆè·¯å¾„ã€‚
+echo [ÐÅÏ¢] ÇåÀí¹¤³ÌtargetÉú³ÉÂ·¾¶¡£
 echo.
 
 %~d0
