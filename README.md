@@ -45,8 +45,6 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
 ## 前端开发注意事项
 
-安装依赖：yarn
-
 正常启动请运行: npm run start:dev
 
 Mock测试模式请运行: npm run start
@@ -57,40 +55,40 @@ Mock测试模式请运行: npm run start
 
 <table>
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/login.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/dashboard.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-e9dd8074ff77bf9a63192a0dbffd4317ca3.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-9496c4533858051ef7d4c3ee39676b68b53.png"/></td>
     </tr>    
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/setting.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/icon-selector.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-55a81f1685c3520d82cb96be5ac8cb652f4.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-293c849ce9112511df2dcaa2da56caed651.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/user.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/useredit.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-4165d6440fe052ecfedc41a79e1a4248347.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-2776f20f9533b6f64dea24d50cf368680dd.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/role.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/role-edit.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-461d455a479088eaacfd700e15d9a07229f.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-8a2841b8903515d45d5971719197e792ada.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/menu.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/menu-edit.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-b87aa3691f6525988bf237eb333b7d1febb.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/config.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/dict.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-90d94b41ad3e59c7c96c6d48e34f6d7ff55.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/loginlog.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/operlog.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-1940f8a5923fe7c94f7f1e799a632709fa7.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-989ac012792e0ec2142b10eedf6edf08e51.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/server.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/cache.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-15ac77792f0102eeedc53a8c1d54ea81105.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-0fc152997aff195c063e9dd8b72f18a6a3e.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/job.png"/></td>
-        <td><img src="https://gitee.com/whiteshader/images/raw/master/swager.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-940b253ebdbaf3984495c1b39afd43513e3.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
     </tr>
 </table>
 
