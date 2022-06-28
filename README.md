@@ -72,7 +72,7 @@ Mock测试模式请运行: npm run start
     </tr>
 	<tr>
         <td><img src="https://oscimg.oschina.net/oscnet/up-b87aa3691f6525988bf237eb333b7d1febb.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-5f028f932aa363bed28010f82b24eed34c4.png"/></td>
     </tr>
 	<tr>
         <td><img src="https://oscimg.oschina.net/oscnet/up-90d94b41ad3e59c7c96c6d48e34f6d7ff55.png"/></td>
@@ -88,7 +88,7 @@ Mock测试模式请运行: npm run start
     </tr>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/up-940b253ebdbaf3984495c1b39afd43513e3.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-e4b51af7ef469f669da6e3a7a8afa200858.png"/></td>
     </tr>
 </table>
 
