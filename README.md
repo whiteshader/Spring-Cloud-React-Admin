@@ -31,7 +31,7 @@ https://gitee.com/whiteshader/ruoyi-react
 16. 缓存监控：对系统的缓存信息查询，命令统计等。
 17. 在线构建器：拖动表单元素生成相应的HTML代码。
 18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
-19. 工作流模块：Activiti7集成在activiti分支，处于功能开发阶段。
+
 ## 在线体验
 
 - admin/admin123  
