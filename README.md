@@ -49,6 +49,28 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
 Mock测试模式请运行: npm run start
 
+## 相关技术文档
+
+### TypeScript
+https://www.tslang.cn/docs/home.html
+
+### React Js
+https://react.docschina.org/docs/getting-started.html
+
+### Ant Design 
+https://ant.design/components/overview-cn/
+
+### Ant Design Pro
+https://pro.ant.design/zh-CN/docs/overview
+
+### Ant Design Chart
+https://charts.ant.design/zh
+
+### Umi Js
+https://umijs.org/docs/introduce/introduce
+
+### Ruoyi-Vue
+http://doc.ruoyi.vip/ruoyi-vue/
 
 ## 演示图
 
