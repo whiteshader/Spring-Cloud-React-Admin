@@ -45,6 +45,8 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
 ## 前端开发注意事项
 
+安装依赖请支行：yarn
+
 正常启动请运行: npm run start:dev
 
 Mock测试模式请运行: npm run start
