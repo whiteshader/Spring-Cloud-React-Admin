@@ -51,6 +51,8 @@ https://gitee.com/whiteshader/images/raw/master/demo.mp4
 
 Mock测试模式请运行: npm run start
 
+发布打包请运行: npm run build
+
 ## 相关技术文档
 
 ### TypeScript
@@ -71,8 +73,8 @@ https://charts.ant.design/zh
 ### Umi Js
 https://umijs.org/docs/introduce/introduce
 
-### Ruoyi-Vue
-http://doc.ruoyi.vip/ruoyi-vue/
+## 部署
+http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 
 ## 演示图
 
