@@ -53,7 +53,7 @@ export default [
         path: '/dashboard/analysis',
         component: './dashboard/analysis',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.dashboard.analysis'
       },
       {
@@ -62,7 +62,7 @@ export default [
         path: '/dashboard/monitor',
         component: './dashboard/monitor',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.dashboard.monitor'
       },
       {
@@ -71,7 +71,7 @@ export default [
         path: '/dashboard/workplace',
         component: './dashboard/workplace',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.dashboard.workplace'
       },
     ],
@@ -92,7 +92,7 @@ export default [
         path: '/account/center',
         component: './account/center',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.account.center'
       },
       {
@@ -101,7 +101,7 @@ export default [
         path: '/account/settings',
         component: './account/settings',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.account.settings'
       },
     ],
@@ -123,7 +123,7 @@ export default [
         component: 'system/user/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.user'
       },
       {
@@ -133,7 +133,7 @@ export default [
         component: 'system/menu/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.menu'
       },
       {
@@ -143,7 +143,7 @@ export default [
         component: 'system/role/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.role'
       },
       {
@@ -153,7 +153,7 @@ export default [
         component: 'system/dept/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.dept'
       },
       {
@@ -163,7 +163,7 @@ export default [
         component: 'system/post/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.post'
       },
       {
@@ -173,7 +173,7 @@ export default [
         component: 'system/dict/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.dict'
       },
       {
@@ -183,7 +183,7 @@ export default [
         component: 'system/dictData/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.dictData'
       },
       {
@@ -193,7 +193,7 @@ export default [
         component: 'system/config/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.config'
       },
       {
@@ -203,7 +203,7 @@ export default [
         component: 'system/notice/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.notice'
       },
       {
@@ -222,7 +222,7 @@ export default [
             component: 'monitor/operlog',
             access: 'authorize',
             wrappers: ['@/components/KeepAlive'],
-            keppAlive: true,
+            KeepAlive: true,
             title: 'menu.title.operlog'
           },
           {
@@ -232,7 +232,7 @@ export default [
             component: 'monitor/logininfor',
             access: 'authorize',
             wrappers: ['@/components/KeepAlive'],
-            keppAlive: true,
+            KeepAlive: true,
             title: 'menu.title.loginInfo'
           },
         ],
@@ -256,7 +256,7 @@ export default [
         component: 'monitor/online',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.onlineUser'
       },
       {
@@ -266,7 +266,7 @@ export default [
         component: 'monitor/job',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.job'
       },
       {
@@ -276,7 +276,7 @@ export default [
         component: 'monitor/joblog',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.joblog'
       },
       {
@@ -286,7 +286,7 @@ export default [
         component: 'monitor/druid',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.druid'
       },
       {
@@ -296,7 +296,7 @@ export default [
         component: 'monitor/server',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.serverInfo'
       },
       {
@@ -306,7 +306,7 @@ export default [
         component: 'monitor/cache',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.cacheInfo'
       },
       {
@@ -316,7 +316,7 @@ export default [
         component: 'monitor/cacheList',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.cacheList'
       },
     ],
@@ -338,7 +338,7 @@ export default [
         component: 'tool/gen/index', 
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.gen'
       },
       {
@@ -348,7 +348,7 @@ export default [
         component: 'tool/builder',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.design'
       },
       {
@@ -358,7 +358,7 @@ export default [
         component: 'tool/swagger',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
-        keppAlive: true,
+        KeepAlive: true,
         title: 'menu.title.swagger'
       },
     ],
