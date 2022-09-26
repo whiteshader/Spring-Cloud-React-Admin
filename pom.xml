@@ -6,14 +6,14 @@
 	
     <groupId>com.ruoyi</groupId>
     <artifactId>ruoyi</artifactId>
-    <version>3.8.3</version>
+    <version>3.8.4</version>
 
     <name>ruoyi</name>
     <url>http://www.ruoyi.vip</url>
     <description>若依管理系统</description>
     
     <properties>
-        <ruoyi.version>3.8.3</ruoyi.version>
+        <ruoyi.version>3.8.4</ruoyi.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
@@ -23,9 +23,9 @@
         <swagger.version>3.0.0</swagger.version>
         <kaptcha.version>2.3.2</kaptcha.version>
         <mybatis-spring-boot.version>2.2.2</mybatis-spring-boot.version>
-        <pagehelper.boot.version>1.4.1</pagehelper.boot.version>
-        <fastjson.version>2.0.8</fastjson.version>
-        <oshi.version>6.1.6</oshi.version>
+        <pagehelper.boot.version>1.4.3</pagehelper.boot.version>
+        <fastjson.version>2.0.14</fastjson.version>
+        <oshi.version>6.2.2</oshi.version>
         <commons.io.version>2.11.0</commons.io.version>
         <commons.fileupload.version>1.4</commons.fileupload.version>
         <commons.collections.version>3.2.2</commons.collections.version>

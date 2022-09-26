@@ -23,6 +23,7 @@ import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.common.utils.ip.IpUtils;
 import com.ruoyi.framework.manager.AsyncManager;
 import com.ruoyi.framework.manager.factory.AsyncFactory;
+import com.ruoyi.framework.security.context.AuthenticationContextHolder;
 import com.ruoyi.system.service.ISysConfigService;
 import com.ruoyi.system.service.ISysUserService;
 
@@ -60,9 +61,9 @@ public class SysLoginService
      */
     public String login(String username, String password, String code, String uuid)
     {
-        boolean captchaOnOff = configService.selectCaptchaOnOff();
+        boolean captchaEnabled = configService.selectCaptchaEnabled();
         // 验证码开关
-        if (captchaOnOff)
+        if (captchaEnabled)
         {
             validateCaptcha(username, code, uuid);
         }
@@ -70,9 +71,10 @@ public class SysLoginService
         Authentication authentication = null;
         try
         {
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username, password);
+            AuthenticationContextHolder.setContext(authenticationToken);
             // 该方法会去调用UserDetailsServiceImpl.loadUserByUsername
-            authentication = authenticationManager
-                    .authenticate(new UsernamePasswordAuthenticationToken(username, password));
+            authentication = authenticationManager.authenticate(authenticationToken);
         }
         catch (Exception e)
         {
@@ -86,6 +88,10 @@ public class SysLoginService
                 AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_FAIL, e.getMessage()));
                 throw new ServiceException(e.getMessage());
             }
+        }
+        finally
+        {
+            AuthenticationContextHolder.clearContext();
         }
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();

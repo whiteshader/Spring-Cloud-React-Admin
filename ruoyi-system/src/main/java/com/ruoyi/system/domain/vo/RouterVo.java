@@ -47,11 +47,6 @@ public class RouterVo
     private Boolean alwaysShow;
 
     /**
-     * 路由权限
-     */
-    private String perms;
-
-    /**
      * 其他元素
      */
     private MetaVo meta;
@@ -129,14 +124,6 @@ public class RouterVo
     public void setAlwaysShow(Boolean alwaysShow)
     {
         this.alwaysShow = alwaysShow;
-    }
-    
-    public String getPerms() {
-        return perms;
-    }
-
-    public void setPerms(String perms) {
-        this.perms = perms;
     }
 
     public MetaVo getMeta()
