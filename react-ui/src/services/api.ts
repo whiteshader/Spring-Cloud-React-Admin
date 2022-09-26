@@ -3,15 +3,15 @@
 import request from '@/utils/request';
 
 
-/** 此处后端没有提供注释 GET /api/notices */
+/** 此处后端没有提供注释 GET /notices */
 export async function getNotices (options?: { [key: string]: any }) {
-  return request<API.NoticeIconList>('/api/notices', {
+  return request<API.NoticeIconList>('/notices', {
     method: 'GET',
     ...(options || {}),
   });
 }
 
-/** 获取规则列表 GET /api/rule */
+/** 获取规则列表 GET /rule */
 export async function rule (
   params: {
     // query
@@ -22,7 +22,7 @@ export async function rule (
   },
   options?: { [key: string]: any },
 ) {
-  return request<API.RuleList>('/api/rule', {
+  return request<API.RuleList>('/rule', {
     method: 'GET',
     params: {
       ...params,
@@ -31,25 +31,25 @@ export async function rule (
   });
 }
 
-/** 新建规则 PUT /api/rule */
+/** 新建规则 PUT /rule */
 export async function updateRule (options?: { [key: string]: any }) {
-  return request<API.RuleListItem>('/api/rule', {
+  return request<API.RuleListItem>('/rule', {
     method: 'PUT',
     ...(options || {}),
   });
 }
 
-/** 新建规则 POST /api/rule */
+/** 新建规则 POST /rule */
 export async function addRule (options?: { [key: string]: any }) {
-  return request<API.RuleListItem>('/api/rule', {
+  return request<API.RuleListItem>('/rule', {
     method: 'POST',
     ...(options || {}),
   });
 }
 
-/** 删除规则 DELETE /api/rule */
+/** 删除规则 DELETE /rule */
 export async function removeRule (options?: { [key: string]: any }) {
-  return request<Record<string, any>>('/api/rule', {
+  return request<Record<string, any>>('/rule', {
     method: 'DELETE',
     ...(options || {}),
   });

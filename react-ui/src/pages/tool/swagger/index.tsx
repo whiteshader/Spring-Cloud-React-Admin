@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-
+import defaultSettings from '../../../../config/defaultSettings';
 
 /**
  *
@@ -24,7 +24,7 @@ const CacheInfo: React.FC = () => {
         style={{ width: '100%', border: '0px', height: '100%' }}
         // frameborder={'0'}
         scrolling="yes"
-        src={'/api/swagger-ui/index.html'}
+        src={`${defaultSettings.apiBasePath}/swagger-ui/index.html`}
         id="bdIframe"
       ></iframe>
     </div>

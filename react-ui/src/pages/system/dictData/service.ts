@@ -13,7 +13,7 @@ import type { DictDataType, DictDataListParams } from './data.d';
 // 查询字典数据列表
 export async function getDictDataList(params?: DictDataListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/dict/data/list?${queryString}`, {
+  return request(`/system/dict/data/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -24,14 +24,14 @@ export async function getDictDataList(params?: DictDataListParams) {
 
 // 查询字典数据详细
 export function getDictData(dictCode: string) {
-  return request(`/api/system/dict/data/${dictCode}`, {
+  return request(`/system/dict/data/${dictCode}`, {
     method: 'GET',
   });
 }
 
 // 新增字典数据
 export async function addDictData(params: DictDataType) {
-  return request('/api/system/dict/data', {
+  return request('/system/dict/data', {
     method: 'POST',
     data: params,
   });
@@ -39,7 +39,7 @@ export async function addDictData(params: DictDataType) {
 
 // 修改字典数据
 export async function updateDictData(params: DictDataType) {
-  return request('/api/system/dict/data', {
+  return request('/system/dict/data', {
     method: 'PUT',
     data: params,
   });
@@ -47,7 +47,7 @@ export async function updateDictData(params: DictDataType) {
 
 // 删除字典数据
 export async function removeDictData(ids: string) {
-  return request(`/api/system/dict/data/${ids}`, {
+  return request(`/system/dict/data/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -57,5 +57,5 @@ export async function removeDictData(ids: string) {
 
 // 导出字典数据
 export function exportDictData(params?: DictDataListParams) {
-  return downLoadXlsx(`/api/system/dict/data/export`, { params }, `dict_data_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/system/dict/data/export`, { params }, `dict_data_${new Date().getTime()}.xlsx`);
 }

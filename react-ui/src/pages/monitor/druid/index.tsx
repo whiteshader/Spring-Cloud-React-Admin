@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import defaultSettings from '../../../../config/defaultSettings';
 
 /* *
  *
@@ -24,7 +25,7 @@ const DruidInfo: React.FC = () => {
       style={{ width: '100%', border: '0px', height: '100%' }}
       // frameborder={'0'}
       scrolling="yes"
-      src={'/api/druid/login.html'}
+      src={`${defaultSettings.apiBasePath}/druid/login.html`}
       id="bdIframe"
     ></iframe>
     // </WrapContent>

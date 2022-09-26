@@ -14,7 +14,7 @@ import type { UserType, UserListParams } from './data.d';
 // 查询用户信息列表
 export async function getUserList(params?: UserListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/user/list?${queryString}`, {
+  return request(`/system/user/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -25,14 +25,14 @@ export async function getUserList(params?: UserListParams) {
 
 // 查询用户信息详细
 export function getUser(userId: number) {
-  return request(`/api/system/user/${userId}`, {
+  return request(`/system/user/${userId}`, {
     method: 'GET',
   });
 }
 
 // 新增用户信息
 export async function addUser(params: UserType) {
-  return request('/api/system/user', {
+  return request('/system/user', {
     method: 'POST',
     data: params,
   });
@@ -40,7 +40,7 @@ export async function addUser(params: UserType) {
 
 // 修改用户信息
 export async function updateUser(params: UserType) {
-  return request('/api/system/user', {
+  return request('/system/user', {
     method: 'PUT',
     data: params,
   });
@@ -48,7 +48,7 @@ export async function updateUser(params: UserType) {
 
 // 删除用户信息
 export async function removeUser(ids: string) {
-  return request(`/api/system/user/${ids}`, {
+  return request(`/system/user/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -58,11 +58,11 @@ export async function removeUser(ids: string) {
 
 // 导出用户信息
 export function exportUser(params?: UserListParams) {
-  return downLoadXlsx(`/api/system/user/export`, { params }, `user_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/system/user/export`, { params }, `user_${new Date().getTime()}.xlsx`);
 }
 
 export function updateUserProfile(data: API.CurrentUser) {
-  return request('/api/system/user/profile', {
+  return request('/system/user/profile', {
     method: 'put',
     data: data
   })
@@ -74,7 +74,7 @@ export function updateUserPwd(oldPassword: string, newPassword: string) {
     oldPassword,
     newPassword
   }
-  return request('/api/system/user/profile/updatePwd', {
+  return request('/system/user/profile/updatePwd', {
     method: 'put',
     params: data
   })
@@ -82,7 +82,7 @@ export function updateUserPwd(oldPassword: string, newPassword: string) {
 
 // 用户头像上传
 export function uploadAvatar(data: any) {
-  return request('/api/system/user/profile/avatar', {
+  return request('/system/user/profile/avatar', {
     method: 'post',
     data: data
   })

@@ -5,6 +5,7 @@ import { history } from 'umi';
 import { message, notification } from 'antd';
 import { clearSessionToken, getAccessToken, getRefreshToken, getTokenExpireTime } from '../access';
 import { LoginPageUrl } from './utils';
+import defaultSettings from '../../config/defaultSettings';
 
 const codeMessage: Record<number, string> = {
   10000: '系统未知错误，请反馈给管理员',
@@ -50,6 +51,7 @@ function createClient () {
   return extend({
     errorHandler, // 默认错误处理
     credentials: 'include', // 默认请求是否带上cookie
+    prefix: defaultSettings.apiBasePath
   });
 }
 

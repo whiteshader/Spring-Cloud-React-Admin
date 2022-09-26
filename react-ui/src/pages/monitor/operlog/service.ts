@@ -13,7 +13,7 @@ import type { OperlogType, OperlogListParams } from './data.d';
 // 查询操作日志记录列表
 export async function getOperlogList(params?: OperlogListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/operlog/list?${queryString}`, {
+  return request(`/monitor/operlog/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -24,14 +24,14 @@ export async function getOperlogList(params?: OperlogListParams) {
 
 // 查询操作日志记录详细
 export function getOperlog(operId: number) {
-  return request(`/api/monitor/operlog/${operId}`, {
+  return request(`/monitor/operlog/${operId}`, {
     method: 'GET',
   });
 }
 
 // 新增操作日志记录
 export async function addOperlog(params: OperlogType) {
-  return request('/api/monitor/operlog', {
+  return request('/monitor/operlog', {
     method: 'POST',
     data: params,
   });
@@ -39,7 +39,7 @@ export async function addOperlog(params: OperlogType) {
 
 // 修改操作日志记录
 export async function updateOperlog(params: OperlogType) {
-  return request('/api/monitor/operlog', {
+  return request('/monitor/operlog', {
     method: 'PUT',
     data: params,
   });
@@ -47,7 +47,7 @@ export async function updateOperlog(params: OperlogType) {
 
 // 删除操作日志记录
 export async function removeOperlog(ids: string) {
-  return request(`/api/monitor/operlog/${ids}`, {
+  return request(`/monitor/operlog/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -57,12 +57,12 @@ export async function removeOperlog(ids: string) {
 
 // 导出操作日志记录
 export function exportOperlog(params?: OperlogListParams) {
-  return downLoadXlsx(`/api/monitor/operlog/export`, { params }, `oper_log_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/monitor/operlog/export`, { params }, `oper_log_${new Date().getTime()}.xlsx`);
 }
 
 // 清空操作日志
 export async function cleanOperlog() {
-  return request('/api/monitor/operlog/clean', {
+  return request('/monitor/operlog/clean', {
     method: 'DELETE',
   });
 }

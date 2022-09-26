@@ -14,7 +14,7 @@ import type { LogininforType, LogininforListParams } from './data.d';
 // 查询系统访问记录列表
 export async function getLogininforList(params?: LogininforListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/logininfor/list?${queryString}`, {
+  return request(`/monitor/logininfor/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -25,14 +25,14 @@ export async function getLogininforList(params?: LogininforListParams) {
 
 // 查询系统访问记录详细
 export function getLogininfor(infoId: number) {
-  return request(`/api/monitor/logininfor/${infoId}`, {
+  return request(`/monitor/logininfor/${infoId}`, {
     method: 'GET',
   });
 }
 
 // 新增系统访问记录
 export async function addLogininfor(params: LogininforType) {
-  return request('/api/monitor/logininfor', {
+  return request('/monitor/logininfor', {
     method: 'POST',
     data: params,
   });
@@ -40,7 +40,7 @@ export async function addLogininfor(params: LogininforType) {
 
 // 修改系统访问记录
 export async function updateLogininfor(params: LogininforType) {
-  return request('/api/monitor/logininfor', {
+  return request('/monitor/logininfor', {
     method: 'PUT',
     data: params,
   });
@@ -48,7 +48,7 @@ export async function updateLogininfor(params: LogininforType) {
 
 // 删除系统访问记录
 export async function removeLogininfor(ids: string) {
-  return request(`/api/monitor/logininfor/${ids}`, {
+  return request(`/monitor/logininfor/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -58,12 +58,12 @@ export async function removeLogininfor(ids: string) {
 
 // 导出系统访问记录
 export function exportLogininfor(params?: LogininforListParams) {
-  return downLoadXlsx(`/api/monitor/logininfor/export`, { params }, `login_infor_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/monitor/logininfor/export`, { params }, `login_infor_${new Date().getTime()}.xlsx`);
 }
 
 // 清空登录日志
 export async function cleanLogininfor() {
-  return request('/api/monitor/logininfor/clean', {
+  return request('/monitor/logininfor/clean', {
     method: 'DELETE',
   });
 }

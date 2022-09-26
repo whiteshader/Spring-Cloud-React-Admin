@@ -13,7 +13,7 @@ import type { DictTypeType, DictTypeListParams } from './data.d';
 // 查询字典类型列表
 export async function getDictTypeList(params?: DictTypeListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/system/dict/type/list?${queryString}`, {
+  return request(`/system/dict/type/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -24,21 +24,21 @@ export async function getDictTypeList(params?: DictTypeListParams) {
 
 // 查询字典类型详细
 export function getDictType(dictId: string) {
-  return request(`/api/system/dict/type/${dictId}`, {
+  return request(`/system/dict/type/${dictId}`, {
     method: 'GET',
   });
 }
 
 // 查询字典数据详细
 export function getDict(dictType: string) {
-  return request(`/api/system/dict/data/type/${dictType}`, {
+  return request(`/system/dict/data/type/${dictType}`, {
     method: 'GET',
   });
 }
 
 // 新增字典类型
 export async function addDictType(params: DictTypeType) {
-  return request('/api/system/dict/type', {
+  return request('/system/dict/type', {
     method: 'POST',
     data: params,
   });
@@ -46,7 +46,7 @@ export async function addDictType(params: DictTypeType) {
 
 // 修改字典类型
 export async function updateDictType(params: DictTypeType) {
-  return request('/api/system/dict/type', {
+  return request('/system/dict/type', {
     method: 'PUT',
     data: params,
   });
@@ -54,7 +54,7 @@ export async function updateDictType(params: DictTypeType) {
 
 // 删除字典类型
 export async function removeDictType(ids: string) {
-  return request(`/api/system/dict/type/${ids}`, {
+  return request(`/system/dict/type/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -64,5 +64,5 @@ export async function removeDictType(ids: string) {
 
 // 导出字典类型
 export function exportDictType(params?: DictTypeListParams) {
-  return downLoadXlsx(`/api/system/dict/type/export`, { params }, `dict_type_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/system/dict/type/export`, { params }, `dict_type_${new Date().getTime()}.xlsx`);
 }

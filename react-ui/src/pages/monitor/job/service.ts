@@ -13,7 +13,7 @@ import type { JobType, JobListParams } from './data.d';
 // 查询定时任务调度列表
 export async function getJobList(params?: JobListParams) {
   const queryString = new URLSearchParams(params).toString();
-  return request(`/api/monitor/job/list?${queryString}`, {
+  return request(`/monitor/job/list?${queryString}`, {
     data: params,
     method: 'GET',
     headers: {
@@ -24,14 +24,14 @@ export async function getJobList(params?: JobListParams) {
 
 // 查询定时任务调度详细
 export function getJob(jobId: number) {
-  return request(`/api/monitor/job/${jobId}`, {
+  return request(`/monitor/job/${jobId}`, {
     method: 'GET',
   });
 }
 
 // 新增定时任务调度
 export async function addJob(params: JobType) {
-  return request('/api/monitor/job', {
+  return request('/monitor/job', {
     method: 'POST',
     data: params,
   });
@@ -39,7 +39,7 @@ export async function addJob(params: JobType) {
 
 // 修改定时任务调度
 export async function updateJob(params: JobType) {
-  return request('/api/monitor/job', {
+  return request('/monitor/job', {
     method: 'PUT',
     data: params,
   });
@@ -47,7 +47,7 @@ export async function updateJob(params: JobType) {
 
 // 删除定时任务调度
 export async function removeJob(ids: string) {
-  return request(`/api/monitor/job/${ids}`, {
+  return request(`/monitor/job/${ids}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
@@ -57,7 +57,7 @@ export async function removeJob(ids: string) {
 
 // 导出定时任务调度
 export function exportJob(params?: JobListParams) {
-  return downLoadXlsx(`/api/monitor/job/export`, { params }, `job_${new Date().getTime()}.xlsx`);
+  return downLoadXlsx(`/monitor/job/export`, { params }, `job_${new Date().getTime()}.xlsx`);
 }
 
 // 定时任务立即执行一次
@@ -66,7 +66,7 @@ export async function runJob(jobId: number, jobGroup: string) {
     jobId,
     jobGroup,
   };
-  return request('/api/monitor/job/run', {
+  return request('/monitor/job/run', {
     method: 'PUT',
     data: job,
   });

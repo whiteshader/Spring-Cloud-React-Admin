@@ -4,6 +4,7 @@ const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
   tabsLayout?: boolean;
+  apiBasePath?: string;
 } = {
   navTheme: 'light',
   headerTheme: 'light',
@@ -18,7 +19,8 @@ const Settings: LayoutSettings & {
   pwa: false,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
-  tabsLayout: true,
+  tabsLayout: true,  
+  apiBasePath: '/api',
 };
 
 export default Settings;

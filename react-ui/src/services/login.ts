@@ -1,6 +1,6 @@
-import request from 'umi-request';
+import request from '@/utils/request';
 
-/** 发送验证码 POST /api/login/captcha */
+/** 发送验证码 POST /login/captcha */
 export async function getFakeCaptcha (
   params: {
     // query
@@ -9,7 +9,7 @@ export async function getFakeCaptcha (
   },
   options?: Record<string, any>,
 ) {
-  return request<API.FakeCaptcha>('/api/login/captcha', {
+  return request<API.FakeCaptcha>('/login/captcha', {
     method: 'GET',
     params: {
       ...params,
@@ -19,9 +19,9 @@ export async function getFakeCaptcha (
 }
 
 
-/** 登录接口 POST /api/login/account */
+/** 登录接口 POST /login/account */
 export async function login (body: API.LoginParams, options?: Record<string, any>) {
-  return request<API.LoginResult>('/api/login', {
+  return request<API.LoginResult>('/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -33,7 +33,7 @@ export async function login (body: API.LoginParams, options?: Record<string, any
 
 // 获取验证码
 export async function getCaptchaImage () {
-  return request('/api/captchaImage', {
+  return request('/captchaImage', {
     headers: {
     },
   })
@@ -41,5 +41,5 @@ export async function getCaptchaImage () {
 
 // 获取手机验证码
 export async function getMobileCaptcha (mobile: string) {
-  return request(`/api/login/captcha?mobile=${mobile}`);
+  return request(`/login/captcha?mobile=${mobile}`);
 }

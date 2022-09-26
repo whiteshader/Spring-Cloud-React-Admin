@@ -2,17 +2,17 @@ import { createIcon } from '@/utils/IconUtil';
 import request from '@/utils/request'
 import type { MenuDataItem } from '@umijs/route-utils';
 
-/** 获取当前的用户 GET /api/getUserInfo */
+/** 获取当前的用户 GET /getUserInfo */
 export async function getUserInfo (options?: Record<string, any>) {
-  return request<API.GetUserInfoResult>('/api/getInfo', {
+  return request<API.GetUserInfoResult>('/getInfo', {
     method: 'GET',
     ...(options || {}),
   });
 }
 
-/** 退出登录接口 POST /api/login/outLogin */
+/** 退出登录接口 POST /login/outLogin */
 export async function logout (options?: Record<string, any>) {
-  return request<Record<string, any>>('/api/logout', {
+  return request<Record<string, any>>('/logout', {
     method: 'POST',
     ...(options || {}),
   });
@@ -20,7 +20,7 @@ export async function logout (options?: Record<string, any>) {
 
 
 export async function getRouters(): Promise<API.GetRoutersResult> {
-  return request('/api/getRouters');
+  return request('/getRouters');
 }
 
 export function convertCompatRouters(childrens: API.RoutersMenuItem[]): MenuDataItem[] {
