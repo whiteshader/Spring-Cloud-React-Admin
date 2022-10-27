@@ -26,7 +26,7 @@ const CacheInfo: React.FC = () => {
         scrolling="yes"
         src={`${defaultSettings.apiBasePath}/swagger-ui/index.html`}
         id="bdIframe"
-      ></iframe>
+       />
     </div>
   );
 };

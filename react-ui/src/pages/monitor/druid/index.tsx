@@ -27,7 +27,7 @@ const DruidInfo: React.FC = () => {
       scrolling="yes"
       src={`${defaultSettings.apiBasePath}/druid/login.html`}
       id="bdIframe"
-    ></iframe>
+     />
     // </WrapContent>
   );
 };
