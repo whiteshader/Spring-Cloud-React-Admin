@@ -177,20 +177,19 @@ insert into sys_menu values('102',  '菜单管理', '1',   '3', 'menu',       's
 insert into sys_menu values('103',  '部门管理', '1',   '4', 'dept',       'system/dept/index',        '', 1, 0, 'C', '0', '0', 'system:dept:list',        'ApartmentOutlined',          'admin', sysdate(), '', null, '部门管理菜单');
 insert into sys_menu values('104',  '岗位管理', '1',   '5', 'post',       'system/post/index',        '', 1, 0, 'C', '0', '0', 'system:post:list',        'AppstoreAddOutlined',          'admin', sysdate(), '', null, '岗位管理菜单');
 insert into sys_menu values('105',  '字典管理', '1',   '6', 'dict',       'system/dict/index',        '', 1, 0, 'C', '0', '0', 'system:dict:list',        'BookOutlined',          'admin', sysdate(), '', null, '字典管理菜单');
-insert into sys_menu values('106',  '字典数据', '1',   '7', 'dictData', 'system/dictData/index',    '', 1, 0, 'C', '1', '0',    'system:dict:list',       'FolderAddOutlined',      'admin', sysdate(), '', null, '字典数据管理菜单');
-insert into sys_menu values('107',  '参数设置', '1',   '8', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'ProfileOutlined',          'admin', sysdate(), '', null, '参数设置菜单');
-insert into sys_menu values('108',  '通知公告', '1',   '9', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'NotificationOutlined',       'admin', sysdate(), '', null, '通知公告菜单');
-insert into sys_menu values('109',  '日志管理', '1',   '10', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                       'BlockOutlined',           'admin', sysdate(), '', null, '日志管理菜单');
-insert into sys_menu values('110',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'LoginOutlined',        'admin', sysdate(), '', null, '在线用户菜单');
-insert into sys_menu values('111',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'ClockCircleOutlined',           'admin', sysdate(), '', null, '定时任务菜单');
-insert into sys_menu values('112',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'ConsoleSqlOutlined',         'admin', sysdate(), '', null, '数据监控菜单');
-insert into sys_menu values('113',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'DesktopOutlined',        'admin', sysdate(), '', null, '服务监控菜单');
-insert into sys_menu values('114',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'MonitorOutlined',         'admin', sysdate(), '', null, '缓存监控菜单');
-insert into sys_menu values('115',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'MonitorOutlined',    'admin', sysdate(), '', null, '缓存列表菜单');
-insert into sys_menu values('116',  '表单构建', '3',   '1', 'build',      'tool/builder/index',       '', 1, 0, 'C', '0', '0', 'tool:build:list',         'BlockOutlined',         'admin', sysdate(), '', null, '表单构建菜单');
-insert into sys_menu values('117',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'PrinterOutlined',          'admin', sysdate(), '', null, '代码生成菜单');
-insert into sys_menu values('118',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'ApiOutlined',       'admin', sysdate(), '', null, '系统接口菜单');
-
+insert into sys_menu values('106',  '参数设置', '1',   '8', 'config',     'system/config/index',      '', 1, 0, 'C', '0', '0', 'system:config:list',      'ProfileOutlined',          'admin', sysdate(), '', null, '参数设置菜单');
+insert into sys_menu values('107',  '通知公告', '1',   '9', 'notice',     'system/notice/index',      '', 1, 0, 'C', '0', '0', 'system:notice:list',      'NotificationOutlined',       'admin', sysdate(), '', null, '通知公告菜单');
+insert into sys_menu values('108',  '日志管理', '1',   '10', 'log',        '',                         '', 1, 0, 'M', '0', '0', '',                       'BlockOutlined',           'admin', sysdate(), '', null, '日志管理菜单');
+insert into sys_menu values('109',  '在线用户', '2',   '1', 'online',     'monitor/online/index',     '', 1, 0, 'C', '0', '0', 'monitor:online:list',     'LoginOutlined',        'admin', sysdate(), '', null, '在线用户菜单');
+insert into sys_menu values('110',  '定时任务', '2',   '2', 'job',        'monitor/job/index',        '', 1, 0, 'C', '0', '0', 'monitor:job:list',        'ClockCircleOutlined',           'admin', sysdate(), '', null, '定时任务菜单');
+insert into sys_menu values('111',  '数据监控', '2',   '3', 'druid',      'monitor/druid/index',      '', 1, 0, 'C', '0', '0', 'monitor:druid:list',      'ConsoleSqlOutlined',         'admin', sysdate(), '', null, '数据监控菜单');
+insert into sys_menu values('112',  '服务监控', '2',   '4', 'server',     'monitor/server/index',     '', 1, 0, 'C', '0', '0', 'monitor:server:list',     'DesktopOutlined',        'admin', sysdate(), '', null, '服务监控菜单');
+insert into sys_menu values('113',  '缓存监控', '2',   '5', 'cache',      'monitor/cache/index',      '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'MonitorOutlined',         'admin', sysdate(), '', null, '缓存监控菜单');
+insert into sys_menu values('114',  '缓存列表', '2',   '6', 'cacheList',  'monitor/cache/list',       '', 1, 0, 'C', '0', '0', 'monitor:cache:list',      'MonitorOutlined',    'admin', sysdate(), '', null, '缓存列表菜单');
+insert into sys_menu values('115',  '表单构建', '3',   '1', 'build',      'tool/builder/index',       '', 1, 0, 'C', '0', '0', 'tool:build:list',         'BlockOutlined',         'admin', sysdate(), '', null, '表单构建菜单');
+insert into sys_menu values('116',  '代码生成', '3',   '2', 'gen',        'tool/gen/index',           '', 1, 0, 'C', '0', '0', 'tool:gen:list',           'PrinterOutlined',          'admin', sysdate(), '', null, '代码生成菜单');
+insert into sys_menu values('117',  '系统接口', '3',   '3', 'swagger',    'tool/swagger/index',       '', 1, 0, 'C', '0', '0', 'tool:swagger:list',       'ApiOutlined',       'admin', sysdate(), '', null, '系统接口菜单');
+insert into sys_menu values('118',  '字典数据', '1',   '7', 'dictData', 'system/dictData/index',    '', 1, 0, 'C', '1', '0',    'system:dict:list',       'FolderAddOutlined',      'admin', sysdate(), '', null, '字典数据管理菜单');
 
 -- 三级菜单
 insert into sys_menu values('500',  '操作日志', '108', '1', 'operlog',    'monitor/operlog/index',    '', 1, 0, 'C', '0', '0', 'monitor:operlog:list',    'FileOutlined',          'admin', sysdate(), '', null, '操作日志菜单');
