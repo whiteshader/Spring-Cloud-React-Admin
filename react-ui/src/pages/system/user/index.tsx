@@ -17,11 +17,11 @@ import {
   updateUser,
   exportUser,
   updateUserPwd,
+  getDeptTree,
 } from './service';
 import UpdateForm from './components/edit';
 import { getDict } from '../dict/service';
 import ResetPwd from './components/ResetPwd';
-import { getTreeList as getDeptTreeList } from '../dept/service';
 import DeptTree from './components/DeptTree';
 import type { DataNode } from 'antd/lib/tree';
 import { getPostList } from '../post/service';
@@ -263,7 +263,7 @@ const UserTableList: React.FC = () => {
               );
             };
             fetchUserInfo(record.userId);
-            getDeptTreeList({}).then((treeData) => {
+            getDeptTree({}).then((treeData) => {
               setDeptTree(treeData);
             });
             setModalVisible(true);
@@ -350,7 +350,7 @@ const UserTableList: React.FC = () => {
                   if (selectDept.id === '' || selectDept.id == null) {
                     message.warning('请选择左侧父级节点');
                   } else {
-                    getDeptTreeList({}).then((treeData) => {
+                    getDeptTree({}).then((treeData) => {
                       setDeptTree(treeData);
                       setCurrentRow(undefined);
                       setModalVisible(true);

@@ -1,5 +1,7 @@
 import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
+import { formatTreeSelectData } from '@/utils/utils';
+import type { DataNode } from 'antd/lib/tree';
 import type { UserType, UserListParams } from './data.d';
 
 
@@ -86,4 +88,21 @@ export function uploadAvatar(data: any) {
     method: 'post',
     data: data
   })
+}
+
+// 获取数据列表
+export function getDeptTree(params: any): Promise<DataNode[]> {
+  return new Promise((resolve) => {
+    const queryString = new URLSearchParams(params).toString();
+    request(`/system/user/deptTree?${queryString}`, {
+      method: 'get',
+    }).then((res) => {
+      if(res && res.code === 200) {
+        const treeData = formatTreeSelectData(res.data);
+        resolve(treeData);
+      } else {
+        resolve([]);
+      }
+    });
+  });
 }

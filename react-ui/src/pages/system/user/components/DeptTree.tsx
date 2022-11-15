@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { getTreeList } from '../../dept/service';
 import { Tree, message } from 'antd';
+import { getDeptTree } from '../service';
 
 const { DirectoryTree } = Tree;
 
@@ -24,7 +24,7 @@ const DeptTree: React.FC<TreeProps> = (props) => {
   const fetchDeptList = async () => {
     const hide = message.loading('正在查询');
     try {
-      await getTreeList({}).then((res: any) => {
+      await getDeptTree({}).then((res: any) => {
         const exKeys = [];
         exKeys.push('1');
         setTreeData(res);

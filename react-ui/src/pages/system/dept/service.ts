@@ -1,7 +1,5 @@
 import { downLoadXlsx } from '@/utils/downloadfile';
 import request from '@/utils/request';
-import { formatTreeSelectData } from '@/utils/utils';
-import type { DataNode } from 'antd/lib/tree';
 import type { DeptType, DeptListParams } from './data.d';
 
 
@@ -68,24 +66,4 @@ export async function removeDept(ids: string) {
 // 导出部门
 export function exportDept(params?: DeptListParams) {
   return downLoadXlsx(`/system/dept/export`, { params }, `dept_${new Date().getTime()}.xlsx`);
-}
-
-// 获取数据列表
-export function getTreeList(params: any): Promise<DataNode[]> {
-  return new Promise((resolve) => {
-    const queryString = new URLSearchParams(params).toString();
-    request(`/system/dept/treeselect?${queryString}`, {
-      method: 'get',
-      headers: {
-        'Content-Type': 'application/json;charset=UTF-8',
-      },
-    }).then((res) => {
-      if(res && res.code === 200) {
-        const treeData = formatTreeSelectData(res.data);
-        resolve(treeData);
-      } else {
-        resolve([]);
-      }
-    });
-  });
 }
