@@ -1,6 +1,7 @@
 ## 平台简介
 
-https://gitee.com/whiteshader/ruoyi-react
+项目链接：https://gitee.com/whiteshader/ruoyi-react
+相关项目：https://gitee.com/whiteshader/ruoyi-cloud-vben
 
 若依(Ruoyi-React)是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
