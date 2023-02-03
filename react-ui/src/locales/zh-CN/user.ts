@@ -8,7 +8,7 @@
 
 export default {
   'system.User.user_id': '用户ID',
-  'system.User.dept_id': '部门ID',
+  'system.User.dept_id': '归属部门',
   'system.User.user_name': '用户账号',
   'system.User.nick_name': '用户昵称',
   'system.User.user_type': '用户类型',

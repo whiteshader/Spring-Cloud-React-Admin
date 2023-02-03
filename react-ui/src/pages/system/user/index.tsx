@@ -483,7 +483,7 @@ const UserTableList: React.FC = () => {
           setModalVisible(false);
           setCurrentRow(undefined);
         }}
-        visible={modalVisible}
+        open={modalVisible}
         values={currentRow || {}}
         sexOptions={sexOptions}
         statusOptions={statusOptions}
