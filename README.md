@@ -94,7 +94,7 @@ http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
     </tr>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/up-4165d6440fe052ecfedc41a79e1a4248347.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-2776f20f9533b6f64dea24d50cf368680dd.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-2597f971a2ea3c8d2f1aaa5c1ffaf74af48.png"/></td>
     </tr>
     <tr>
         <td><img src="https://oscimg.oschina.net/oscnet/up-461d455a479088eaacfd700e15d9a07229f.png"/></td>
@@ -126,3 +126,6 @@ http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 ## 若依(Ruoyi-React)前后端分离交流群
 
 QQ群： [![加入QQ群](https://img.shields.io/badge/201396349-blue.svg)](https://jq.qq.com/?_wv=1027&k=u58VEEQK) 点击按钮入群。
+
+
+## 感谢捐赠的伙伴,谢谢你们的支持
