@@ -1,6 +1,7 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import { Menu } from 'antd';
+import WrapContent from '@/components/WrapContent';
 import BaseView from './components/base';
 import BindingView from './components/binding';
 import NotificationView from './components/notification';
@@ -77,35 +78,37 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <GridContent>
-      <div
-        className={styles.main}
-        ref={(ref) => {
-          if (ref) {
-            dom.current = ref;
-          }
-        }}
-      >
-        <div className={styles.leftMenu}>
-          <Menu
-            mode={initConfig.mode}
-            selectedKeys={[initConfig.selectKey]}
-            onClick={({ key }) => {
-              setInitConfig({
-                ...initConfig,
-                selectKey: key as SettingsStateKeys,
-              });
-            }}
-          >
-            {getMenu()}
-          </Menu>
+    <WrapContent>
+      <GridContent>
+        <div
+          className={styles.main}
+          ref={(ref) => {
+            if (ref) {
+              dom.current = ref;
+            }
+          }}
+        >
+          <div className={styles.leftMenu}>
+            <Menu
+              mode={initConfig.mode}
+              selectedKeys={[initConfig.selectKey]}
+              onClick={({ key }) => {
+                setInitConfig({
+                  ...initConfig,
+                  selectKey: key as SettingsStateKeys,
+                });
+              }}
+            >
+              {getMenu()}
+            </Menu>
+          </div>
+          <div className={styles.right}>
+            <div className={styles.title}>{menuMap[initConfig.selectKey]}</div>
+            {renderChildren()}
+          </div>
         </div>
-        <div className={styles.right}>
-          <div className={styles.title}>{menuMap[initConfig.selectKey]}</div>
-          {renderChildren()}
-        </div>
-      </div>
-    </GridContent>
+      </GridContent>
+    </WrapContent>
   );
 };
 export default Settings;
