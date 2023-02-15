@@ -179,7 +179,7 @@ export default [
       {
         name: 'dictData',
         icon: 'PartitionOutlined',
-        path: '/system/dictData/index/:id?',
+        path: '/system/dict-data/index/:id?',
         component: 'system/dictData/index',
         access: 'authorize',
         wrappers: ['@/components/KeepAlive'],
