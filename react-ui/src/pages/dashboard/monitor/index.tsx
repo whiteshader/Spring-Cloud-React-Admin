@@ -10,6 +10,7 @@ import Map from './components/Map';
 import ActiveChart from './components/ActiveChart';
 import { queryTags } from './service';
 import styles from './style.less';
+import WrapContent from '@/components/WrapContent';
 
 const { Countdown } = Statistic;
 
@@ -27,7 +28,7 @@ const Monitor: FC = () => {
   });
 
   return (
-    <GridContent>
+    <WrapContent>
       <>
         <Row gutter={24}>
           <Col xl={18} lg={24} md={24} sm={24} xs={24} style={{ marginBottom: 24 }}>
@@ -145,7 +146,7 @@ const Monitor: FC = () => {
           </Col>
         </Row>
       </>
-    </GridContent>
+    </WrapContent>
   );
 };
 
