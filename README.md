@@ -46,9 +46,9 @@
 
 Node：建议v16或以上
 
-安装依赖请支行：pnpm
+安装依赖请支行：pnpm i
 
-正常启动请运行: npm run start:dev
+正常启动请运行: pnpm run dev
 
 Mock测试模式请运行: npm run start
 

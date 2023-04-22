@@ -67,51 +67,6 @@ declare namespace API {
     email?: string;
   }
 
-  type Role = {
-    admin: boolean;
-    createBy: string;
-    createTime: string;
-    dataScope: string;
-    delFlag: string;
-    deptCheckStrictly: boolean;
-    deptIds: string;
-    flag: boolean;
-    menuCheckStrictly: boolean;
-    menuIds: string;
-    params: any;
-    remark: string;
-    roleId: number;
-    roleKey: string;
-    roleName: string;
-    roleSort: string;
-    searchValue: string;
-    status: string;
-    updateBy: string;
-    updateTime: string;
-  };
-
-  type Dept = {
-    ancestors?: string;
-    children: Array<Dept>;
-    delFlag?: string;
-    deptId?: number;
-    deptName?: string;
-    email?: string;
-    leader?: string;
-    orderNum?: string;
-    params: any;
-    parentId?: number;
-    parentName?: string;
-    phone?: string;
-    remark?: string;
-    searchValue?: string;
-    status?: string;
-    createBy?: string;
-    createTime?: Date;
-    updateBy?: string;
-    updateTime?: Date;
-  };
-
   type definitions_0 = null;
 
   type MenuItemMeta = {

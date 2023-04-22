@@ -44,10 +44,13 @@ declare namespace API {
   };
 
   type LoginResult = {
-    code?: number;
+    code: number;
     msg?: string;
-    token?: string;
     type?: string;
+    data?: {
+      access_token?: string;
+      expires_in?: number;
+    }
   };
 
   type NoticeIconItem = {

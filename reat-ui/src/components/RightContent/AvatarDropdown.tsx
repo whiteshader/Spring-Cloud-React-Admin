@@ -8,9 +8,10 @@ import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
 import { flushSync } from 'react-dom';
 import HeaderDropdown from '../HeaderDropdown';
-import { logout, setRemoteMenu } from '@/services/session';
+import { setRemoteMenu } from '@/services/session';
 import { PageEnum } from '@/enums/pagesEnums';
 import { clearSessionToken } from '@/access';
+import { logout } from '@/services/system/auth';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;

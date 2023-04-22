@@ -175,9 +175,6 @@ const UserForm: React.FC<UserFormProps> = (props) => {
           rules={[
             {
               required: true,
-              message: (
-                <FormattedMessage id="请输入用户账号！" defaultMessage="请输入用户账号！" />
-              ),
             },
           ]}
         />

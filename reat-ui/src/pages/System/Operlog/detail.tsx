@@ -21,7 +21,9 @@ const OperlogDetailForm: React.FC<OperlogFormProps> = (props) => {
   const { values, businessTypeOptions, operatorTypeOptions, statusOptions, } = props;
 
   const intl = useIntl();
-  const handleOk = () => {};
+  const handleOk = () => {
+    console.log("handle ok");
+  };
   const handleCancel = () => {
     props.onCancel();
   };

@@ -26,7 +26,6 @@ public class SwaggerHandler
 
     private final SwaggerResourcesProvider swaggerResources;
 
-    @Autowired
     public SwaggerHandler(SwaggerResourcesProvider swaggerResources)
     {
         this.swaggerResources = swaggerResources;

@@ -50,6 +50,11 @@ export default [
         path: '/system/dict-data/index/:id',
         component: './System/DictData',
       },
+      {
+        name: '分配用户',
+        path: '/system/role-auth/user/:id',
+        component: './System/Role/authUser',
+      },     
     ]
   },
   {
@@ -67,6 +72,11 @@ export default [
     name: 'tool',
     path: '/tool',
     routes: [
+      {
+        name: '导入表',
+        path: '/tool/gen/import',
+        component: './Tool/Gen/import',
+      },      
     ]
   },
 ];

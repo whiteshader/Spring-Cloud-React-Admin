@@ -7,6 +7,7 @@ import { ActionType, FooterToolbar, PageContainer, ProColumns, ProTable } from '
 import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined, UnlockOutlined } from '@ant-design/icons';
 import { getLogininforList, removeLogininfor, exportLogininfor, unlockLogininfor, cleanLogininfor } from '@/services/monitor/logininfor';
 import DictTag from '@/components/DictTag';
+import { getDictValueEnum } from '@/services/system/dict';
 
 /**
  * 删除节点
@@ -93,33 +94,17 @@ const LogininforTableList: React.FC = () => {
 
   const actionRef = useRef<ActionType>();
   const [selectedRows, setSelectedRows] = useState<API.Monitor.Logininfor[]>([]);
+  const [statusOptions, setStatusOptions] = useState<any>([]);
 
   const access = useAccess();
-
-  const statusOptions = {
-    0: {
-      label: '成功',
-      key: '0',
-      value: '0',
-      text: '成功',
-      status: 'success',
-      listClass: 'success'
-    },
-    1: {
-      label: '失败',
-      key: '1',
-      value: '1',
-      text: '失败',
-      status: 'error',
-      listClass: 'danger'
-    },
-  };
 
   /** 国际化配置 */
   const intl = useIntl();
 
   useEffect(() => {
-
+    getDictValueEnum('sys_common_status', true).then((data) => {
+      setStatusOptions(data);
+    });
   }, []);
 
   const columns: ProColumns<API.Monitor.Logininfor>[] = [
@@ -161,6 +146,7 @@ const LogininforTableList: React.FC = () => {
       title: <FormattedMessage id="monitor.logininfor.status" defaultMessage="登录状态" />,
       dataIndex: 'status',
       valueType: 'select',
+      valueEnum: statusOptions,
       render: (_, record) => {
         return (<DictTag enums={statusOptions} value={record.status} />);
       },

@@ -84,22 +84,21 @@ export function patchRouteWithRemoteMenus(routes: any) {
 
 /** 获取当前的用户 GET /api/getUserInfo */
 export async function getUserInfo(options?: Record<string, any>) {
-  return request<API.UserInfoResult>('/api/getInfo', {
+  return request<API.UserInfoResult>('/api/system/user/getInfo', {
     method: 'GET',
     ...(options || {}),
   });
 }
 
-/** 退出登录接口 POST /api/login/outLogin */
-export async function logout(options?: Record<string, any>) {
-  return request<Record<string, any>>('/api/logout', {
-    method: 'POST',
-    ...(options || {}),
-  });
+// 刷新方法
+export async function refreshToken() {
+  return request('/api/auth/refresh', {
+    method: 'post'
+  })
 }
 
 export async function getRouters(): Promise<any> {
-  return request('/api/getRouters');
+  return request('/api/system/menu/getRouters');
 }
 
 export function convertCompatRouters(childrens: API.RoutersMenuItem[]): any[] {
