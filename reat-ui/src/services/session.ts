@@ -70,7 +70,6 @@ function patchRouteItems(route: any, menu: any, parentPath: string) {
 }
 
 export function patchRouteWithRemoteMenus(routes: any) {
-  // console.log('patchRouteWithRemoteMenus', routes, remoteMenu);
   if (remoteMenu === null) { return; }
   let proLayout = null;
   for (const routeItem of routes) {

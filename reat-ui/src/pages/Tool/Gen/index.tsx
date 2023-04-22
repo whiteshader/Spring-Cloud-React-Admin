@@ -1,5 +1,5 @@
 import { DownloadOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, message, Drawer, Modal, Card } from 'antd';
+import { Button, message, Drawer, Modal, Card, Layout } from 'antd';
 import type { FormInstance } from 'antd';
 import React, { useState, useRef } from 'react';
 import { history, FormattedMessage, useAccess } from '@umijs/max';
@@ -21,7 +21,6 @@ import {
   ProDescriptionsItemProps,
   ProTable,
 } from '@ant-design/pro-components';
-import { Layout } from 'antd';
 
 const { Content } = Layout;
 
