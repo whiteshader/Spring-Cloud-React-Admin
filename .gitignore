@@ -3,7 +3,6 @@
 
 .gradle
 /build/
-**/node_modules
 !gradle/wrapper/gradle-wrapper.jar
 
 target/
@@ -26,6 +25,8 @@ target/
 *.iml
 *.ipr
 
+### JRebel ###
+rebel.xml
 ### NetBeans ###
 nbproject/private/
 build/*
@@ -33,8 +34,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
-
-.vscode
 
 ######################################################################
 # Others
@@ -45,4 +44,3 @@ nbdist/
 !*/build/*.java
 !*/build/*.html
 !*/build/*.xml
-react-ui/public/avatar/
