@@ -1,7 +1,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess, history, useParams } from '@umijs/max';
-import { Button, message, Modal } from 'antd';
+import { Button, Modal, message } from 'antd';
 import { ActionType, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
 import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined, RollbackOutlined } from '@ant-design/icons';
 import { authUserSelectAll, authUserCancel, authUserCancelAll, allocatedUserList, unallocatedUserList } from '@/services/system/role';
@@ -128,8 +128,8 @@ const AuthUserTableList: React.FC = () => {
 					type="link"
 					size="small"
 					danger
+					icon={<DeleteOutlined />}
 					key="remove"
-					icon=<DeleteOutlined />
 					hidden={!access.hasPerms('system:role:remove')}
 					onClick={async () => {
 						Modal.confirm({

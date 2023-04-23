@@ -63,7 +63,7 @@ const handleRemoveOne = async (selectedRow: API.Monitor.JobLog) => {
 };
 
 /**
- * 导出数据
+ * 清空日志数据
  *
  */
 const handleExport = async () => {

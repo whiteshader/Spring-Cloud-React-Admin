@@ -33,11 +33,9 @@ const DeptTree: React.FC<TreeProps> = (props) => {
         props.onSelect(res[0].children[0]);
       });
       hide();
-      // message.success('数据查询成功');
       return true;
     } catch (error) {
       hide();
-      // message.error('数据查询失败');
       return false;
     }
   };

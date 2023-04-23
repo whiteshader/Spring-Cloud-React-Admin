@@ -1,15 +1,14 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useIntl, FormattedMessage, useAccess, history } from '@umijs/max';
-import { Dropdown, FormInstance, Space, Switch } from 'antd';
-import { Button, message, Modal } from 'antd';
+import { DataNode } from 'antd/es/tree';
+import { Button, message, Modal, Dropdown, FormInstance, Space, Switch } from 'antd';
 import { ActionType, FooterToolbar, PageContainer, ProColumns, ProTable } from '@ant-design/pro-components';
 import { PlusOutlined, EditOutlined, DeleteOutlined, ExclamationCircleOutlined, DownOutlined } from '@ant-design/icons';
 import { getRoleList, removeRole, addRole, updateRole, exportRole, getRoleMenuList, changeRoleStatus, updateRoleDataScope, getDeptTreeSelect, getRole } from '@/services/system/role';
 import UpdateForm from './edit';
 import { getDictValueEnum } from '@/services/system/dict';
 import { formatTreeData } from '@/utils/tree';
-import { DataNode } from 'antd/es/tree';
 import { getMenuTree } from '@/services/system/menu';
 import DataScopeForm from './components/DataScope';
 
@@ -302,7 +301,7 @@ const RoleTableList: React.FC = () => {
                 disabled: !access.hasPerms('system:role:edit'),
               },
             ],
-            onClick: ({ key }) => {
+            onClick: ({ key }: any) => {
               if (key === 'datascope') {
                 getRole(record.roleId).then(resp => {
                   if(resp.code === 200) {

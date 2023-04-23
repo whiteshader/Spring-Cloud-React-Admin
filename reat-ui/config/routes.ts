@@ -35,9 +35,14 @@ export default [
     path: '/account',
     routes: [
       {
-        name: 'login',
+        name: 'acenter',
         path: '/account/center',
         component: './User/Center',
+      },
+      {
+        name: 'asettings',
+        path: '/account/settings',
+        component: './User/Settings',
       },
     ],
   },
