@@ -2,9 +2,6 @@
 
 项目链接：https://gitee.com/whiteshader/ruoyi-react
 
-最近计划：3.0重构版
-https://my.oschina.net/u/5396559/blog/7671383
-
 相关项目：https://gitee.com/whiteshader/ruoyi-cloud-vben
 
 若依(Ruoyi-React)是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
