@@ -1,140 +1,97 @@
-// @ts-ignore
 /* eslint-disable */
+// 该文件由 OneAPI 自动生成，请勿手动修改！
 
 declare namespace API {
-  type Role = {
-    admin: boolean;
-    createBy: string;
-    createTime: string;
-    dataScope: string;
-    delFlag: string;
-    deptCheckStrictly: boolean;
-    deptIds: string;
-    flag: boolean;
-    menuCheckStrictly: boolean;
-    menuIds: string;
-    params: any;
-    remark: string;
-    roleId: number;
-    roleKey: string;
-    roleName: string;
-    roleSort: string;
-    searchValue: string;
-    status: string;
-    updateBy: string;
-    updateTime: string;
-  };
+  interface PageInfo {
+    current?: number;
+    pageSize?: number;
+    total?: number;
+    list?: Array<Record<string, any>>;
+  }
 
-  type Dept = {
-    ancestors?: string;
-    children: Array;
-    delFlag?: string;
-    deptId?: number;
-    deptName?: string;
-    email?: string;
-    leader?: string;
-    orderNum?: string;
-    params: any;
-    parentId?: number;
-    parentName?: string;
-    phone?: string;
-    remark?: string;
-    searchValue?: string;
-    status?: string;
-    createBy?: string;
-    createTime?: Date;
-    updateBy?: string;
-    updateTime?: Date;
-  };
+  interface PageInfo_UserInfo_ {
+    current?: number;
+    pageSize?: number;
+    total?: number;
+    list?: Array<UserInfo>;
+  }
 
-  type CurrentUser = {
-    avatar?: string;
+  interface Result {
+    code: number;
+    msg: string;
+    data?: Record<string, any>;
+  }
+
+  interface Result_PageInfo_UserInfo__ {
+    code: number;
+    msg: string;
+    data?: PageInfo_UserInfo_;
+  }
+  interface UserInfoResult {
+    code?: number;
+    msg?: string;
+    user: UserInfo;
+    permissions: any;
+    roles: any;
+  }
+
+  interface Result_string_ {
+    success?: boolean;
+    errorMessage?: string;
+    data?: string;
+  }
+
+  type UserGenderEnum = 'MALE' | 'FEMALE';
+
+  interface UserInfo {
+    userId?: string;
     userName?: string;
     nickName?: string;
-    userId?: string;
+    avatar?: string;
     sex?: string;
     email?: string;
-    signature?: string;
-    remark?: string;
-    title?: string;
-    group?: string;
-    tags?: { key?: string; label?: string }[];
-    notifyCount?: number;
-    unreadCount?: number;
-    country?: string;
-    access?: string;
-    geographic?: {
-      province?: { label?: string; key?: string };
-      city?: { label?: string; key?: string };
-    };
+    gender?: UserGenderEnum;
+    unreadCount: number;
     address?: string;
     phonenumber?: string;
     dept?: Dept;
     roles?: Role[];
     permissions: string[];
-  };
+  }
 
-  type LoginResult = {
-    code?: number;
-    msg?: string;
-    token?: string;
-  };
-
-  type GetUserInfoResult = {
-    code?: number;
-    msg?: string;
-    permissions?: string[];
-    roles?: string[];
-    user?: CurrentUser;
-  };
-
-  type PageParams = {
-    current?: number;
-    pageSize?: number;
-  };
-
-  type RuleListItem = {
-    key?: number;
-    disabled?: boolean;
-    href?: string;
-    avatar?: string;
+  interface UserInfoVO {
     name?: string;
-    owner?: string;
-    desc?: string;
-    callNo?: number;
-    status?: number;
-    updatedAt?: string;
-    createdAt?: string;
-    progress?: number;
+    /** nick */
+    nickName?: string;
+    /** email */
+    email?: string;
+  }
+
+  type definitions_0 = null;
+
+  type MenuItemMeta = {
+    title: string;
+    icon: string;
+    noCache: boolean;
+    link: string;
   };
 
-  type RuleList = {
-    data?: RuleListItem[];
-    /** 列表的内容总数 */
-    total?: number;
-    success?: boolean;
+  type RoutersMenuItem = {
+    alwaysShow?: boolean;
+    children?: RoutersMenuItem[];
+    component?: string;
+    hidden?: boolean;
+    meta: MenuItemMeta;
+    name: string;
+    path: string;
+    redirect?: string;
+    [key: string]: any;
   };
-
-  type FakeCaptcha = {
-    code?: number;
-    status?: string;
-  };
-
-  type LoginParams = {
-    username?: string;
-    password?: string;
-    code?: string;
-    uuid?: string;
-  };
-
-  type ErrorResponse = {
-    /** 业务约定的错误码 */
-    errorCode: string;
-    /** 业务上的错误信息 */
-    errorMessage?: string;
-    /** 业务上的请求是否成功 */
-    success?: boolean;
-  };
+  interface GetRoutersResult {
+    code: number;
+    msg: string;
+    data: RoutersMenuItem[];
+  }
 
   type NoticeIconList = {
     data?: NoticeIconItem[];
@@ -158,30 +115,77 @@ declare namespace API {
     type?: NoticeIconItemType;
   };
 
-
-  type MenuItemMeta = {
-    title: string;
-    icon: string;
-    noCache: boolean;
-    link: string;
-  };
-
-  type RoutersMenuItem = {
-    alwaysShow?: boolean;
-    children?: RoutersMenuItem[];
-    component?: string;
-    hidden?: boolean;
-    meta: MenuItemMeta;
-    name: string;
+  export type MenuType = {
+    menuId: number;
+    menuName: string;
+    parentId: string;
+    orderNum: number;
     path: string;
-    redirect?: string;
-    [key: string]: any;
+    component: string;
+    isFrame: number;
+    isCache: number;
+    menuType: string;
+    visible: string;
+    status: string;
+    perms: string;
+    icon: string;
+    createBy: string;
+    createTime: Date;
+    updateBy: string;
+    updateTime: Date;
+    remark: string;
   };
 
-  type GetRoutersResult = {
-    code: number;
-    msg: string;
-    data: RoutersMenuItem[];
+  export type MenuListParams = {
+    menuId?: string;
+    menuName?: string;
+    parentId?: string;
+    orderNum?: string;
+    path?: string;
+    component?: string;
+    isFrame?: string;
+    isCache?: string;
+    menuType?: string;
+    visible?: string;
+    status?: string;
+    perms?: string;
+    icon?: string;
+    createBy?: string;
+    createTime?: string;
+    updateBy?: string;
+    updateTime?: string;
+    remark?: string;
+    pageSize?: string;
+    currentPage?: string;
+    filter?: string;
+    sorter?: string;
+  };
+
+  export type DictTypeType = {
+    dictId: number;
+    dictName: string;
+    dictType: string;
+    status: string;
+    createBy: string;
+    createTime: Date;
+    updateBy: string;
+    updateTime: Date;
+    remark: string;
+  };
+
+  export type DictTypeListParams = {
+    dictId?: string;
+    dictName?: string;
+    dictType?: string;
+    status?: string;
+    createBy?: string;
+    createTime?: string;
+    updateBy?: string;
+    updateTime?: string;
+    remark?: string;
+    pageSize?: string;
+    currentPage?: string;
+    filter?: string;
+    sorter?: string;
   };
 }
-

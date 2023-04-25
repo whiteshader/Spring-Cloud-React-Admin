@@ -1,40 +1,101 @@
-.anticonsList {
-  margin: 6px 0;
+.iconPicSearcher {
+  display: inline-block;
+  margin: 0 8px;
+
+  .icon-pic-btn {
+    color: @text-color-secondary;
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      color: @input-icon-hover-color;
+    }
+  }
+}
+
+.icon-pic-preview {
+  width: 30px;
+  height: 30px;
+  margin-top: 10px;
+  padding: 8px;
+  text-align: center;
+  border: 1px solid @border-color-base;
+  border-radius: 4px;
+
+  > img {
+    max-width: 50px;
+    max-height: 50px;
+  }
+}
+
+.icon-pic-search-result {
+  min-height: 50px;
+  padding: 0 10px;
+
+  > .result-tip {
+    padding: 10px 0;
+    color: @text-color-secondary;
+  }
+
+  > table {
+    width: 100%;
+
+    .col-icon {
+      width: 80px;
+      padding: 10px 0;
+
+      > .anticon {
+        font-size: 30px;
+
+        :hover {
+          color: @link-hover-color;
+        }
+      }
+    }
+  }
+}
+
+ul.anticonsList {
+  margin: 2px 0;
   overflow: hidden;
   direction: ltr;
   list-style: none;
+
   li {
     position: relative;
     float: left;
-    width: 16.66%;
-    height: 60px;
-    margin: 30px 0;
-    padding: 4px 0 0;
+    width: 48px;
+    height: 48px;
+    margin: 3px 0;
+    padding: 2px 0 0;
     overflow: hidden;
     color: #555;
     text-align: center;
     list-style: none;
     background-color: inherit;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
     transition: color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+
     .rtl & {
-      margin: 2px 0;
-      padding: 3px 0 0;
+      margin: 3px 0;
+      padding: 2px 0 0;
     }
+
     .anticon {
-      margin: 2px 0 3px;
-      font-size: 26px;
+      margin: 4px 0 2px;
+      font-size: 24px;
       transition: transform 0.3s ease-in-out;
       will-change: transform;
     }
 
-    .anticonTitle {
+    .anticonClass {
       display: block;
       font-family: 'Lucida Console', Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
       white-space: nowrap;
       text-align: center;
       transform: scale(0.83);
+
       .ant-badge {
         transition: color 0.3s ease-in-out;
       }
@@ -43,9 +104,11 @@
     &:hover {
       color: #fff;
       background-color: @primary-color;
+
       .anticon {
         transform: scale(1.4);
       }
+
       .ant-badge {
         color: #fff;
       }
@@ -59,23 +122,16 @@
       color: rgba(255, 255, 255, 0.2);
     }
 
-    &::after {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      color: #fff;
-      line-height: 110px;
-      text-align: center;
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      content: 'Copied!';
-    }
-
     &.copied::after {
-      top: -10px;
+      top: -2px;
       opacity: 1;
     }
   }
+}
+
+.copied-code {
+  padding: 2px 4px;
+  font-size: 12px;
+  background: #f5f5f5;
+  border-radius: 2px;
 }

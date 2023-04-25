@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import { Upload, Tooltip, Popover, Modal, Progress, message, Spin, Result } from 'antd';
-import { injectIntl } from 'react-intl';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Upload, Tooltip, Popover, Modal, Progress, Spin, Result } from 'antd';
 import * as AntdIcons from '@ant-design/icons';
+import { useIntl } from '@umijs/max';
+import './style.less';
 
-const allIcons: {
-  [key: string]: any;
-} = AntdIcons;
+const allIcons: { [key: string]: any } = AntdIcons;
 
 const { Dragger } = Upload;
 interface AntdIconClassifier {
-  load: Function;
-  predict: Function;
+  load: () => void;
+  predict: (imgEl: HTMLImageElement) => void;
 }
 declare global {
   interface Window {
@@ -18,15 +17,11 @@ declare global {
   }
 }
 
-interface PicSearcherProps {
-  intl: any;
-}
-
 interface PicSearcherState {
   loading: boolean;
-  modalVisible: boolean;
+  modalOpen: boolean;
   popoverVisible: boolean;
-  icons: string[];
+  icons: iconObject[];
   fileList: any[];
   error: boolean;
   modelLoaded: boolean;
@@ -37,92 +32,76 @@ interface iconObject {
   score: number;
 }
 
-class PicSearcher extends Component<PicSearcherProps, PicSearcherState> {
-  state = {
+const PicSearcher: React.FC = () => {
+  const intl = useIntl();
+  const {formatMessage} = intl;
+  const [state, setState] = useState<PicSearcherState>({
     loading: false,
-    modalVisible: false,
+    modalOpen: false,
     popoverVisible: false,
     icons: [],
     fileList: [],
     error: false,
     modelLoaded: false,
+  });
+  const predict = (imgEl: HTMLImageElement) => {
+    try {
+      let icons: any[] = window.antdIconClassifier.predict(imgEl);
+      if (gtag && icons.length) {
+        gtag('event', 'icon', {
+          event_category: 'search-by-image',
+          event_label: icons[0].className,
+        });
+      }
+      icons = icons.map(i => ({ score: i.score, type: i.className.replace(/\s/g, '-') }));
+      setState(prev => ({ ...prev, loading: false, error: false, icons }));
+    } catch {
+      setState(prev => ({ ...prev, loading: false, error: true }));
+    }
   };
+  // eslint-disable-next-line class-methods-use-this
+  const toImage = (url: string) =>
+    new Promise(resolve => {
+      const img = new Image();
+      img.setAttribute('crossOrigin', 'anonymous');
+      img.src = url;
+      img.onload = () => {
+        resolve(img);
+      };
+    });
 
-  componentDidMount() {
-    this.loadModel();
-    this.setState({ popoverVisible: !localStorage.getItem('disableIconTip') });
-  }
-
-  componentWillUnmount() {
-    document.removeEventListener('paste', this.onPaste);
-  }
-
-  loadModel = () => {
-    const script = document.createElement('script');
-    script.onload = async () => {
-      await window.antdIconClassifier.load();
-      this.setState({ modelLoaded: true });
-      document.addEventListener('paste', this.onPaste);
+  const uploadFile = useCallback((file: File) => {
+    setState(prev => ({ ...prev, loading: true }));
+    const reader = new FileReader();
+    reader.onload = () => {
+      toImage(reader.result as string).then(predict);
+      setState(prev => ({
+        ...prev,
+        fileList: [{ uid: 1, name: file.name, status: 'done', url: reader.result }],
+      }));
     };
-    script.src = 'https://cdn.jsdelivr.net/gh/lewis617/antd-icon-classifier@0.0/dist/main.js';
-    document.head.appendChild(script);
-  };
+    reader.readAsDataURL(file);
+  }, []);
 
-  onPaste = (event: ClipboardEvent) => {
+  const onPaste = useCallback((event: ClipboardEvent) => {
     const items = event.clipboardData && event.clipboardData.items;
     let file = null;
     if (items && items.length) {
-      for (let i = 0; i < items.length; i += 1) {
-        if (items[i].type.indexOf('image') !== -1) {
+      for (let i = 0; i < items.length; i++) {
+        if (items[i].type.includes('image')) {
           file = items[i].getAsFile();
           break;
         }
       }
     }
-    if (file) this.uploadFile(file);
-  };
-
-  uploadFile = (file: File) => {
-    this.setState(() => ({ loading: true }));
-    const reader: FileReader = new FileReader();
-    reader.onload = () => {
-      this.toImage(reader.result).then(this.predict);
-      this.setState(() => ({
-        fileList: [{ uid: 1, name: file.name, status: 'done', url: reader.result }],
-      }));
-    };
-    reader.readAsDataURL(file);
-  };
-
-  toImage = (url: any) =>
-    new Promise((resolve) => {
-      const img = new Image();
-      img.setAttribute('crossOrigin', 'anonymous');
-      img.src = url;
-      img.onload = function onload() {
-        resolve(img);
-      };
-    });
-
-  predict = (imgEl: any) => {
-    try {
-      let icons = window.antdIconClassifier.predict(imgEl);
-      // if (gtag && icons.length >= 1) {
-      //   gtag('event', 'icon', {
-      //     event_category: 'search-by-image',
-      //     event_label: icons[0].className,
-      //   });
-      // }
-      icons = icons.map((i: any) => ({ score: i.score, type: i.className.replace(/\s/g, '-') }));
-      this.setState(() => ({ icons, loading: false, error: false }));
-    } catch (err) {
-      this.setState(() => ({ loading: false, error: true }));
+    if (file) {
+      uploadFile(file);
     }
-  };
-
-  toggleModal = () => {
-    this.setState((prev) => ({
-      modalVisible: !prev.modalVisible,
+  }, []);
+  const toggleModal = useCallback(() => {
+    setState(prev => ({
+      ...prev,
+      modalOpen: !prev.modalOpen,
       popoverVisible: false,
       fileList: [],
       icons: [],
@@ -130,119 +109,125 @@ class PicSearcher extends Component<PicSearcherProps, PicSearcherState> {
     if (!localStorage.getItem('disableIconTip')) {
       localStorage.setItem('disableIconTip', 'true');
     }
-  };
+  }, []);
 
-  onCopied = (text: string) => {
-    message.success(
-      <span>
-        <code className="copied-code">{text}</code> copied 🎉
-      </span>,
-    );
-  };
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.onload = async () => {
+      await window.antdIconClassifier.load();
+      setState(prev => ({ ...prev, modelLoaded: true }));
+      document.addEventListener('paste', onPaste);
+    };
+    script.src = 'https://cdn.jsdelivr.net/gh/lewis617/antd-icon-classifier@0.0/dist/main.js';
+    document.head.appendChild(script);
+    setState(prev => ({ ...prev, popoverVisible: !localStorage.getItem('disableIconTip') }));
+    return () => {
+      document.removeEventListener('paste', onPaste);
+    };
+  }, []);
 
-  render() {
-    const {
-      intl: { messages },
-    } = this.props;
-    const { modalVisible, popoverVisible, icons, fileList, loading, modelLoaded, error } =
-      this.state;
-    return (
-      <div className="icon-pic-searcher">
-        <Popover
-          content={messages[`app.docs.components.icon.pic-searcher.intro`]}
-          visible={popoverVisible}
+  return (
+    <div className="iconPicSearcher">
+      <Popover
+        content={formatMessage({id: 'app.docs.components.icon.pic-searcher.intro'})}
+        open={state.popoverVisible}
+      >
+        <AntdIcons.CameraOutlined className="icon-pic-btn" onClick={toggleModal} />
+      </Popover>
+      <Modal
+        title={intl.formatMessage({
+          id: 'app.docs.components.icon.pic-searcher.title',
+          defaultMessage: '信息',
+        })}
+        open={state.modalOpen}
+        onCancel={toggleModal}
+        footer={null}
+      >
+        {state.modelLoaded || (
+          <Spin
+            spinning={!state.modelLoaded}
+            tip={formatMessage({
+              id: 'app.docs.components.icon.pic-searcher.modelloading',
+
+            })}
+          >
+            <div style={{ height: 100 }} />
+          </Spin>
+        )}
+        {state.modelLoaded && (
+          <Dragger
+            accept="image/jpeg, image/png"
+            listType="picture"
+            customRequest={o => uploadFile(o.file as File)}
+            fileList={state.fileList}
+            showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
+          >
+            <p className="ant-upload-drag-icon">
+              <AntdIcons.InboxOutlined />
+            </p>
+            <p className="ant-upload-text">
+              {formatMessage({id: 'app.docs.components.icon.pic-searcher.upload-text'})}
+            </p>
+            <p className="ant-upload-hint">
+              {formatMessage({id: 'app.docs.components.icon.pic-searcher.upload-hint'})}
+            </p>
+          </Dragger>
+        )}
+        <Spin
+          spinning={state.loading}
+          tip={formatMessage({id: 'app.docs.components.icon.pic-searcher.matching'})}
         >
-          <AntdIcons.CameraOutlined className="icon-pic-btn" onClick={this.toggleModal} />
-        </Popover>
-        <Modal
-          title={messages[`app.docs.components.icon.pic-searcher.title`]}
-          visible={modalVisible}
-          onCancel={this.toggleModal}
-          footer={null}
-        >
-          {modelLoaded || (
-            <Spin
-              spinning={!modelLoaded}
-              tip={messages['app.docs.components.icon.pic-searcher.modelloading']}
-            >
-              <div style={{ height: 100 }} />
-            </Spin>
-          )}
-          {modelLoaded && (
-            <Dragger
-              accept="image/jpeg, image/png"
-              listType="picture"
-              customRequest={(o: any) => this.uploadFile(o.file)}
-              fileList={fileList}
-              showUploadList={{ showPreviewIcon: false, showRemoveIcon: false }}
-            >
-              <p className="ant-upload-drag-icon">
-                <AntdIcons.InboxOutlined />
-              </p>
-              <p className="ant-upload-text">
-                {messages['app.docs.components.icon.pic-searcher.upload-text']}
-              </p>
-              <p className="ant-upload-hint">
-                {messages['app.docs.components.icon.pic-searcher.upload-hint']}
-              </p>
-            </Dragger>
-          )}
-          <Spin spinning={loading} tip={messages['app.docs.components.icon.pic-searcher.matching']}>
-            <div className="icon-pic-search-result">
-              {icons.length > 0 && (
-                <div className="result-tip">
-                  {messages['app.docs.components.icon.pic-searcher.result-tip']}
-                </div>
+          <div className="icon-pic-search-result">
+            {state.icons.length > 0 && (
+              <div className="result-tip">
+                {formatMessage({id: 'app.docs.components.icon.pic-searcher.result-tip'})}
+              </div>
+            )}
+            <table>
+              {state.icons.length > 0 && (
+                <thead>
+                  <tr>
+                    <th className="col-icon">
+                      {formatMessage({id: 'app.docs.components.icon.pic-searcher.th-icon'})}
+                    </th>
+                    <th>{formatMessage({id: 'app.docs.components.icon.pic-searcher.th-score'})}</th>
+                  </tr>
+                </thead>
               )}
-              <table>
-                {icons.length > 0 && (
-                  <thead>
-                    <tr>
-                      <th className="col-icon">
-                        {messages['app.docs.components.icon.pic-searcher.th-icon']}
-                      </th>
-                      <th>{messages['app.docs.components.icon.pic-searcher.th-score']}</th>
-                    </tr>
-                  </thead>
-                )}
-                <tbody>
-                  {icons.map((icon: iconObject) => {
-                    const { type } = icon;
-                    const iconName = `${type
-                      .split('-')
-                      .map((str) => `${str[0].toUpperCase()}${str.slice(1)}`)
-                      .join('')}Outlined`;
-
-                    return (
-                      <tr key={iconName}>
-                        <td className="col-icon">
-                          {/* <CopyToClipboard text={`<${iconName} />`} onCopy={this.onCopied}> */}
+              <tbody>
+                {state.icons.map(icon => {
+                  const { type } = icon;
+                  const iconName = `${type
+                    .split('-')
+                    .map(str => `${str[0].toUpperCase()}${str.slice(1)}`)
+                    .join('')}Outlined`;
+                  return (
+                    <tr key={iconName}>
+                      <td className="col-icon">
                           <Tooltip title={icon.type} placement="right">
                             {React.createElement(allIcons[iconName])}
                           </Tooltip>
-                          {/* </CopyToClipboard> */}
-                        </td>
-                        <td>
-                          <Progress percent={Math.ceil(icon.score * 100)} />
-                        </td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              {error && (
-                <Result
-                  status="500"
-                  title="503"
-                  subTitle={messages['app.docs.components.icon.pic-searcher.server-error']}
-                />
-              )}
-            </div>
-          </Spin>
-        </Modal>
-      </div>
-    );
-  }
-}
+                      </td>
+                      <td>
+                        <Progress percent={Math.ceil(icon.score * 100)} />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            {state.error && (
+              <Result
+                status="500"
+                title="503"
+                subTitle={formatMessage({id: 'app.docs.components.icon.pic-searcher.server-error'})}
+              />
+            )}
+          </div>
+        </Spin>
+      </Modal>
+    </div>
+  );
+};
 
-export default injectIntl(PicSearcher);
+export default PicSearcher;

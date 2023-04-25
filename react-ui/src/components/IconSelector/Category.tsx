@@ -1,9 +1,8 @@
 import * as React from 'react';
-import { message } from 'antd';
-import { injectIntl } from 'react-intl';
 import CopyableIcon from './CopyableIcon';
 import type { ThemeType } from './index';
 import type { CategoriesKeys } from './fields';
+import { useIntl } from '@umijs/max';
 import styles from './style.less';
 
 interface CategoryProps {
@@ -11,68 +10,54 @@ interface CategoryProps {
   icons: string[];
   theme: ThemeType;
   newIcons: string[];
-  intl: any;
-  onSelect: (name: string) => any;
+  onSelect: (type: string, name: string) => any;
 }
 
-interface CategoryState {
-  justCopied: string | null;
-}
+const Category: React.FC<CategoryProps> = props => {
 
-class Category extends React.Component<CategoryProps, CategoryState> {
-  copyId?: number;
-
-  state = {
-    justCopied: null,
-  };
-
-  componentWillUnmount() {
-    window.clearTimeout(this.copyId);
-  }
-
-  onSelect = (name: string) => {
-    const { onSelect } = this.props;
+  const { icons, title, newIcons, theme } = props;
+  const intl = useIntl();
+  const [justCopied, setJustCopied] = React.useState<string | null>(null);
+  const copyId = React.useRef<NodeJS.Timeout | null>(null);
+  const onSelect = React.useCallback((type: string, text: string) => {
+    const { onSelect } = props;
     if (onSelect) {
-      onSelect(name);
+      onSelect(type, text);
     }
-    message.success(
-      <span>
-        <code className="copied-code">{name}</code> selected 🎉
-      </span>,
-    );
-    this.setState({ justCopied: name }, () => {
-      this.copyId = window.setTimeout(() => {
-        this.setState({ justCopied: null });
-      }, 2000);
-    });
-  };
+    setJustCopied(type);
+    copyId.current = setTimeout(() => {
+      setJustCopied(null);
+    }, 2000);
+  }, []);
+  React.useEffect(
+    () => () => {
+      if (copyId.current) {
+        clearTimeout(copyId.current);
+      }
+    },
+    [],
+  );
 
-  render() {
-    const {
-      icons,
-      title,
-      newIcons,
-      theme,
-      intl: { messages },
-    } = this.props;
-    const items = icons.map((name) => (
-      <CopyableIcon
-        key={name}
-        name={name}
-        theme={theme}
-        isNew={newIcons.indexOf(name) >= 0}
-        justCopied={this.state.justCopied}
-        onSelect={this.onSelect}
-      />
-    ));
+  return (
+    <div>
+      <h4>{intl.formatMessage({
+        id: `app.docs.components.icon.category.${title}`,
+        defaultMessage: '信息',
+      })}</h4>
+      <ul className={styles.anticonsList}>
+        {icons.map(name => (
+          <CopyableIcon
+            key={name}
+            name={name}
+            theme={theme}
+            isNew={newIcons.includes(name)}
+            justCopied={justCopied}
+            onSelect={onSelect}
+          />
+        ))}
+      </ul>
+    </div>
+  );
+};
 
-    return (
-      <div>
-        <h3>{messages[`app.docs.components.icon.category.${title}`]}</h3>
-        <ul className={styles.anticonsList}>{items}</ul>
-      </div>
-    );
-  }
-}
-
-export default injectIntl(Category);
+export default Category;

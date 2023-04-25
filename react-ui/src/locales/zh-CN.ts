@@ -1,24 +1,26 @@
+import app from './zh-CN/app';
 import component from './zh-CN/component';
 import globalHeader from './zh-CN/globalHeader';
-import menu from './zh-CN/menu';
+import sysmenu from './zh-CN/menu';
+import pages from './zh-CN/pages';
 import pwa from './zh-CN/pwa';
 import settingDrawer from './zh-CN/settingDrawer';
 import settings from './zh-CN/settings';
-import pages from './zh-CN/pages';
-import user from './zh-CN/user';
-import role from './zh-CN/role';
-import dept from './zh-CN/dept';
-import post from './zh-CN/post';
-import config from './zh-CN/config';
-import sysmenu from './zh-CN/sysmenu';
-import notice from './zh-CN/notice';
-import dict from './zh-CN/dict';
-import job from './zh-CN/job';
-import jobLog from './zh-CN/jobLog';
-import loginInfo from './zh-CN/loginInfo';
-import operLog from './zh-CN/operLog';
-import server from './zh-CN/server';
-import onlineUser from './zh-CN/onlineUser';
+import user from './zh-CN/system/user';
+import menu from './zh-CN/system/menu';
+import dict from './zh-CN/system/dict';
+import dictData from './zh-CN/system/dict-data';
+import role from './zh-CN/system/role';
+import dept from './zh-CN/system/dept';
+import post from './zh-CN/system/post';
+import config from './zh-CN/system/config';
+import notice from './zh-CN/system/notice';
+import operlog from './zh-CN/monitor/operlog';
+import logininfor from './zh-CN/monitor/logininfor';
+import onlineUser from './zh-CN/monitor/onlineUser';
+import job from './zh-CN/monitor/job';
+import joblog from './zh-CN/monitor/job-log';
+import server from './zh-CN/monitor/server';
 
 export default {
   'navBar.lang': '语言',
@@ -29,25 +31,27 @@ export default {
   'app.preview.down.block': '下载此页面到本地项目',
   'app.welcome.link.fetch-blocks': '获取全部区块',
   'app.welcome.link.block-list': '基于 block 开发，快速构建标准页面',
+  ...app,
   ...pages,
   ...globalHeader,
-  ...menu,
+  ...sysmenu,
   ...settingDrawer,
   ...settings,
   ...pwa,
   ...component,
   ...user,
-  ...post,
-  ...dept,
-  ...role,
-  ...config,
-  ...sysmenu,
-  ...notice,
+  ...menu,
   ...dict,
-  ...job,
-  ...jobLog,
-  ...loginInfo,
-  ...operLog,
-  ...server,
+  ...dictData,
+  ...role,
+  ...dept,
+  ...post,
+  ...config,
+  ...notice,
+  ...operlog,
+  ...logininfor,
   ...onlineUser,
+  ...job,
+  ...joblog,
+  ...server,
 };
