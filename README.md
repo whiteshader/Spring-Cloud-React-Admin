@@ -6,8 +6,8 @@
 
 若依(Ruoyi-React)是一套全部开源的快速开发平台，毫无保留给个人及企业免费使用。
 
-* 前端采用React 18、Ant Design Pro 6、TypeScript。
-* 后端采用Spring Boot、Spring Security、Redis & Jwt。
+* 前端采用React 18、Ant Design Pro 6、TypeScript 5。
+* 后端采用Spring Cloud、Spring Security、Redis & Jwt。
 * 权限认证使用Jwt，支持多终端认证系统。
 * 支持加载动态权限菜单，多方式轻松权限控制。
 * 高效率开发，使用代码生成器可以一键生成前后端代码。
@@ -30,9 +30,8 @@
 13. 代码生成：前后端代码的生成（java、html、xml、sql）支持CRUD下载 。
 14. 系统接口：根据业务代码自动生成相关的api接口文档。
 15. 服务监控：监视当前系统CPU、内存、磁盘、堆栈等相关信息。
-16. 缓存监控：对系统的缓存信息查询，命令统计等。
-17. 在线构建器：拖动表单元素生成相应的HTML代码。
-18. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
+16. 在线构建器：拖动表单元素生成相应的HTML代码。
+17. 连接池监视：监视当前系统数据库连接池状态，可进行分析SQL找出系统性能瓶颈。
 
 ## 在线体验
 
@@ -82,40 +81,48 @@ http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 
 <table>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-e9dd8074ff77bf9a63192a0dbffd4317ca3.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-9496c4533858051ef7d4c3ee39676b68b53.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-9996b274886e8134066ccee096fde2089dd.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-66afe06885d34482862536e4f00c87c0475.png"/></td>
     </tr>    
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-55a81f1685c3520d82cb96be5ac8cb652f4.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-293c849ce9112511df2dcaa2da56caed651.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-f279ee4e419e9ba80a77fd898ebd8c9ac45.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-b56c891e29d1dfd0213b000339effd256db.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-4165d6440fe052ecfedc41a79e1a4248347.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-2597f971a2ea3c8d2f1aaa5c1ffaf74af48.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-26d4a0f56967f4c319d6e95cab9652bdbfe.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-125aed48a8214551cb2ce5aa5a1403d78e9.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-461d455a479088eaacfd700e15d9a07229f.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-8a2841b8903515d45d5971719197e792ada.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-59bc1efe5d8f109e56305aa86192ff56bb0.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-6e081044a6f864c96df9a25aaa26516f7fc.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-b87aa3691f6525988bf237eb333b7d1febb.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-5f028f932aa363bed28010f82b24eed34c4.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-ed2e67f41c8a56e0db1215645a0d9dd1e52.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-2788241f7893ac8fbfd2b84813f60451755.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-90d94b41ad3e59c7c96c6d48e34f6d7ff55.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-458944d8fd7accc60e462df2c9c16ee5d4a.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-eda1770f6383e0001439b56c3392012213d.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-31c487d7419b16bc79de0d6a6a12789f048.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-1940f8a5923fe7c94f7f1e799a632709fa7.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-989ac012792e0ec2142b10eedf6edf08e51.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-31c487d7419b16bc79de0d6a6a12789f048.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-4d8cd86ba198f0263f90a0bd36c47b0317b.png"/></td>
     </tr>
 	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-15ac77792f0102eeedc53a8c1d54ea81105.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-0fc152997aff195c063e9dd8b72f18a6a3e.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-6d0ba703a00f8b02a0540931c9e67fe816c.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-376159966aa67e7e2fdd971bf68fb0a3375.png"/></td>
     </tr>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-940b253ebdbaf3984495c1b39afd43513e3.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-e4b51af7ef469f669da6e3a7a8afa200858.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-77b186361c754bd9abc6beac7b2dd371858.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-800aba850793feb11e52720153a801cc2e5.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-8835cf289be21d9ed81974764670d78d120.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-31a968948be45abb0a30bd7b69fd9bee501.png"/></td>
+    </tr>
+    <tr>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-ed8b654a35b70d5b14281c7d5f086658e27.png"/></td>
+        <td><img src="https://oscimg.oschina.net/oscnet/up-e7f3e329aa2052d32f64a372f25ad9f5df1.png"/></td>
     </tr>
 </table>
 
