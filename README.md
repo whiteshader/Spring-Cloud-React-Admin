@@ -40,6 +40,7 @@
 
 演示地址：暂时没有
  
+<img src="https://github.com/whiteshader/files/blob/main/ruoyi-react-demo-2023-04-27.gif" />
 
 ## 前端开发注意事项
 
@@ -77,7 +78,6 @@ https://umijs.org/docs/introduce/introduce
 http://doc.ruoyi.vip/ruoyi-vue/document/hjbs.html#nginx%E9%85%8D%E7%BD%AE
 
 ## 演示图
-
 
 <table>
     <tr>
