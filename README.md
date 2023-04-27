@@ -40,7 +40,7 @@
 
 演示地址：暂时没有
  
-<img src="https://github.com/whiteshader/files/blob/main/ruoyi-react-demo-2023-04-27.gif" />
+<img src="https://gitee.com/whiteshader/ruoyi-cloud-vben/blob/master/ruoyi-react-demo-2023-04-27.gif" />
 
 ## 前端开发注意事项
 
