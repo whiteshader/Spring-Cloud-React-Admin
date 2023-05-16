@@ -59,7 +59,7 @@ export default [
         name: '分配用户',
         path: '/system/role-auth/user/:id',
         component: './System/Role/authUser',
-      },     
+      },
     ]
   },
   {
@@ -81,7 +81,12 @@ export default [
         name: '导入表',
         path: '/tool/gen/import',
         component: './Tool/Gen/import',
-      },      
+      },
+      {
+        name: '编辑表',
+        path: '/tool/gen/edit',
+        component: './Tool/Gen/edit',
+      },
     ]
   },
 ];

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import BaseInfo from './components/BaseInfo';
-import { Card, message, Steps } from 'antd';
+import { Card, Layout, message, Steps } from 'antd';
 import ColumnInfo from './components/ColumnInfo';
 import GenInfo from './components/GenInfo';
 import { getGenCode, updateData } from './service';
@@ -10,12 +10,9 @@ import type { GenCodeType } from './data';
 import { getMenuTree } from '@/services/system/menu';
 import { getDictTypeList } from '@/services/system/dict';
 import queryString from 'query-string';
-import { Layout } from 'antd';
 import { useLocation } from '@umijs/max';
 
 const { Content } = Layout;
-
-const { Step } = Steps;
 
 export type GenCodeArgs = {
   id: string;
@@ -166,11 +163,17 @@ const TableList: React.FC = () => {
   return (
     <Content>
       <Card className={styles.tabsCard} bordered={false}>
-        <Steps current={currentStep} className={styles.steps}>
-          <Step title="基本信息" />
-          <Step title="字段信息" />
-          <Step title="生成信息" />
-        </Steps>
+        <Steps current={currentStep} className={styles.steps} items={[
+          {
+            title: '基本信息',
+          },
+          {
+            title: '字段信息',
+          },
+          {
+            title: '生成信息',
+          },
+        ]} />
         {stepComponent}
       </Card>
     </Content>
