@@ -7,7 +7,7 @@ import { ActionType, FooterToolbar, PageContainer, ProColumns, ProTable } from '
 import { PlusOutlined, DeleteOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { getDictDataList, removeDictData, addDictData, updateDictData, exportDictData } from '@/services/system/dictdata';
 import UpdateForm from './edit';
-import { getDictValueEnum, getDictType, getDictTypeList } from '@/services/system/dict';
+import { getDictValueEnum, getDictType, getDictTypeOptionSelect } from '@/services/system/dict';
 import DictTag from '@/components/DictTag';
 
 /**
@@ -103,7 +103,7 @@ const handleRemoveOne = async (selectedRow: API.System.DictData) => {
 /**
  * 导出数据
  *
- * 
+ *
  */
 const handleExport = async () => {
   const hide = message.loading('正在导出');
@@ -154,10 +154,10 @@ const DictDataTableList: React.FC = () => {
   useEffect(() => {
     if (dictId !== id) {
       setDictId(id);
-      getDictTypeList().then((res) => {
+      getDictTypeOptionSelect().then((res) => {
         if (res.code === 200) {
           const opts: any = {};
-          res.rows.forEach((item: any) => {
+          res.data.forEach((item: any) => {
             opts[item.dictType] = item.dictName;
           });
           setDictTypeOptions(opts);
@@ -314,7 +314,7 @@ const DictDataTableList: React.FC = () => {
               key="add"
               hidden={!access.hasPerms('system:data:add')}
               onClick={async () => {
-                setCurrentRow(undefined);
+                setCurrentRow({ dictType: dictType, isDefault: 'N', status: '0' } as API.System.DictData);
                 setModalVisible(true);
               }}
             >

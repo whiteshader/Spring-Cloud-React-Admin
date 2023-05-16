@@ -202,6 +202,7 @@ const DictDataForm: React.FC<DataFormProps> = (props) => {
             'Y': '是',
             'N': '否',
           }}
+          initialValue={'N'}
           colProps={{ md: 12, xl: 24 }}
           placeholder="请输入是否默认"
           rules={[
@@ -218,6 +219,7 @@ const DictDataForm: React.FC<DataFormProps> = (props) => {
             id: 'system.dict.data.status',
             defaultMessage: '状态',
           })}
+          initialValue={'0'}
           colProps={{ md: 12, xl: 24 }}
           placeholder="请输入状态"
           rules={[

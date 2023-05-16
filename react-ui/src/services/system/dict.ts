@@ -102,8 +102,21 @@ export async function removeDictType(ids: string) {
 
 // 导出字典类型
 export function exportDictType(params?: API.System.DictTypeListParams) {
-  return request<API.Result>(`/api/system/dict/type/export`, {
+  return request<API.Result>('/api/system/dict/type/export', {
     method: 'GET',
     params
+  });
+}
+
+// 获取字典选择框列表
+export async function getDictTypeOptionSelect(params?: API.DictTypeListParams) {
+  return request('/api/system/dict/type/optionselect', {
+    params: {
+      ...params,
+    },
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json;charset=UTF-8',
+    },
   });
 }
