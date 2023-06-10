@@ -114,6 +114,7 @@ const MenuForm: React.FC<MenuFormProps> = (props) => {
             id: 'system.menu.parent_id',
             defaultMessage: '上级菜单',
           })}
+          params={{menuTree}}
           request={async () => {
             return menuTree;
           }}
