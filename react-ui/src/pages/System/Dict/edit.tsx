@@ -22,7 +22,7 @@ export type DictTypeFormProps = {
 
 const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
   const [form] = Form.useForm();
-  
+
   const { statusOptions } = props;
 
   useEffect(() => {
@@ -64,11 +64,11 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
       onOk={handleOk}
       onCancel={handleCancel}
     >
-		  <ProForm 
+		  <ProForm
         form={form}
         grid={true}
         submitter={false}
-        layout="horizontal" 
+        layout="horizontal"
         onFinish={handleFinish}>
         <ProFormDigit
           name="dictId"
@@ -82,7 +82,7 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入字典主键！" defaultMessage="请输入字典主键！" />,                  
+              message: <FormattedMessage id="请输入字典主键！" defaultMessage="请输入字典主键！" />,
             },
           ]}
         />
@@ -96,7 +96,7 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入字典名称！" defaultMessage="请输入字典名称！" />,                  
+              message: <FormattedMessage id="请输入字典名称！" defaultMessage="请输入字典名称！" />,
             },
           ]}
         />
@@ -110,7 +110,7 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入字典类型！" defaultMessage="请输入字典类型！" />,                  
+              message: <FormattedMessage id="请输入字典类型！" defaultMessage="请输入字典类型！" />,
             },
           ]}
         />
@@ -121,11 +121,12 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
             id: 'system.dict.status',
             defaultMessage: '状态',
           })}
+          initialValue={'0'}
           placeholder="请输入状态"
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入状态！" defaultMessage="请输入状态！" />,                  
+              message: <FormattedMessage id="请输入状态！" defaultMessage="请输入状态！" />,
             },
           ]}
         />
@@ -139,7 +140,7 @@ const DictTypeForm: React.FC<DictTypeFormProps> = (props) => {
           rules={[
             {
               required: false,
-              message: <FormattedMessage id="请输入备注！" defaultMessage="请输入备注！" />,                  
+              message: <FormattedMessage id="请输入备注！" defaultMessage="请输入备注！" />,
             },
           ]}
         />
